@@ -1,5 +1,5 @@
 import 'phaser';
-import config from '../Config/config';
+import Config from '../Config/Config';
 
 export default class CreditsScene extends Phaser.Scene {
   constructor () {
@@ -9,7 +9,7 @@ export default class CreditsScene extends Phaser.Scene {
   create () {
     this.creditsText = this.add.text(0, 0, 'Crédits', { fontSize: '32px', fill: '#fff' });
     this.madeByText = this.add.text(0, 0, 'Développer par Nekrofage', { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
+    this.zone = this.add.zone(Config.width/2, Config.height/2, Config.width, Config.height);
 
     Phaser.Display.Align.In.Center(
       this.creditsText,

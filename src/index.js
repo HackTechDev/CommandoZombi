@@ -1,5 +1,5 @@
 import 'phaser';
-import config from './Config/config';
+import Config from './Config/Config';
 import GameScene from './Scenes/GameScene';
 import BootScene from './Scenes/BootScene';
 import PreloaderScene from './Scenes/PreloaderScene';
@@ -10,7 +10,7 @@ import Music from './Music/Music';
 
 class Game extends Phaser.Game {
   constructor () {
-    super(config);
+    super(Config);
     const music = new Music();
     this.globals = { music, bgMusic: null };
     this.scene.add('Boot', BootScene);
