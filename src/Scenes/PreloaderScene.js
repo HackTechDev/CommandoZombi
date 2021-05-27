@@ -24,7 +24,7 @@ export default class PreloaderScene extends Phaser.Scene {
     var loadingText = this.make.text({
       x: width / 2,
       y: height / 2 - 50,
-      text: 'Loading...',
+      text: 'Chargement...',
       style: {
         font: '20px monospace',
         fill: '#ffffff'
@@ -64,7 +64,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     // update file progress text
     this.load.on('fileprogress', function (file) {
-      assetText.setText('Loading asset: ' + file.key);
+      assetText.setText('Chargement des ressources : ' + file.key);
     });
 
     // remove progress bar when complete
