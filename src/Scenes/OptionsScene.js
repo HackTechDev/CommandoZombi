@@ -7,7 +7,7 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   create () {
-    this.model = this.sys.game.globals.model;
+    this.music = this.sys.game.globals.music;
 
     this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
     this.musicButton = this.add.image(200, 200, 'checkedBox');
@@ -20,12 +20,12 @@ export default class OptionsScene extends Phaser.Scene {
     this.soundButton.setInteractive();
 
     this.musicButton.on('pointerdown', function () {
-      this.model.musicOn = !this.model.musicOn;
+      this.music.musicOn = !this.music.musicOn;
       this.updateAudio();
     }.bind(this));
 
     this.soundButton.on('pointerdown', function () {
-      this.model.soundOn = !this.model.soundOn;
+      this.music.soundOn = !this.music.soundOn;
       this.updateAudio();
     }.bind(this));
 
@@ -35,19 +35,19 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   updateAudio() {
-    if (this.model.musicOn === false) {
+    if (this.music.musicOn === false) {
       this.musicButton.setTexture('box');
       this.sys.game.globals.bgMusic.stop();
-      this.model.bgMusicPlaying = false;
+      this.music.bgMusicPlaying = false;
     } else {
       this.musicButton.setTexture('checkedBox');
-      if (this.model.bgMusicPlaying === false) {
+      if (this.music.bgMusicPlaying === false) {
         this.sys.game.globals.bgMusic.play();
-        this.model.bgMusicPlaying = true;
+        this.music.bgMusicPlaying = true;
       }
     }
 
-    if (this.model.soundOn === false) {
+    if (this.music.soundOn === false) {
       this.soundButton.setTexture('box');
     } else {
       this.soundButton.setTexture('checkedBox');
