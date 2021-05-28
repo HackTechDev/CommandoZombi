@@ -21,8 +21,8 @@ export default class GameScene extends Phaser.Scene {
 
         const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
 
-        const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
-        const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
+        this.belowLayer = map.createDynamicLayer("Below Player", tileset, 0, 0);
+        const worldLayer = map.createDynamicLayer("World", tileset, 0, 0);
         const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
 
         worldLayer.setCollisionByProperty({ collides: true });
@@ -73,6 +73,17 @@ export default class GameScene extends Phaser.Scene {
 
     update(time, delta) {
         this.player.update();
-         this.marker.update();
+        this.marker.update();
+
+        // Add a colliding tile at the mouse position
+        const pointer = this.input.activePointer;
+        const worldPoint = pointer.positionToCamera(this.cameras.main);
+        if (pointer.isDown) {
+          const tile = this.belowLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
+          tile.setCollision(true);
+        }
+
+
+
     }
 }
