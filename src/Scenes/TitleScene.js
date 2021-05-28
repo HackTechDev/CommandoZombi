@@ -8,7 +8,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   preload() {
-        this.load.image('background', 'assets/team.jpg');
+        this.load.image('background', 'assets/images/team.jpg');
     }
 
   create () {
