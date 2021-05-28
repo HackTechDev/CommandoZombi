@@ -1,4 +1,5 @@
 import 'phaser';
+
 import Config from './Config/Config';
 import GameScene from './Scenes/GameScene';
 import DungeonScene from './Scenes/DungeonScene';
@@ -10,6 +11,8 @@ import TitleScene from './Scenes/TitleScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Music from './Music/Music';
+
+import MouseTileMarker from './MouseTileMarker/MouseTileMarker'
 
 class Game extends Phaser.Game {
   constructor () {

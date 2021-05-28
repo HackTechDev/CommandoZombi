@@ -1,4 +1,6 @@
 import Player from "../Player/Player";
+import MouseTileMarker from "../MouseTileMarker/MouseTileMarker"
+
 import 'phaser';
 
 export default class GameScene extends Phaser.Scene {
@@ -39,6 +41,8 @@ export default class GameScene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
+        this.marker = new MouseTileMarker(this, map);
+
         this.add
             .text(16, 16, 'Move: Arrow keys', {
                 font: "18px monospace",
@@ -69,5 +73,6 @@ export default class GameScene extends Phaser.Scene {
 
     update(time, delta) {
         this.player.update();
+         this.marker.update();
     }
 }
