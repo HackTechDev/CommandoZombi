@@ -2,6 +2,7 @@ import Player from "../Player/Player";
 import 'phaser';
 import Dungeon from "@mikewesthad/dungeon";
 import TILES from "../TileMapping/TileMapping.js";
+import MouseTileMarker from "../MouseTileMarker/MouseTileMarker.js";
 
 /**
  * Scene that generates a new dungeon
@@ -85,6 +86,8 @@ export default class DungeonScene extends Phaser.Scene {
     camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     camera.startFollow(this.player.sprite);
 
+    this.marker = new MouseTileMarker(this, map);
+
     this.add
       .text(16, 16, "Arrow keys to move", {
         font: "18px monospace",
@@ -96,6 +99,17 @@ export default class DungeonScene extends Phaser.Scene {
   }
 
   update(time, delta) {
+    this.marker.update();
     this.player.update();
+
+    // Add a colliding tile at the mouse position
+    const pointer = this.input.activePointer;
+    const worldPoint = pointer.positionToCamera(this.cameras.main);
+    if (pointer.isDown) {
+      const tile = this.groundLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
+      tile.setCollision(true);
+    }
+
+
   }
 }
