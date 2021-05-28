@@ -22,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
         const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
 
         this.belowLayer = map.createDynamicLayer("Below Player", tileset, 0, 0);
+
         const worldLayer = map.createDynamicLayer("World", tileset, 0, 0);
         const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
 
@@ -52,20 +53,6 @@ export default class GameScene extends Phaser.Scene {
             })
         .setScrollFactor(0)
         .setDepth(30);
-
-          this.input.keyboard.once("keydown_D", event => {
-            this.physics.world.createDebugGraphic();
-
-            const graphics = this.add
-              .graphics()
-              .setAlpha(0.75)
-              .setDepth(20);
-            worldLayer.renderDebug(graphics, {
-              tileColor: null, 
-              collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), 
-              faceColor: new Phaser.Display.Color(40, 39, 37, 255) 
-            });
-          });
 
 
     }
