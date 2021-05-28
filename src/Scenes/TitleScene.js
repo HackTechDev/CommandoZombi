@@ -7,7 +7,13 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
+  preload() {
+        this.load.image('background', 'assets/team.jpg');
+    }
+
   create () {
+    this.add.image(0, 33, 'background').setOrigin(0).setScale(1);
+
     // Game
     this.gameButton = new Button(this, Config.width/2, Config.height/2 - 200, 'blueButton1', 'blueButton2', 'Jouer', 'Game');
     this.dungeonButton = new Button(this, Config.width/2, Config.height/2 - 100, 'blueButton1', 'blueButton2', 'Donjon', 'Dungeon');
