@@ -83,8 +83,6 @@ export default class Player {
         const prevVelocity = sprite.body.velocity.clone();
 
 
-        console.log(sprite.x + " " + sprite.y);
-        
         if(keyD.isDown) {
             
             if (!this.keyDOnce) {
