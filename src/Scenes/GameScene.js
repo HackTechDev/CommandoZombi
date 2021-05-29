@@ -21,12 +21,13 @@ export default class GameScene extends Phaser.Scene {
 
         const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
 
-        this.belowLayer = map.createDynamicLayer("Below Player", tileset, 0, 0);
+        this.belowLayer = map.createLayer("Below Player", tileset, 0, 0);
 
-        const worldLayer = map.createDynamicLayer("World", tileset, 0, 0);
-        const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
+        this.worldLayer = map.createLayer("World", tileset, 0, 0);
 
-        worldLayer.setCollisionByProperty({ collides: true });
+        const aboveLayer = map.createLayer("Above Player", tileset, 0, 0);
+
+        this.worldLayer.setCollisionByProperty({ collides: true });
 
         aboveLayer.setDepth(10);
 
@@ -36,7 +37,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.player = new Player(this, spawnPoint.x, spawnPoint.y);
 
-        this.physics.add.collider(this.player.sprite, worldLayer);
+        this.physics.add.collider(this.player.sprite, this.worldLayer);
 
         const camera = this.cameras.main;
         camera.startFollow(this.player.sprite);
@@ -66,7 +67,7 @@ export default class GameScene extends Phaser.Scene {
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
         if (pointer.isDown) {
-          const tile = this.belowLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
+          const tile = this.worldLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
           tile.setCollision(true);
         }
 
