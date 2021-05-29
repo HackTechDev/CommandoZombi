@@ -45,6 +45,16 @@ export default class GameScene extends Phaser.Scene {
 
         this.marker = new MouseTileMarker(this, map);
 
+        
+        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+
+        this.testKeyP = false;
+        this.testKeyG = false;
+
+
         this.add
             .text(16, 16, 'Move: Arrow keys', {
                 font: "18px monospace",
@@ -66,11 +76,41 @@ export default class GameScene extends Phaser.Scene {
         // Add a colliding tile at the mouse position
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
-        if (pointer.isDown) {
+        if (pointer.isDown && this.testKeyP) {
           const tile = this.worldLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
           tile.setCollision(true);
         }
 
+
+
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
+            console.log("Fire!");
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyP)){
+            this.testKeyP = !this.testKeyP;
+            console.log("Put: " + this.testKeyP);
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyG)){
+            this.testKeyG = !this.testKeyG;
+            console.log("Get:"  + this.testKeyG);
+        }
+
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyC)){
+            this.physics.world.createDebugGraphic();
+            const graphics = this.add
+              .graphics()
+              .setAlpha(0.75)
+              .setDepth(20);
+            this.worldLayer.renderDebug(graphics, {
+              tileColor: null,
+              collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),
+              faceColor: new Phaser.Display.Color(40, 39, 37, 255)
+            });
+
+        }
 
 
     }
