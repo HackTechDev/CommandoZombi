@@ -76,15 +76,23 @@ export default class GameScene extends Phaser.Scene {
         // Add a colliding tile at the mouse position
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
-        if (pointer.isDown && this.testKeyP) {
-          const tile = this.worldLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
-          tile.setCollision(true);
+        if (pointer.isDown) {
+            if (this.testKeyP) {
+              const tile = this.worldLayer.putTileAtWorldXY(128, worldPoint.x, worldPoint.y);
+              tile.setCollision(true);
+            } else {
+              const tile = this.worldLayer.putTileAtWorldXY(125, worldPoint.x, worldPoint.y);
+              tile.setCollision(false);
+            }
         }
+
+
         if (pointer.isDown && this.testKeyG) {
           const tile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
           if (tile != null) {
+            console.log("Get tile: ", tile);
             console.log("Get tile: ", tile.index);
-            console.log("Get tile properties: " + tile.getTileData(tile.index));
+
           }
         }
 
