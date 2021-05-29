@@ -80,6 +80,14 @@ export default class GameScene extends Phaser.Scene {
           const tile = this.worldLayer.putTileAtWorldXY(20, worldPoint.x, worldPoint.y);
           tile.setCollision(true);
         }
+        if (pointer.isDown && this.testKeyG) {
+          const tile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+          if (tile != null) {
+            console.log("Get tile: ", tile.index);
+            console.log("Get tile properties: " + tile.getTileData(tile.index));
+          }
+        }
+
 
 
 
