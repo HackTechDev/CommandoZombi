@@ -54,6 +54,9 @@ export default class GameScene extends Phaser.Scene {
         this.testKeyP = false;
         this.testKeyG = false;
 
+        this.testKeyPOnce = true;
+        this.testKeyGOnce = true;
+
 
         this.add
             .text(16, 16, 'Move: Arrow keys', {
@@ -76,6 +79,8 @@ export default class GameScene extends Phaser.Scene {
         // Add a colliding tile at the mouse position
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
+
+        
         if (pointer.isDown) {
             if (this.testKeyP) {
               const tile = this.worldLayer.putTileAtWorldXY(128, worldPoint.x, worldPoint.y);
@@ -85,18 +90,25 @@ export default class GameScene extends Phaser.Scene {
               tile.setCollision(false);
             }
         }
+       
 
 
-        if (pointer.isDown && this.testKeyG) {
-          const tile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
-          if (tile != null) {
-            console.log("Get tile: ", tile);
-            console.log("Get tile: ", tile.index);
+        if(this.keyG.isDown) {
 
-          }
+            if (!this.keyGOnce) {
+                const tile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+                console.log('G key pressed')
+                this.keyGOnce = true;
+                if (tile != null) {
+                    console.log("Get tile: ", tile);
+                    console.log("Get tile: ", tile.index);
+                }
+            }
         }
 
-
+        if(this.keyG.isUp) {
+          this.keyGOnce = false;
+        }
 
 
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
