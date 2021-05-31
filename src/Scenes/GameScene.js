@@ -83,11 +83,11 @@ export default class GameScene extends Phaser.Scene {
         
         if (pointer.isDown) {
             if (this.testKeyP) {
-              const tile = this.worldLayer.putTileAtWorldXY(128, worldPoint.x, worldPoint.y);
-              tile.setCollision(true);
+              const worldTile = this.worldLayer.putTileAtWorldXY(128, worldPoint.x, worldPoint.y);
+              worldTile.setCollision(true);
             } else {
-              const tile = this.worldLayer.putTileAtWorldXY(125, worldPoint.x, worldPoint.y);
-              tile.setCollision(false);
+              const worldTile = this.worldLayer.putTileAtWorldXY(125, worldPoint.x, worldPoint.y);
+              worldTile.setCollision(false);
             }
         }
        
@@ -96,13 +96,21 @@ export default class GameScene extends Phaser.Scene {
         if(this.keyG.isDown) {
 
             if (!this.keyGOnce) {
-                const tile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+                const worldTile = this.worldLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+                const belowTile = this.belowLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
                 console.log('G key pressed')
                 this.keyGOnce = true;
-                if (tile != null) {
-                    console.log("Get tile: ", tile);
-                    console.log("Get tile: ", tile.index);
+                if (worldTile != null) {
+                    console.log("Get worldTile: ", worldTile);
+                    console.log("Get worldTile: ", worldTile.index);
                 }
+                
+                if (belowTile != null) {
+                    console.log("Get belowTile: ", belowTile);
+                    console.log("Get belowTile: ", belowTile.index);
+                }
+                
+
             }
         }
 

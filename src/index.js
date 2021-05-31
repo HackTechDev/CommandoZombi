@@ -3,6 +3,8 @@ import 'phaser';
 import Config from './Config/Config';
 import GameScene from './Scenes/GameScene';
 import DungeonScene from './Scenes/DungeonScene';
+import StendhalScene from './Scenes/StendhalScene';
+
 import TileMapping from './TileMapping/TileMapping';
 
 import BootScene from './Scenes/BootScene';
@@ -26,6 +28,7 @@ class Game extends Phaser.Game {
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Game', GameScene);
     this.scene.add('Dungeon', DungeonScene);
+    this.scene.add('Stendhal', StendhalScene);
 
     this.scene.start('Boot');
   }
