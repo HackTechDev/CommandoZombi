@@ -2,12 +2,20 @@ import Player from "../Player/Player";
 
 import 'phaser';
 
-export default class GameScene extends Phaser.Scene {
+export default class StendhalScene extends Phaser.Scene {
   constructor () {
     super('Stendhal');
   }
 
     preload() {
+        /*
+        Tiled version : Tiled-1.6.0-x86_64.AppImage
+        Format de Calque de Tuiles : CSV
+        Exporter en tant que... : .json
+
+        */
+
+
        this.load.image("ground_indoor_tiles", "assets/stendhal/tiled/tileset/ground/indoor/tiles.png");
        this.load.image("building_castle", "assets/stendhal/tiled/tileset/building/castle.png");
        this.load.image("ground_ground", "assets/stendhal/tiled/tileset/ground/ground.png");
