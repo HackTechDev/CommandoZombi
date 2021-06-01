@@ -21,11 +21,11 @@ export default class GameScene extends Phaser.Scene {
 
         const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
 
+
         this.belowLayer = map.createLayer("Below Player", tileset, 0, 0);
-
         this.worldLayer = map.createLayer("World", tileset, 0, 0);
-
         const aboveLayer = map.createLayer("Above Player", tileset, 0, 0);
+
 
         this.worldLayer.setCollisionByProperty({ collides: true });
 

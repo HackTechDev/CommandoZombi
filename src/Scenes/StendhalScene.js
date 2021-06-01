@@ -159,20 +159,20 @@ export default class GameScene extends Phaser.Scene {
 
         const allTileset = [ground_indoor_tiles, building_castle, ground_ground, ground_ground_2, building_wall_wall_brown, building_decoration_banner, ground_brown_paving, ground_water_dungeon_water, ground_water_pool, building_roof_blue, building_roof_yellow, building_wall_stone, building_roof_green, building_wall_wood, building_roof_red, plant_flower_daisy_white, item_statue_green_stone, ground_cobbled_paving, item_statue_bird, building_fence_fence_chunky, plant_grasses, plant_bush_hedge, plant_flower_daisy_blue, plant_flower_daisy_red, plant_flower_daisy_yellow, plant_bush_bushes, plant_tree_tree_green, building_window_window_long, building_window_window_left, building_door_closed_with_key, building_window_window_right, furniture_chair_wooden_pale, furniture_table_wooden_pale, item_statue_grey_stone, item_statue_fairypool, ground_eye, item_sign_large, plant_stump_small_stump, building_door_door_n, building_decoration_chimney, building_door_closed, building_decoration_orbpedestal, building_decoration_longhorn_skull, building_church, building_entrance_int_iron_bars, building_decoration_chimney_big, item_statue_green_stone_2, building_decoration_library_banner, building_door_door_e, building_door_door_w, logic_collision, furniture_other_stick, building_decoration_numbers, ground_water_pool_deep, object_suspension_bridge, logic_creature_animal, logic_creature_mutant, building_stairs_stairs, object_boardwalk, plant_stump_log_vertical, plant_stump_stump_vertical, ground_green_paving, light_light_5x5, light_door_light, furniture_light_lamp_bronze, light_dim_light_7x5, building_huts, logic_creature_fowl];
 
+        this.collisionLayer = map.createLayer("collision", allTileset, 0, 0);
         this.floorLayer = map.createLayer("0_floor", allTileset, 0, 0);
         this.terrainLayer = map.createLayer("1_terrain", allTileset, 0, 0);
         this.objectLayer = map.createLayer("2_object", allTileset, 0, 0);
-        this.roofLayer = map.createLayer("3_roof", allTileset, 0, 0);
+        const roofLayer = map.createLayer("3_roof", allTileset, 0, 0);
         this.roofaddLayer = map.createLayer("4_roof_add", allTileset, 0, 0);
         this.objectsLayer = map.createLayer("objects", allTileset, 0, 0);
-        this.collisionLayer = map.createLayer("collision", allTileset, 0, 0);
-        this.protectionLayer = map.createLayer("protection", allTileset, 0, 0);
-        this.blendgroundLayer = map.createLayer("blend_ground", allTileset, 0, 0);
-        const blendroofLayer = map.createLayer("blend_roof", allTileset, 0, 0);
+        //this.protectionLayer = map.createLayer("protection", allTileset, 0, 0);
+        //this.blendgroundLayer = map.createLayer("blend_ground", allTileset, 0, 0);
+        //this.blendroofLayer = map.createLayer("blend_roof", allTileset, 0, 0);
 
         this.collisionLayer.setCollisionByProperty({ collides: true });
 
-        blendroofLayer.setDepth(10);
+        roofLayer.setDepth(10);
 
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
 
