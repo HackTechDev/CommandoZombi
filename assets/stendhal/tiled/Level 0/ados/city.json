@@ -64,7 +64,7 @@
          "name":"2_object",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":128,
          "x":0,
          "y":0
@@ -153,8 +153,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":12,
- "nextobjectid":3,
+ "nextlayerid":13,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",

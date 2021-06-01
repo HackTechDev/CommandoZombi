@@ -1,4 +1,5 @@
 import Player from "../Player/Player";
+import MouseTileMarker from "../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
 
@@ -194,10 +195,50 @@ export default class StendhalScene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
+        this.marker = new MouseTileMarker(this, map);
+
+        /* Command */
+
+        this.keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+        this.testKeyO = false;
+        this.testKeyOOnce = true;
+
     }
 
 
     update(time, delta) {
         this.player.update();
+        this.marker.update();
+
+        const pointer = this.input.activePointer;
+        const worldPoint = pointer.positionToCamera(this.cameras.main);
+
+        if(this.keyO.isDown) {
+
+            if (!this.keyOOnce) {
+                //const objectTile = this.floorLayer.getTileAtWorldXY(this.player.x, this.player.y);
+                const infoTile = this.objectLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+
+                console.log("O key pressed")
+                console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
+                this.keyOOnce = true;
+
+                if (infoTile != null) {
+                    console.log("Get objectTile : ", infoTile);
+                    console.log("Get objectTile index : ", infoTile.index);
+                    console.log("Get objectTile properties : ", infoTile.properties);
+
+                }
+
+
+            }
+        }
+
+        if(this.keyO.isUp) {
+          this.keyOOnce = false;
+        }
+
+
+
     }
 }
