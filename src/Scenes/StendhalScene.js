@@ -205,6 +205,12 @@ export default class StendhalScene extends Phaser.Scene {
 
     }
 
+    checkDoor(playerx, playery, doorx, doory) {
+       if(playerx >= doorx-2 && playerx <= doorx+2 && playery >= doory-2 && playery <= doory+2)
+            return true;
+        return false;
+    }
+
 
     update(time, delta) {
         this.player.update();
@@ -216,19 +222,25 @@ export default class StendhalScene extends Phaser.Scene {
         if(this.keyO.isDown) {
 
             if (!this.keyOOnce) {
-                //const objectTile = this.floorLayer.getTileAtWorldXY(this.player.x, this.player.y);
-                const infoTile = this.objectLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+                const infoTile = this.floorLayer.getTileAtWorldXY(this.player.x, this.player.y);
+                //const infoTile = this.objectLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
 
                 console.log("O key pressed")
                 console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
                 this.keyOOnce = true;
-
+        
                 if (infoTile != null) {
                     console.log("Get objectTile : ", infoTile);
                     console.log("Get objectTile index : ", infoTile.index);
                     console.log("Get objectTile properties : ", infoTile.properties);
 
                 }
+
+                if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
+                    console.log("house_70");
+                    this.scene.start('House');                   
+                }
+
 
 
             }
