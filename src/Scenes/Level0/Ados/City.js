@@ -5,7 +5,7 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
 
-var keyObj;
+var keyO, keyD;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -201,13 +201,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
         /* Command */
-
+/*
         this.keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
         this.testKeyO = false;
         this.testKeyOOnce = true;
+*/
 
-
-        keyObj=this.input.keyboard.addKey("o");
+        keyO=this.input.keyboard.addKey("o");
+        keyD=this.input.keyboard.addKey("d");
 
     }
 
@@ -226,13 +227,22 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
 
-        if(keyObj.isDown){
+        if(keyO.isDown){
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
                     console.log("house_70");
                     this.scene.start('InteriorsAdosHouse70', {px: 400, py: 704});
             }
 
+            if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 592, 1960)) {
+                    console.log("house_68");
+                    this.scene.start('InteriorsAdosHouse68' /*, {px: 400, py: 704}*/);
+            }
+
+        }
+
+        if(keyD.isDown){
+            console.log( this.player.sprite.x + " " + this.player.sprite.y);
         }
 
         /*       

@@ -1,7 +1,16 @@
 <?php
 
-// Script 1
 /*
+
+
+$ cat house_70.json | grep tileset > tile.txt
+$ php tilesetGenerator.php > code.txt
+
+*/ 
+
+
+// Script 1
+
 $handle = fopen("tile.txt", "r");
 if ($handle) {
     while (($line = fgets($handle)) !== false) {
@@ -22,13 +31,14 @@ if ($handle) {
 } else {
      echo "error opening the file.\n";
 } 
-*/
+
 
 // Script 2
 
 $handle = fopen("tile.txt", "r");
 
 $const = "";
+$allName = "";
 
 if ($handle) {
     while (($line = fgets($handle)) !== false) {

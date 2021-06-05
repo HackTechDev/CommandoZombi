@@ -52,6 +52,17 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
         3/ 
         php ./tilesetGenerator.php 
 
+        
+        4/ Dans le fichier json : 
+
+         "image":"..\/..\/tileset\/furniture\/carpet\/carpets_2.png",
+         "name":"carpets_2.png",
+
+         Remplacer "name" par :
+
+         "name":"furniture_carpet_carpets_2",
+
+
         */
 
        console.log("preload: this.load.image");
