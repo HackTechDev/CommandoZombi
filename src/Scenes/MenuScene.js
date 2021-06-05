@@ -2,9 +2,9 @@ import 'phaser';
 import Config from '../Config/Config';
 import Button from '../Buttons/Button';
 
-export default class TitleScene extends Phaser.Scene {
+export default class MenuScene extends Phaser.Scene {
   constructor () {
-    super('Title');
+    super('Menu');
   }
 
   preload() {

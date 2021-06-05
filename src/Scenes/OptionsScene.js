@@ -29,7 +29,7 @@ export default class OptionsScene extends Phaser.Scene {
       this.updateAudio();
     }.bind(this));
 
-    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');
 
     this.updateAudio();
   }

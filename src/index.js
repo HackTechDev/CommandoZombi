@@ -14,7 +14,7 @@ import TileMapping from './TileMapping/TileMapping';
 
 import BootScene from './Scenes/BootScene';
 import PreloaderScene from './Scenes/PreloaderScene';
-import TitleScene from './Scenes/TitleScene';
+import MenuScene from './Scenes/MenuScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Music from './Music/Music';
@@ -28,7 +28,7 @@ class Game extends Phaser.Game {
     this.globals = { music, bgMusic: null };
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
-    this.scene.add('Title', TitleScene);
+    this.scene.add('Menu', MenuScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Game', GameScene);
