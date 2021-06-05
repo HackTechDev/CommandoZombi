@@ -13,7 +13,6 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
     init(data){
           this.px = data.px;
           this.py = data.py;
-          console.log(this.px + " " + this.py);
     }
 
     preload() {
@@ -54,8 +53,6 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
         php ./tilesetGenerator.php 
 
         */
-
-       console.log("preload: this.load.image");
 
        this.load.image("furniture_carpet_carpets_2", "assets/stendhal/tiled/tileset/furniture/carpet/carpets_2.png");
        this.load.image("building_wall_int_wall_pale", "assets/stendhal/tiled/tileset/building/wall/int_wall_pale.png");
@@ -99,7 +96,6 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
        this.load.image("logic_item_vegetable", "assets/stendhal/tiled/tileset/logic/item/vegetable.png");
        this.load.image("furniture_bed_double_blue", "assets/stendhal/tiled/tileset/furniture/bed/double_blue.png");
    
-        console.log("preload: tilemapTileJSON");
         this.load.tilemapTiledJSON("interiorsAdosHouse68", "assets/stendhal/tiled/interiors/ados/house_68.json");
 
         this.load.atlas("atlas", "assets/atlas/atlas.png", "assets/atlas/atlas.json");
@@ -153,7 +149,6 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
 
         const allTileset = [furniture_carpet_carpets_2, building_wall_int_wall_pale, building_wall_int_wall_purple, building_entrance_pale_red_ns, plant_indoor_flower_vase, furniture_shelve_bright_bookshelf_and_cupboard, furniture_chair_wooden_pale, plant_indoor_flowering_plant, furniture_chair_stool, furniture_table_wooden_pale, furniture_light_small_lamp, logic_collision, furniture_carpet_blue, item_chest_small, item_drink_red_wine, item_food_fruit_basket, furniture_table_long_front_on, item_documents_book, plant_indoor_flower_vase, furniture_shelve_pale_book_bottle_shelf, furniture_kitchen_pie_safe, furniture_kitchen_stove, logic_item_sheepfood, furniture_chair_sofa_red, plant_bush_hosta, furniture_chair_sofa, plant_indoor_pot_plant_1, furniture_kitchen_warmer, plant_indoor_flower_baskets, furniture_carpet_carpets, item_brush, furniture_shelve_bright_bookshelf, furniture_table_wooden_rectangular, item_food_rustic_meals, item_food_meals_2, furniture_chair_sofa_chair_blue, item_food_meals_3, ground_ground, building_wall_bricked_edges, logic_item_vegetable, furniture_bed_double_blue];
 
-        console.log("create: map.createLayer");
 
         this.collisionLayer = interiorsAdosHouse68.createLayer("collision", allTileset, 0, 0);
         this.floorLayer = interiorsAdosHouse68.createLayer("0_floor", allTileset, 0, 0);

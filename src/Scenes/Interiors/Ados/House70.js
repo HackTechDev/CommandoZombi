@@ -12,7 +12,6 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
     init(data){
           this.px = data.px;
           this.py = data.py;
-          console.log(this.px + " " + this.py);
     }
 
     preload() {
@@ -65,8 +64,6 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
 
         */
 
-       console.log("preload: this.load.image");
-
        this.load.image("logic_collision", "assets/stendhal/tiled/tileset/logic/collision.png");
        this.load.image("furniture_carpet_purple", "assets/stendhal/tiled/tileset/furniture/carpet/purple.png");
        this.load.image("ground_ground_2", "assets/stendhal/tiled/tileset/ground/ground_2.png");
@@ -116,7 +113,6 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
        this.load.image("terrain_cave_edges_blue", "assets/stendhal/tiled/tileset/terrain/cave_edges_blue.png");
        this.load.image("ground_slate_tiles", "assets/stendhal/tiled/tileset/ground/slate_tiles.png");
 
-        console.log("preload: tilemapTileJSON");
         this.load.tilemapTiledJSON("interiorsAdosHouse70", "assets/stendhal/tiled/interiors/ados/house_70.json");
 
         this.load.atlas("atlas", "assets/atlas/atlas.png", "assets/atlas/atlas.json");
@@ -177,7 +173,6 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
 
        const allTileset = [logic_collision, furniture_carpet_purple, ground_ground_2, ground_ground_3, ground_indoor_oriental_tan_tile, ground_indoor_floor_tiles2, plant_bush_bushes, plant_indoor_pot_plant_1, plant_indoor_small_flowerpots, building_wall_int_green_purple, building_entrance_green_purple_ns_ew, furniture_chair_wooden_pale, furniture_kitchen_cabinets, furniture_table_white, furniture_table_concrete_table, furniture_chair_sofa_chair_pink, furniture_bed_double_purple_gold, furniture_chair_armchair_pink, furniture_chair_stool, furniture_chair_colorful, furniture_shelve_wardrobe_lateral, furniture_clock_wooden_clock, furniture_table_long_side_on_pale, furniture_kitchen_warmer_2, item_textile_towels, furniture_bathroom_basin, furniture_bathroom_toilet, furniture_bathroom_bathtub, item_pot_wastebin, furniture_light_lights_candle, building_decoration_fancy_gate, furniture_picture_cats, furniture_picture_oil_paintings, item_documents_books2, item_brush, item_chest_chests_red, item_drink_bottles_and_cups, item_food_bread, furniture_shelve_rack, item_household_food_preparation, item_household_food_preparation_2, item_drink_juice_glass, item_statue_nymph_reddish, item_instrument_ukulele, logic_portal, logic_item_sheepfood, terrain_cave_edges_blue, ground_slate_tiles];
 
-        console.log("create: map.createLayer");
 
         this.collisionLayer = interiorsAdosHouse70.createLayer("collision", allTileset, 0, 0);
         this.floorLayer = interiorsAdosHouse70.createLayer("0_floor", allTileset, 0, 0);
