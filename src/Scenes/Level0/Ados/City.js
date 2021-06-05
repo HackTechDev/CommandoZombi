@@ -5,7 +5,7 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
 
-var keyO, keyD;
+var keyO, keyD, keyM;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -207,8 +207,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyOOnce = true;
 */
 
-        keyO=this.input.keyboard.addKey("o");
-        keyD=this.input.keyboard.addKey("d");
+        keyO = this.input.keyboard.addKey("o");
+        keyD = this.input.keyboard.addKey("d");
+        keyM = this.input.keyboard.addKey("m");
+
 
     }
 
@@ -244,6 +246,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(keyD.isDown){
             console.log( this.player.sprite.x + " " + this.player.sprite.y);
         }
+
+        if(keyM.isDown){
+            console.log( "Menu");
+            this.scene.start('Title');
+        }
+
 
         /*       
         if(this.keyO.isDown) {
