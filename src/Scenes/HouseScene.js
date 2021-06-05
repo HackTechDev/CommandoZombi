@@ -46,6 +46,8 @@ export default class HouseScene extends Phaser.Scene {
 
         */
 
+       console.log("preload: this.load.image");
+
        this.load.image("logic_collision", "assets/stendhal/tiled/tileset/logic/collision.png");
        this.load.image("furniture_carpet_purple", "assets/stendhal/tiled/tileset/furniture/carpet/purple.png");
        this.load.image("ground_ground_2", "assets/stendhal/tiled/tileset/ground/ground_2.png");
@@ -95,79 +97,85 @@ export default class HouseScene extends Phaser.Scene {
        this.load.image("terrain_cave_edges_blue", "assets/stendhal/tiled/tileset/terrain/cave_edges_blue.png");
        this.load.image("ground_slate_tiles", "assets/stendhal/tiled/tileset/ground/slate_tiles.png");
 
-        this.load.tilemapTiledJSON("map", "assets/stendhal/tiled/interiors/ados/house_70.json");
+        console.log("preload: tilemapTileJSON");
+        this.load.tilemapTiledJSON("house", "assets/stendhal/tiled/interiors/ados/house_70.json");
 
         this.load.atlas("atlas", "assets/atlas/atlas.png", "assets/atlas/atlas.json");
 
     }
 
     create() {
-        const map = this.make.tilemap({ key: "map" });
+        const house = this.make.tilemap({ key: "house" });
+        console.log("properties", house);
 
-        const logic_collision = map.addTilesetImage("logic_collision", "logic_collision");
-        const furniture_carpet_purple = map.addTilesetImage("furniture_carpet_purple", "furniture_carpet_purple");
-        const ground_ground_2 = map.addTilesetImage("ground_ground_2", "ground_ground_2");
-        const ground_ground_3 = map.addTilesetImage("ground_ground_3", "ground_ground_3");
-        const ground_indoor_oriental_tan_tile = map.addTilesetImage("ground_indoor_oriental_tan_tile", "ground_indoor_oriental_tan_tile");
-        const ground_indoor_floor_tiles2 = map.addTilesetImage("ground_indoor_floor_tiles2", "ground_indoor_floor_tiles2");
-        const plant_bush_bushes = map.addTilesetImage("plant_bush_bushes", "plant_bush_bushes");
-        const plant_indoor_pot_plant_1 = map.addTilesetImage("plant_indoor_pot_plant_1", "plant_indoor_pot_plant_1");
-        const plant_indoor_small_flowerpots = map.addTilesetImage("plant_indoor_small_flowerpots", "plant_indoor_small_flowerpots");
-        const building_wall_int_green_purple = map.addTilesetImage("building_wall_int_green_purple", "building_wall_int_green_purple");
-        const building_entrance_green_purple_ns_ew = map.addTilesetImage("building_entrance_green_purple_ns_ew", "building_entrance_green_purple_ns_ew");
-        const furniture_chair_wooden_pale = map.addTilesetImage("furniture_chair_wooden_pale", "furniture_chair_wooden_pale");
-        const furniture_kitchen_cabinets = map.addTilesetImage("furniture_kitchen_cabinets", "furniture_kitchen_cabinets");
-        const furniture_table_white = map.addTilesetImage("furniture_table_white", "furniture_table_white");
-        const furniture_table_concrete_table = map.addTilesetImage("furniture_table_concrete_table", "furniture_table_concrete_table");
-        const furniture_chair_sofa_chair_pink = map.addTilesetImage("furniture_chair_sofa_chair_pink", "furniture_chair_sofa_chair_pink");
-        const furniture_bed_double_purple_gold = map.addTilesetImage("furniture_bed_double_purple_gold", "furniture_bed_double_purple_gold");
-        const furniture_chair_armchair_pink = map.addTilesetImage("furniture_chair_armchair_pink", "furniture_chair_armchair_pink");
-        const furniture_chair_stool = map.addTilesetImage("furniture_chair_stool", "furniture_chair_stool");
-        const furniture_chair_colorful = map.addTilesetImage("furniture_chair_colorful", "furniture_chair_colorful");
-        const furniture_shelve_wardrobe_lateral = map.addTilesetImage("furniture_shelve_wardrobe_lateral", "furniture_shelve_wardrobe_lateral");
-        const furniture_clock_wooden_clock = map.addTilesetImage("furniture_clock_wooden_clock", "furniture_clock_wooden_clock");
-        const furniture_table_long_side_on_pale = map.addTilesetImage("furniture_table_long_side_on_pale", "furniture_table_long_side_on_pale");
-        const furniture_kitchen_warmer_2 = map.addTilesetImage("furniture_kitchen_warmer_2", "furniture_kitchen_warmer_2");
-        const item_textile_towels = map.addTilesetImage("item_textile_towels", "item_textile_towels");
-        const furniture_bathroom_basin = map.addTilesetImage("furniture_bathroom_basin", "furniture_bathroom_basin");
-        const furniture_bathroom_toilet = map.addTilesetImage("furniture_bathroom_toilet", "furniture_bathroom_toilet");
-        const furniture_bathroom_bathtub = map.addTilesetImage("furniture_bathroom_bathtub", "furniture_bathroom_bathtub");
-        const item_pot_wastebin = map.addTilesetImage("item_pot_wastebin", "item_pot_wastebin");
-        const furniture_light_lights_candle = map.addTilesetImage("furniture_light_lights_candle", "furniture_light_lights_candle");
-        const building_decoration_fancy_gate = map.addTilesetImage("building_decoration_fancy_gate", "building_decoration_fancy_gate");
-        const furniture_picture_cats = map.addTilesetImage("furniture_picture_cats", "furniture_picture_cats");
-        const furniture_picture_oil_paintings = map.addTilesetImage("furniture_picture_oil_paintings", "furniture_picture_oil_paintings");
-        const item_documents_books2 = map.addTilesetImage("item_documents_books2", "item_documents_books2");
-        const item_brush = map.addTilesetImage("item_brush", "item_brush");
-        const item_chest_chests_red = map.addTilesetImage("item_chest_chests_red", "item_chest_chests_red");
-        const item_drink_bottles_and_cups = map.addTilesetImage("item_drink_bottles_and_cups", "item_drink_bottles_and_cups");
-        const item_food_bread = map.addTilesetImage("item_food_bread", "item_food_bread");
-        const furniture_shelve_rack = map.addTilesetImage("furniture_shelve_rack", "furniture_shelve_rack");
-        const item_household_food_preparation = map.addTilesetImage("item_household_food_preparation", "item_household_food_preparation");
-        const item_household_food_preparation_2 = map.addTilesetImage("item_household_food_preparation_2", "item_household_food_preparation_2");
-        const item_drink_juice_glass = map.addTilesetImage("item_drink_juice_glass", "item_drink_juice_glass");
-        const item_statue_nymph_reddish = map.addTilesetImage("item_statue_nymph_reddish", "item_statue_nymph_reddish");
-        const item_instrument_ukulele = map.addTilesetImage("item_instrument_ukulele", "item_instrument_ukulele");
-        const logic_portal = map.addTilesetImage("logic_portal", "logic_portal");
-        const logic_item_sheepfood = map.addTilesetImage("logic_item_sheepfood", "logic_item_sheepfood");
-        const terrain_cave_edges_blue = map.addTilesetImage("terrain_cave_edges_blue", "terrain_cave_edges_blue");
-        const ground_slate_tiles = map.addTilesetImage("ground_slate_tiles", "ground_slate_tiles");
+        console.log("create: map.addTilesetImage");
+
+        const logic_collision = house.addTilesetImage("logic_collision", "logic_collision");
+        const furniture_carpet_purple = house.addTilesetImage("furniture_carpet_purple", "furniture_carpet_purple");
+        const ground_ground_2 = house.addTilesetImage("ground_ground_2", "ground_ground_2");
+        const ground_ground_3 = house.addTilesetImage("ground_ground_3", "ground_ground_3");
+        const ground_indoor_oriental_tan_tile = house.addTilesetImage("ground_indoor_oriental_tan_tile", "ground_indoor_oriental_tan_tile");
+        const ground_indoor_floor_tiles2 = house.addTilesetImage("ground_indoor_floor_tiles2", "ground_indoor_floor_tiles2");
+        const plant_bush_bushes = house.addTilesetImage("plant_bush_bushes", "plant_bush_bushes");
+        const plant_indoor_pot_plant_1 = house.addTilesetImage("plant_indoor_pot_plant_1", "plant_indoor_pot_plant_1");
+        const plant_indoor_small_flowerpots = house.addTilesetImage("plant_indoor_small_flowerpots", "plant_indoor_small_flowerpots");
+        const building_wall_int_green_purple = house.addTilesetImage("building_wall_int_green_purple", "building_wall_int_green_purple");
+        const building_entrance_green_purple_ns_ew = house.addTilesetImage("building_entrance_green_purple_ns_ew", "building_entrance_green_purple_ns_ew");
+        const furniture_chair_wooden_pale = house.addTilesetImage("furniture_chair_wooden_pale", "furniture_chair_wooden_pale");
+        const furniture_kitchen_cabinets = house.addTilesetImage("furniture_kitchen_cabinets", "furniture_kitchen_cabinets");
+        const furniture_table_white = house.addTilesetImage("furniture_table_white", "furniture_table_white");
+        const furniture_table_concrete_table = house.addTilesetImage("furniture_table_concrete_table", "furniture_table_concrete_table");
+        const furniture_chair_sofa_chair_pink = house.addTilesetImage("furniture_chair_sofa_chair_pink", "furniture_chair_sofa_chair_pink");
+        const furniture_bed_double_purple_gold = house.addTilesetImage("furniture_bed_double_purple_gold", "furniture_bed_double_purple_gold");
+        const furniture_chair_armchair_pink = house.addTilesetImage("furniture_chair_armchair_pink", "furniture_chair_armchair_pink");
+        const furniture_chair_stool = house.addTilesetImage("furniture_chair_stool", "furniture_chair_stool");
+        const furniture_chair_colorful = house.addTilesetImage("furniture_chair_colorful", "furniture_chair_colorful");
+        const furniture_shelve_wardrobe_lateral = house.addTilesetImage("furniture_shelve_wardrobe_lateral", "furniture_shelve_wardrobe_lateral");
+        const furniture_clock_wooden_clock = house.addTilesetImage("furniture_clock_wooden_clock", "furniture_clock_wooden_clock");
+        const furniture_table_long_side_on_pale = house.addTilesetImage("furniture_table_long_side_on_pale", "furniture_table_long_side_on_pale");
+        const furniture_kitchen_warmer_2 = house.addTilesetImage("furniture_kitchen_warmer_2", "furniture_kitchen_warmer_2");
+        const item_textile_towels = house.addTilesetImage("item_textile_towels", "item_textile_towels");
+        const furniture_bathroom_basin = house.addTilesetImage("furniture_bathroom_basin", "furniture_bathroom_basin");
+        const furniture_bathroom_toilet = house.addTilesetImage("furniture_bathroom_toilet", "furniture_bathroom_toilet");
+        const furniture_bathroom_bathtub = house.addTilesetImage("furniture_bathroom_bathtub", "furniture_bathroom_bathtub");
+        const item_pot_wastebin = house.addTilesetImage("item_pot_wastebin", "item_pot_wastebin");
+        const furniture_light_lights_candle = house.addTilesetImage("furniture_light_lights_candle", "furniture_light_lights_candle");
+        const building_decoration_fancy_gate = house.addTilesetImage("building_decoration_fancy_gate", "building_decoration_fancy_gate");
+        const furniture_picture_cats = house.addTilesetImage("furniture_picture_cats", "furniture_picture_cats");
+        const furniture_picture_oil_paintings = house.addTilesetImage("furniture_picture_oil_paintings", "furniture_picture_oil_paintings");
+        const item_documents_books2 = house.addTilesetImage("item_documents_books2", "item_documents_books2");
+        const item_brush = house.addTilesetImage("item_brush", "item_brush");
+        const item_chest_chests_red = house.addTilesetImage("item_chest_chests_red", "item_chest_chests_red");
+        const item_drink_bottles_and_cups = house.addTilesetImage("item_drink_bottles_and_cups", "item_drink_bottles_and_cups");
+        const item_food_bread = house.addTilesetImage("item_food_bread", "item_food_bread");
+        const furniture_shelve_rack = house.addTilesetImage("furniture_shelve_rack", "furniture_shelve_rack");
+        const item_household_food_preparation = house.addTilesetImage("item_household_food_preparation", "item_household_food_preparation");
+        const item_household_food_preparation_2 = house.addTilesetImage("item_household_food_preparation_2", "item_household_food_preparation_2");
+        const item_drink_juice_glass = house.addTilesetImage("item_drink_juice_glass", "item_drink_juice_glass");
+        const item_statue_nymph_reddish = house.addTilesetImage("item_statue_nymph_reddish", "item_statue_nymph_reddish");
+        const item_instrument_ukulele = house.addTilesetImage("item_instrument_ukulele", "item_instrument_ukulele");
+        const logic_portal = house.addTilesetImage("logic_portal", "logic_portal");
+        const logic_item_sheepfood = house.addTilesetImage("logic_item_sheepfood", "logic_item_sheepfood");
+        const terrain_cave_edges_blue = house.addTilesetImage("terrain_cave_edges_blue", "terrain_cave_edges_blue");
+        const ground_slate_tiles = house.addTilesetImage("ground_slate_tiles", "ground_slate_tiles");
 
        const allTileset = [logic_collision, furniture_carpet_purple, ground_ground_2, ground_ground_3, ground_indoor_oriental_tan_tile, ground_indoor_floor_tiles2, plant_bush_bushes, plant_indoor_pot_plant_1, plant_indoor_small_flowerpots, building_wall_int_green_purple, building_entrance_green_purple_ns_ew, furniture_chair_wooden_pale, furniture_kitchen_cabinets, furniture_table_white, furniture_table_concrete_table, furniture_chair_sofa_chair_pink, furniture_bed_double_purple_gold, furniture_chair_armchair_pink, furniture_chair_stool, furniture_chair_colorful, furniture_shelve_wardrobe_lateral, furniture_clock_wooden_clock, furniture_table_long_side_on_pale, furniture_kitchen_warmer_2, item_textile_towels, furniture_bathroom_basin, furniture_bathroom_toilet, furniture_bathroom_bathtub, item_pot_wastebin, furniture_light_lights_candle, building_decoration_fancy_gate, furniture_picture_cats, furniture_picture_oil_paintings, item_documents_books2, item_brush, item_chest_chests_red, item_drink_bottles_and_cups, item_food_bread, furniture_shelve_rack, item_household_food_preparation, item_household_food_preparation_2, item_drink_juice_glass, item_statue_nymph_reddish, item_instrument_ukulele, logic_portal, logic_item_sheepfood, terrain_cave_edges_blue, ground_slate_tiles];
 
-        this.collisionLayer = map.createLayer("collision", allTileset, 0, 0);
-        this.floorLayer = map.createLayer("0_floor", allTileset, 0, 0);
-        this.terrainLayer = map.createLayer("1_terrain", allTileset, 0, 0);
-        this.objectLayer = map.createLayer("2_object", allTileset, 0, 0);
-        const roofLayer = map.createLayer("3_roof", allTileset, 0, 0);
-        this.roofaddLayer = map.createLayer("4_roof_add", allTileset, 0, 0);
-        this.objectsLayer = map.createLayer("objects", allTileset, 0, 0);
+        console.log("create: map.createLayer");
+
+        this.collisionLayer = house.createLayer("collision", allTileset, 0, 0);
+        this.floorLayer = house.createLayer("0_floor", allTileset, 0, 0);
+        this.terrainLayer = house.createLayer("1_terrain", allTileset, 0, 0);
+        this.objectLayer = house.createLayer("2_object", allTileset, 0, 0);
+        const roofLayer = house.createLayer("3_roof", allTileset, 0, 0);
+        this.roofaddLayer = house.createLayer("4_roof_add", allTileset, 0, 0);
+        this.objectsLayer = house.createLayer("objects", allTileset, 0, 0);
 
         this.collisionLayer.setCollisionByProperty({ collides: true });
 
         roofLayer.setDepth(10);
 
-        const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
+        const spawnPoint = house.findObject("Objects", obj => obj.name === "Spawn Point");
 
         console.log(spawnPoint.x + " " + spawnPoint.y);
 
@@ -177,7 +185,7 @@ export default class HouseScene extends Phaser.Scene {
 
         const camera = this.cameras.main;
         camera.startFollow(this.player.sprite);
-        camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        camera.setBounds(0, 0, house.widthInPixels, house.heightInPixels);
 
     }
 
