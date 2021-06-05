@@ -15,7 +15,9 @@ export default class TitleScene extends Phaser.Scene {
     this.add.image(0, 33, 'background').setOrigin(0).setScale(1);
 
     // Game
-    this.stendhalButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'L0AdosCity', 'Level0AdosCity');
+    //this.l0AdosCityButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'L0AdosCity', 'Level0AdosCity');
+
+    this.missionButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'Mission', 'Mission1');
 
     // Options
     this.optionsButton = new Button(this, Config.width/2, Config.height/2 + 100, 'blueButton1', 'blueButton2', 'Options', 'Options');
