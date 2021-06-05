@@ -9,6 +9,12 @@ export default class HouseScene extends Phaser.Scene {
     super('House');
   }
 
+    init(data){
+          this.px = data.px;
+          this.py = data.py;
+          console.log(this.px + " " + this.py);
+    }
+
     preload() {
         /*
         1/
@@ -179,9 +185,7 @@ export default class HouseScene extends Phaser.Scene {
 
         const spawnPoint = house.findObject("Objects", obj => obj.name === "Spawn Point");
 
-        console.log(spawnPoint.x + " " + spawnPoint.y);
-
-        this.player = new Player(this, spawnPoint.x, spawnPoint.y);
+        this.player = new Player(this, this.px, this.py);
 
         this.physics.add.collider(this.player.sprite, this.collisionLayer);
 
@@ -207,7 +211,7 @@ export default class HouseScene extends Phaser.Scene {
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 400, 704)) {
                console.log("ados");
-               this.scene.start("Stendhal");                   
+               this.scene.start("Stendhal", {px: 720, py: 3624});                   
            }
         }
     }

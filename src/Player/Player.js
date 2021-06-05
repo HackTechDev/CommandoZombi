@@ -93,7 +93,6 @@ export default class Player {
 
         if(keyD.isUp) {
           this.keyDOnce = false;
-          console.log("Player position: " + sprite.x + " " + sprite.y);
         }
 
         sprite.body.setVelocity(0);

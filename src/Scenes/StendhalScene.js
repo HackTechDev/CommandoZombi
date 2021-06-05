@@ -12,6 +12,13 @@ export default class StendhalScene extends Phaser.Scene {
     super('Stendhal');
   }
 
+    init(data){
+          this.px = data.px;
+          this.py = data.py;
+          console.log(this.px + " " + this.py);
+    }
+
+
     preload() {
 
        this.load.image("ground_indoor_tiles", "assets/stendhal/tiled/tileset/ground/indoor/tiles.png");
@@ -182,9 +189,12 @@ export default class StendhalScene extends Phaser.Scene {
 
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
 
-        console.log(spawnPoint.x + " " + spawnPoint.y);
 
-        this.player = new Player(this, spawnPoint.x, spawnPoint.y);
+        if ( this.px === undefined && this.py === undefined) {
+            this.player = new Player(this, spawnPoint.x, spawnPoint.y);
+        } else {
+            this.player = new Player(this, this.px, this.py);
+        }
 
         this.physics.add.collider(this.player.sprite, this.collisionLayer);
 
@@ -201,7 +211,7 @@ export default class StendhalScene extends Phaser.Scene {
         this.testKeyOOnce = true;
 
 
-        keyObj=this.input.keyboard.addKey('w');
+        keyObj=this.input.keyboard.addKey("o");
 
     }
 
@@ -221,10 +231,15 @@ export default class StendhalScene extends Phaser.Scene {
 
 
         if(keyObj.isDown){
-            console.log("w");
+            console.log("o");
+            if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
+                    console.log("house_70");
+                    this.scene.start('House', {px: 400, py: 704});
+            }
+
         }
 
-        
+        /*       
         if(this.keyO.isDown) {
 
             if (!this.keyOOnce) {
@@ -232,7 +247,7 @@ export default class StendhalScene extends Phaser.Scene {
                 //const infoTile = this.objectLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
 
                 console.log("O key pressed")
-                console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
+                //console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
                 this.keyOOnce = true;
         
                 if (infoTile != null) {
@@ -253,7 +268,7 @@ export default class StendhalScene extends Phaser.Scene {
         if(this.keyO.isUp) {
           this.keyOOnce = false;
         }
-        
+        */
 
 
     }
