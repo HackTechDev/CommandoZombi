@@ -246,12 +246,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(keyD.isDown){
             console.log( this.player.sprite.x + " " + this.player.sprite.y);
         }
-
+    
+        /*
         if(keyM.isDown){
             console.log( "Menu");
             this.scene.start('Menu');
         }
-
+        */
 
         /*       
         if(this.keyO.isDown) {

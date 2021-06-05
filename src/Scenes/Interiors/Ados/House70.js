@@ -2,7 +2,7 @@ import Player from "../../../Player/Player";
 
 import 'phaser';
 
-var keyObj;
+var keyO, keyD, keyM;
 
 export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
   constructor () {
@@ -196,7 +196,9 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, interiorsAdosHouse70.widthInPixels, interiorsAdosHouse70.heightInPixels);
 
-        keyObj=this.input.keyboard.addKey('o');
+        keyO = this.input.keyboard.addKey('o');
+        keyD = this.input.keyboard.addKey('d');
+        keyM = this.input.keyboard.addKey("m");
 
     }
 
@@ -210,12 +212,22 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
     update(time, delta) {
         this.player.update();
  
-        if(keyObj.isDown){
+        if(keyO.isDown){
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 400, 704)) {
                console.log("ados");
                this.scene.start("Level0AdosCity", {px: 720, py: 3624});                   
            }
         }
+        
+        if(keyD.isDown){
+            console.log( this.player.sprite.x + " " + this.player.sprite.y);
+        }
+
+        if(keyM.isDown){
+            console.log( "Menu");
+            this.scene.start('Menu');
+        }   
+        
     }
 }
