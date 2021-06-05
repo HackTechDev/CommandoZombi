@@ -2,6 +2,8 @@ import Player from "../Player/Player";
 
 import 'phaser';
 
+var keyObj;
+
 export default class HouseScene extends Phaser.Scene {
   constructor () {
     super('House');
@@ -187,10 +189,26 @@ export default class HouseScene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, house.widthInPixels, house.heightInPixels);
 
+        keyObj=this.input.keyboard.addKey('o');
+
+    }
+
+    checkDoor(playerx, playery, doorx, doory) {
+       if(playerx >= doorx-2 && playerx <= doorx+2 && playery >= doory-2 && playery <= doory+2)
+            return true;
+        return false;
     }
 
 
     update(time, delta) {
         this.player.update();
+ 
+        if(keyObj.isDown){
+            console.log("o");
+            if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 400, 704)) {
+               console.log("ados");
+               this.scene.start("Stendhal");                   
+           }
+        }
     }
 }

@@ -221,10 +221,10 @@ export default class StendhalScene extends Phaser.Scene {
 
 
         if(keyObj.isDown){
-            this.scene.start("House");
+            console.log("w");
         }
 
-        /*
+        
         if(this.keyO.isDown) {
 
             if (!this.keyOOnce) {
@@ -235,8 +235,6 @@ export default class StendhalScene extends Phaser.Scene {
                 console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
                 this.keyOOnce = true;
         
-                scene.scene.start('House');
-                
                 if (infoTile != null) {
                     console.log("Get objectTile : ", infoTile);
                     console.log("Get objectTile index : ", infoTile.index);
@@ -255,7 +253,7 @@ export default class StendhalScene extends Phaser.Scene {
         if(this.keyO.isUp) {
           this.keyOOnce = false;
         }
-        */
+        
 
 
     }
