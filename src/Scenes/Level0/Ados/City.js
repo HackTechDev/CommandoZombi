@@ -230,7 +230,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
                     console.log("house_70");
-                    this.scene.start('House', {px: 400, py: 704});
+                    this.scene.start('InteriorsAdosHouse70', {px: 400, py: 704});
             }
 
         }

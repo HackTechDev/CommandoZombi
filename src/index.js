@@ -4,7 +4,7 @@ import Config from './Config/Config';
 import GameScene from './Scenes/GameScene';
 import DungeonScene from './Scenes/DungeonScene';
 import Level0AdosCityScene from './Scenes/Level0/Ados/City';
-import HouseScene from './Scenes/HouseScene';
+import InteriorsAdosHouse70Scene from './Scenes/Interiors/Ados/House70';
 
 import TileMapping from './TileMapping/TileMapping';
 
@@ -30,7 +30,7 @@ class Game extends Phaser.Game {
     this.scene.add('Game', GameScene);
     this.scene.add('Dungeon', DungeonScene);
     this.scene.add('Level0AdosCity', Level0AdosCityScene);
-    this.scene.add('House', HouseScene);
+    this.scene.add('InteriorsAdosHouse70', InteriorsAdosHouse70Scene);
 
     this.scene.start('Boot');
   }
