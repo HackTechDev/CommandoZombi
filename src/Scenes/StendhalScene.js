@@ -1,7 +1,11 @@
 import Player from "../Player/Player";
+
 import MouseTileMarker from "../MouseTileMarker/MouseTileMarker"
 
+
 import 'phaser';
+
+var keyObj;
 
 export default class StendhalScene extends Phaser.Scene {
   constructor () {
@@ -9,13 +13,6 @@ export default class StendhalScene extends Phaser.Scene {
   }
 
     preload() {
-        /*
-        Tiled version : Tiled-1.6.0-x86_64.AppImage
-        Format de Calque de Tuiles : CSV
-        Exporter en tant que... : .json
-
-        */
-
 
        this.load.image("ground_indoor_tiles", "assets/stendhal/tiled/tileset/ground/indoor/tiles.png");
        this.load.image("building_castle", "assets/stendhal/tiled/tileset/building/castle.png");
@@ -203,6 +200,9 @@ export default class StendhalScene extends Phaser.Scene {
         this.testKeyO = false;
         this.testKeyOOnce = true;
 
+
+        keyObj=this.input.keyboard.addKey('w');
+
     }
 
     checkDoor(playerx, playery, doorx, doory) {
@@ -219,6 +219,12 @@ export default class StendhalScene extends Phaser.Scene {
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
+
+        if(keyObj.isDown){
+            this.scene.start("House");
+        }
+
+        /*
         if(this.keyO.isDown) {
 
             if (!this.keyOOnce) {
@@ -229,6 +235,8 @@ export default class StendhalScene extends Phaser.Scene {
                 console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
                 this.keyOOnce = true;
         
+                scene.scene.start('House');
+                
                 if (infoTile != null) {
                     console.log("Get objectTile : ", infoTile);
                     console.log("Get objectTile index : ", infoTile.index);
@@ -240,16 +248,14 @@ export default class StendhalScene extends Phaser.Scene {
                     console.log("house_70");
                     this.scene.start('House');                   
                 }
-
-
-
+                
             }
         }
 
         if(this.keyO.isUp) {
           this.keyOOnce = false;
         }
-
+        */
 
 
     }
