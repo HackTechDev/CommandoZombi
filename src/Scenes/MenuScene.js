@@ -64,8 +64,10 @@ export default class MenuScene extends Phaser.Scene {
   update(time, delta) {
  
     if(keyM.isDown){
-        console.log("Menu");
-        this.scene.start(this.previousScene);
+        if(this.previousScene != undefined) {
+          console.log("Menu");
+          this.scene.start(this.previousScene);
+        }
     }   
     
 }
