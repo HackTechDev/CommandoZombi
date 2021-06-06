@@ -33,6 +33,8 @@ export default class MenuScene extends Phaser.Scene {
     // Credits
     this.creditsButton = new Button(this, Config.width/2, Config.height/2 + 200, 'blueButton1', 'blueButton2', 'Crédits', 'Credits');
 
+    this.helpButton = new Button(this, Config.width/2 + 200, Config.height/2 + 200, 'blueButton1', 'blueButton2', 'Aide', 'Help');
+
     this.music = this.sys.game.globals.music;
     if (this.music.musicOn === true && this.music.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });

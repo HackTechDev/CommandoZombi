@@ -17,6 +17,9 @@ import PreloaderScene from './Scenes/PreloaderScene';
 import MenuScene from './Scenes/MenuScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
+import HelpScene from './Scenes/HelpScene';
+
+
 import Music from './Music/Music';
 
 import MouseTileMarker from './MouseTileMarker/MouseTileMarker'
@@ -31,6 +34,8 @@ class Game extends Phaser.Game {
     this.scene.add('Menu', MenuScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
+    this.scene.add('Help', HelpScene);
+    
     this.scene.add('Game', GameScene);
     this.scene.add('Dungeon', DungeonScene);
     this.scene.add('Level0AdosCity', Level0AdosCityScene);
