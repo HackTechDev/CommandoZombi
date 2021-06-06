@@ -2,10 +2,18 @@ import 'phaser';
 import Config from '../Config/Config';
 import Button from '../Buttons/Button';
 
+var keyM;
+
 export default class MenuScene extends Phaser.Scene {
   constructor () {
     super('Menu');
   }
+
+  init(data){
+    this.previousScene = data.previousScene;
+
+    console.log("previousScene: " + this.previousScene);
+}
 
   preload() {
         this.load.image('background', 'assets/images/team.jpg');
@@ -32,6 +40,9 @@ export default class MenuScene extends Phaser.Scene {
       this.music.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
     }
+
+    keyM = this.input.keyboard.addKey("m");
+
   }
 
   centerButton (gameObject, offset = 0) {
@@ -47,4 +58,15 @@ export default class MenuScene extends Phaser.Scene {
       gameButton
     );
   }
+
+  update(time, delta) {
+ 
+    if(keyM.isDown){
+        console.log("Menu");
+        this.scene.start(this.previousScene);
+    }   
+    
+}
+
+
 };

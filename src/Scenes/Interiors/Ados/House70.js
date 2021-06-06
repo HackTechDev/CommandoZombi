@@ -225,8 +225,8 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
         }
 
         if(keyM.isDown){
-            console.log( "Menu");
-            this.scene.start('Menu');
+            console.log("Menu");
+            this.scene.start('Menu', {previousScene: "InteriorsAdosHouse70"});
         }   
         
     }
