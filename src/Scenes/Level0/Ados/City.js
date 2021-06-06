@@ -222,7 +222,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.overlap(this.player.sprite, bombs, this.collectBomb, null, this);
 
         /* HUD*/
-
          scoreText = this.add
             .text(16, 16, 'Score: 0', {
               font: "18px monospace",
@@ -233,13 +232,16 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setScrollFactor(0)
             .setDepth(30);
 
-        /* NPC */
 
+        /* NPC */
         npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
+        npcBlacklord.body.immovable = true;
+        npcBlacklord.body.moves = false;
+
         this.physics.add.collider(this.player.sprite, npcBlacklord, this.talkBlacklord, null, this);
 
-        /* Command */
 
+        /* Command */
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         this.testKeyC = false;
         this.testKeyOnceC = true;
@@ -248,14 +250,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyD = false;
         this.testKeyOnceD = true;
 
-
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
         
-
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
-
     }
 
 
@@ -268,7 +267,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
     talkBlacklord(player, npc) {
-        npc.disableBody(true);
         console.log('Parler à Blacklord');
     }
 
