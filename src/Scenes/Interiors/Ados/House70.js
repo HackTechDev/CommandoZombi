@@ -2,7 +2,7 @@ import Player from "../../../Player/Player";
 
 import 'phaser';
 
-var keyO, keyD, keyM, keyA;
+var keyO, keyD, keyM, keyA, keyS;
 
 export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
   constructor () {
@@ -200,6 +200,7 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
         keyD = this.input.keyboard.addKey("d");
         keyM = this.input.keyboard.addKey("m");
         keyA = this.input.keyboard.addKey("a");
+        keyS = this.input.keyboard.addKey("s");
     }
 
     checkDoor(playerx, playery, doorx, doory) {
@@ -234,6 +235,10 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
             this.scene.start('Help', {previousScene: "InteriorsAdosHouse70"});
         }          
 
+        if(keyS.isDown){
+            console.log("Option: Son");
+            this.scene.start('Options', {previousScene: "InteriorsAdosHouse70"});
+        } 
 
     }
 }

@@ -1,6 +1,8 @@
 import 'phaser';
 import Button from '../Buttons/Button';
 
+var keyS;
+
 export default class OptionsScene extends Phaser.Scene {
   constructor () {
     super('Options');
@@ -11,7 +13,7 @@ export default class OptionsScene extends Phaser.Scene {
 
     console.log("previousScene: " + this.previousScene);
   }
-  
+
   create () {
     this.music = this.sys.game.globals.music;
 
@@ -35,9 +37,14 @@ export default class OptionsScene extends Phaser.Scene {
       this.updateAudio();
     }.bind(this));
 
-    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');
 
+    if(this.previousScene === undefined) {
+      this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');
+    }
+    
     this.updateAudio();
+
+    keyS = this.input.keyboard.addKey("s");
   }
 
   updateAudio() {
@@ -59,4 +66,16 @@ export default class OptionsScene extends Phaser.Scene {
       this.soundButton.setTexture('checkedBox');
     }
   }
+
+  update(time, delta) {
+ 
+    if(keyS.isDown){
+        if(this.previousScene != undefined) {
+          console.log("Son");
+          this.scene.start(this.previousScene);
+        }
+    }  
+  }
+
+
 };
