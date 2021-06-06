@@ -5,7 +5,8 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
 
-var keyO, keyD, keyM;
+var keyO, keyM, keyJ;
+var keyC, keyD;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -201,14 +202,18 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
         /* Command */
-/*
-        this.keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
-        this.testKeyO = false;
-        this.testKeyOOnce = true;
-*/
+
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        this.testKeyC = false;
+        this.testKeyOnceC = true;
+
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.testKeyD = false;
+        this.testKeyOnceD = true;
+
 
         keyO = this.input.keyboard.addKey("o");
-        keyD = this.input.keyboard.addKey("d");
+        keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
 
 
@@ -244,48 +249,41 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         }
 
 
-        if(keyD.isDown){
+        if(keyJ.isDown){
             console.log( this.player.sprite.x + " " + this.player.sprite.y);
         }
     
-        /*
-        if(keyM.isDown){
-            console.log( "Menu");
-            this.scene.start('Menu');
-        }
-        */
+               
+        if(this.keyC.isDown) {
 
-        /*       
-        if(this.keyO.isDown) {
-
-            if (!this.keyOOnce) {
-                const infoTile = this.floorLayer.getTileAtWorldXY(this.player.x, this.player.y);
-                //const infoTile = this.objectLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
-
-                console.log("O key pressed")
-                //console.log("Player position: " + this.player.sprite.x + " " + this.player.sprite.y);
-                this.keyOOnce = true;
-        
-                if (infoTile != null) {
-                    console.log("Get objectTile : ", infoTile);
-                    console.log("Get objectTile index : ", infoTile.index);
-                    console.log("Get objectTile properties : ", infoTile.properties);
-
-                }
-
-                if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
-                    console.log("house_70");
-                    this.scene.start('House');                   
-                }
-                
+            if (!this.keyOnceC) {
+                this.worldTile = this.collisionLayer.putTileAtWorldXY(33, worldPoint.x, worldPoint.y);                
+                this.worldTile.setCollision(true);
+                this.worldTile = this.terrainLayer.putTileAtWorldXY(33, worldPoint.x, worldPoint.y);  
+                console.log("C key pressed")
+                this.keyOnceC = true;                
             }
         }
 
-        if(this.keyO.isUp) {
-          this.keyOOnce = false;
+        if(this.keyC.isUp) {
+          this.keyOnceC = false;
         }
-        */
+        
+        if(this.keyD.isDown) {
 
+            if (!this.keyOnceD) {
+                this.worldTile = this.collisionLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y);                
+                this.worldTile.setCollision(false);
+                this.worldTile = this.terrainLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y);  
+                console.log("D key pressed")
+                this.keyOnceD = true;                
+            }
+        }
+
+        if(this.keyD.isUp) {
+          this.keyOnceD = false;
+        }
+ 
 
     }
 }
