@@ -13,7 +13,7 @@ export default class MenuScene extends Phaser.Scene {
     this.previousScene = data.previousScene;
 
     console.log("previousScene: " + this.previousScene);
-}
+  }
 
   preload() {
         this.load.image('background', 'assets/images/team.jpg');
@@ -61,16 +61,5 @@ export default class MenuScene extends Phaser.Scene {
     );
   }
 
-  update(time, delta) {
- 
-    if(keyM.isDown){
-        if(this.previousScene != undefined) {
-          console.log("Menu");
-          this.scene.start(this.previousScene);
-        }
-    }   
     
-}
-
-
 };

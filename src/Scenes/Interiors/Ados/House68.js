@@ -2,7 +2,7 @@ import Player from "../../../Player/Player";
 
 import 'phaser';
 
-var keyO, keyD, keyM;
+var keyO, keyD, keyM, keyA;
 
 export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
   constructor () {
@@ -171,9 +171,10 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, interiorsAdosHouse68.widthInPixels, interiorsAdosHouse68.heightInPixels);
 
-        keyO = this.input.keyboard.addKey('o');
-        keyD = this.input.keyboard.addKey('d');
+        keyO = this.input.keyboard.addKey("o");
+        keyD = this.input.keyboard.addKey("d");
         keyM = this.input.keyboard.addKey("m");
+        keyA = this.input.keyboard.addKey("a");
 
     }
 
@@ -200,9 +201,14 @@ export default class InteriorsAdosHouse68Scene extends Phaser.Scene {
         }
 
         if(keyM.isDown){
-            console.log( "Menu");
-            this.scene.start('Menu', {previousScene: "InteriorsAdosHouse68"});
+            console.log( "Mission1");
+            this.scene.start("Mission1", {previousScene: "InteriorsAdosHouse68"});
         }
         
+        if(keyA.isDown){
+            console.log("Aide");
+            this.scene.start('Help', {previousScene: "InteriorsAdosHouse68"});
+        }  
+
     }
 }

@@ -6,6 +6,12 @@ export default class OptionsScene extends Phaser.Scene {
     super('Options');
   }
 
+  init(data){
+    this.previousScene = data.previousScene;
+
+    console.log("previousScene: " + this.previousScene);
+  }
+  
   create () {
     this.music = this.sys.game.globals.music;
 
