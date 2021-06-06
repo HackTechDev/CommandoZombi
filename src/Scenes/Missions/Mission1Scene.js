@@ -20,7 +20,7 @@ export default class Mission1Scene extends Phaser.Scene {
     this.mission1Text = this.add.text(250, 190, '- Cartographier la ville d\'Ados\n- Visiter les maisons 68 et 70', { fontSize: 24 });
 
     if(this.previousScene === undefined) {
-      this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'En Avant !', 'Level0AdosCity');
+      this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'En avant !', 'Level0AdosCity');
     }
 
     keyM = this.input.keyboard.addKey("m");

@@ -9,6 +9,14 @@ var keyO, keyM, keyJ;
 var keyC, keyD;
 var keyG;
 
+var bombs;
+
+var npcBlacklord;
+
+var scoreText;
+var score = 0;
+
+
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
     super('Level0AdosCity');
@@ -91,11 +99,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.image("building_huts", "assets/stendhal/tiled/tileset/building/huts.png");
        this.load.image("logic_creature_fowl", "assets/stendhal/tiled/tileset/logic/creature/fowl.png");
 
-
         this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
         this.load.atlas("atlas", "assets/atlas/atlas.png", "assets/atlas/atlas.json");
 
+        this.load.image('bomb', 'assets/bomb.png');
+
+        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
     }
 
     create() {
@@ -202,6 +212,32 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
+        /* Bomb */
+       bombs = this.physics.add.group({
+            key: 'bomb',
+            repeat: 11,
+            setXY: { x: 490, y: 2723, stepX: 30 }
+        });
+
+        this.physics.add.overlap(this.player.sprite, bombs, this.collectBomb, null, this);
+
+        /* HUD*/
+
+         scoreText = this.add
+            .text(16, 16, 'Score: 0', {
+              font: "18px monospace",
+              fill: "#000000",
+              padding: { x: 20, y: 10 },
+              backgroundColor: "#ffffff"
+            })
+            .setScrollFactor(0)
+            .setDepth(30);
+
+        /* NPC */
+
+        npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
+        this.physics.add.collider(this.player.sprite, npcBlacklord, this.talkBlacklord, null, this);
+
         /* Command */
 
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
@@ -221,6 +257,22 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
     }
+
+
+    collectBomb(player, bomb) {
+        bomb.disableBody(true, true);
+        score += 10;
+        scoreText.setText('Score: ' + score);
+        console.log('Score: ' + score);
+    }
+
+
+    talkBlacklord(player, npc) {
+        npc.disableBody(true);
+        console.log('Parler à Blacklord');
+    }
+
+
 
     checkDoor(playerx, playery, doorx, doory) {
        if(playerx >= doorx-2 && playerx <= doorx+2 && playery >= doory-2 && playery <= doory+2)
