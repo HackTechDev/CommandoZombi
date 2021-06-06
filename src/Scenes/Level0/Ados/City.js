@@ -9,6 +9,8 @@ var keyO, keyM, keyJ;
 var keyC, keyD;
 var keyG;
 
+var keyP, talkToBlacklord = false;
+
 var bombs;
 
 var npcBlacklord;
@@ -250,6 +252,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyD = false;
         this.testKeyOnceD = true;
 
+        this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        this.testKeyP = false;
+        this.testKeyOnceP = true;
+
+
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
@@ -267,6 +274,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
     talkBlacklord(player, npc) {
+        talkToBlacklord = true;
         console.log('Parler à Blacklord');
     }
 
@@ -337,6 +345,24 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceD = false;
         }
  
+
+        
+        if(this.keyP.isDown) {
+
+            if (!this.keyOnceP) {
+                console.log("P key pressed")
+                if(talkToBlacklord == true) {
+                    console.log("Oh Grand Black Lord !");
+                }
+                this.keyOnceP = true;                
+            }
+        }
+
+        if(this.keyP.isUp) {
+          this.keyOnceP = false;
+        }
+ 
+
 
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.physics.world.createDebugGraphic();
