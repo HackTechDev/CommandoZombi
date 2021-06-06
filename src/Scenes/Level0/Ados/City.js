@@ -7,6 +7,7 @@ import 'phaser';
 
 var keyO, keyM, keyJ;
 var keyC, keyD;
+var keyG;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -215,7 +216,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
+        
 
+        this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
     }
 
@@ -284,6 +287,23 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceD = false;
         }
  
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyG)){
+            this.physics.world.createDebugGraphic();
+            const graphics = this.add
+              .graphics()
+              .setAlpha(0.75)
+              .setDepth(20);
+            this.terrainLayer.renderDebug(graphics, {
+              tileColor: null,
+              collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),
+              faceColor: new Phaser.Display.Color(40, 39, 37, 255)
+            });
+
+        }
+
+
+
 
     }
 }
