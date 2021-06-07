@@ -9,12 +9,17 @@ var keyO, keyM, keyJ;
 var keyC, keyD;
 var keyG;
 
-var keyP, talkToBlacklord = false;
-var blacklordIsColliding, blacklordWasColliding;
+var keyP;
 
-var bombs;
+var dialogueBackground;
 
 var npcBlacklord;
+var talkToBlacklord = false, canTalkToBlacklord = false;
+var blacklordIsColliding, blacklordWasColliding;
+var blacklordDialogue = false;
+var dialogueTextBlacklord;
+
+var bombs;
 
 var scoreText;
 var score = 0;
@@ -347,18 +352,36 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceD = false;
         }
  
+        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
+        if(distanceBetween2PC <= 50) {
+            canTalkToBlacklord = true;
+        } else {
+            canTalkToBlacklord = false;
+            if(blacklordDialogue == true) {
+                console.log("invisible dialogue");
+                dialogueTextBlacklord.destroy();
+                blacklordDialogue = false;
+            }
+        }
 
-        
         if(this.keyP.isDown) {
 
             if (!this.keyOnceP) {
                 console.log("P key pressed");
-                distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
-                console.log("Distance: " + distanceBetween2PC);
-                if(distanceBetween2PC <= 50) {
-                    console.log("Oh Grand Black Lord !");
+                if(canTalkToBlacklord == true) {
+                    console.log("visible dialogue");
+                    dialogueBackground = this.add.rectangle(16, 500, 600, 100, 0xffffff, 1);                    
+                    dialogueTextBlacklord = this.add.text(16, 500, 'Oh Grand Black Lord !', {
+                          font: "12apx monospace",
+                          fill: "#000000",
+                          padding: { x: 20, y: 10 },
+                          backgroundColor: "#ffffff"
+                        })
+                        .setScrollFactor(0)
+                        .setDepth(30);
+                    blacklordDialogue = true;
                 }
-                
+
                 this.keyOnceP = true;                
             }
         }
@@ -367,8 +390,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceP = false;
         }
  
-
-
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.physics.world.createDebugGraphic();
             const graphics = this.add
@@ -382,9 +403,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             });
 
         }
-
-
-
 
     }
 }
