@@ -10,6 +10,7 @@ var keyC, keyD;
 var keyG;
 
 var keyP, talkToBlacklord = false;
+var blacklordIsColliding, blacklordWasColliding;
 
 var bombs;
 
@@ -18,6 +19,7 @@ var npcBlacklord;
 var scoreText;
 var score = 0;
 
+var p, n, distanceBetween2PC;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -240,8 +242,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         npcBlacklord.body.immovable = true;
         npcBlacklord.body.moves = false;
 
-        this.physics.add.collider(this.player.sprite, npcBlacklord, this.talkBlacklord, null, this);
-
+        this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
 
         /* Command */
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
@@ -273,9 +274,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
     }
 
 
-    talkBlacklord(player, npc) {
-        talkToBlacklord = true;
-        console.log('Parler à Blacklord');
+    collideToBlacklord(player, npc) {
+        p = player.body.touching.none;
+        n = npc.body.touching.none;
+        console.log(p + " " + n);
     }
 
 
@@ -350,10 +352,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(this.keyP.isDown) {
 
             if (!this.keyOnceP) {
-                console.log("P key pressed")
-                if(talkToBlacklord == true) {
+                console.log("P key pressed");
+                distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
+                console.log("Distance: " + distanceBetween2PC);
+                if(distanceBetween2PC <= 50) {
                     console.log("Oh Grand Black Lord !");
                 }
+                
                 this.keyOnceP = true;                
             }
         }
