@@ -375,7 +375,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                     dialogueBackground = this.add.rectangle(300, 500, 500, 100, 0xffffff, 1)
                             .setScrollFactor(0,0)
                             .setDepth(29);
-                    console.log("dialogue: ", dialogueBackground); 
                                    
                     dialogueTextBlacklord = this.add.text(50, 450, 'Moi : Oh Grand Black Lord !\nGrand Black Lord : Salut à toi !', {
                           font: "12apx monospace",
