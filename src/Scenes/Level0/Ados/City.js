@@ -16,13 +16,21 @@ var dialogueBackground;
 var npcBlacklord;
 var talkToBlacklord = false, canTalkToBlacklord = false;
 var blacklordIsColliding, blacklordWasColliding;
-var blacklordDialogue = false;
-var dialogueTextBlacklord;
+var blacklordDialogueDisplay = false;
+var dialogueTextBlacklord = false;
+var once = false;
+
+var npcZombi;
+
 
 var bombs;
 
 var scoreText;
 var score = 0;
+
+var healthText;
+var health = 0;
+
 
 var p, n, distanceBetween2PC;
 
@@ -115,6 +123,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/bomb.png');
 
         this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
+
+        this.load.image('zombi', 'assets/atlas/bloody-zombie/misa-front.png');
+
     }
 
     create() {
@@ -241,6 +252,17 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setScrollFactor(0)
             .setDepth(30);
 
+         healthText = this.add
+            .text(16, 50, 'Santé:  0', {
+              font: "18px monospace",
+              fill: "#000000",
+              padding: { x: 20, y: 10 },
+              backgroundColor: "#ffffff"
+            })
+            .setScrollFactor(0)
+            .setDepth(30);
+
+
 
         /* NPC */
         npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
@@ -248,6 +270,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         npcBlacklord.body.moves = false;
 
         this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
+
+
+        npcZombi = this.physics.add.sprite(827,2641, 'zombi');
+        npcZombi.body.immovable = true;
+        npcZombi.body.moves = false;
+
+         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
+
 
         /* Command */
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
@@ -286,6 +316,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         console.log(p + " " + n);
     }
 
+    collideToZombi(player, npc) {
+        p = player.body.touching.none;
+        n = npc.body.touching.none;
+        console.log(p + " " + n);
+    }
 
 
     checkDoor(playerx, playery, doorx, doory) {
@@ -293,6 +328,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             return true;
         return false;
     }
+
 
 
     update(time, delta) {
@@ -353,29 +389,35 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceD = false;
         }
  
+
+        /* Dialogue */
+        
         distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
         if(distanceBetween2PC <= 50) {
-            canTalkToBlacklord = true;
+            console.log("once : " + once);
+            if (once == false) {
+                canTalkToBlacklord = true;
+            }
         } else {
             canTalkToBlacklord = false;
-            if(blacklordDialogue == true) {
-                console.log("invisible dialogue");
+            once = false;
+            console.log("invisible dialogue");
+            if(blacklordDialogueDisplay == true) {
                 dialogueTextBlacklord.destroy();
                 dialogueBackground.destroy();
-                blacklordDialogue = false;
+                blacklordDialogueDisplay = false;
             }
         }
 
         if(this.keyP.isDown) {
 
             if (!this.keyOnceP) {
-                console.log("P key pressed");
-                if(canTalkToBlacklord == true) {
+                if(canTalkToBlacklord == true && once == false) {
                     console.log("visible dialogue");
                     dialogueBackground = this.add.rectangle(300, 500, 500, 100, 0xffffff, 1)
                             .setScrollFactor(0,0)
                             .setDepth(29);
-                                   
+                  
                     dialogueTextBlacklord = this.add.text(50, 450, 'Moi : Oh Grand Black Lord !\nGrand Black Lord : Salut à toi !', {
                           font: "12apx monospace",
                           fill: "#000000",
@@ -384,8 +426,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                         })
                         .setScrollFactor(0,0)
                         .setDepth(30);
-                    blacklordDialogue = true;
-                
+                    blacklordDialogueDisplay = true;
+                    canTalkToBlacklord = false;
+                    once = true;
                 }
                 
                 this.keyOnceP = true;                
@@ -396,6 +439,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceP = false;
         }
  
+
+        /* Debug graphism */
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.physics.world.createDebugGraphic();
             const graphics = this.add
