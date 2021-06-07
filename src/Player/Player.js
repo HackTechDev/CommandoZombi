@@ -66,6 +66,8 @@ export default class Player {
 
     this.keyDOnce = true;
 
+    this.bomb = 0;
+    this.health = 200;
     }
 
 

@@ -25,11 +25,9 @@ var npcZombi;
 
 var bombs;
 
-var scoreText;
-var score = 0;
+var bombText;
 
 var healthText;
-var health = 0;
 
 
 var p, n, distanceBetween2PC;
@@ -242,8 +240,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.overlap(this.player.sprite, bombs, this.collectBomb, null, this);
 
         /* HUD*/
-         scoreText = this.add
-            .text(16, 16, 'Score: 0', {
+         bombText = this.add
+            .text(16, 16, 'Bombe: ' + this.player.bomb, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -253,7 +251,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setDepth(30);
 
          healthText = this.add
-            .text(16, 50, 'Santé:  0', {
+            .text(16, 50, 'Santé:  ' + this.player.health, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -262,8 +260,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setScrollFactor(0)
             .setDepth(30);
 
-
-
         /* NPC */
         npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
         npcBlacklord.body.immovable = true;
@@ -271,13 +267,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
 
-
-        npcZombi = this.physics.add.sprite(827,2641, 'zombi');
+        npcZombi = this.physics.add.sprite(927,2641, 'zombi');
         npcZombi.body.immovable = true;
         npcZombi.body.moves = false;
 
-         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
-
+        this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
 
         /* Command */
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
@@ -292,7 +286,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyP = false;
         this.testKeyOnceP = true;
 
-
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
@@ -304,22 +297,21 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
     collectBomb(player, bomb) {
         bomb.disableBody(true, true);
-        score += 10;
-        scoreText.setText('Score: ' + score);
-        console.log('Score: ' + score);
+        this.player.bomb += 10;
+        bombText.setText('Bombe : ' + this.player.bomb);
     }
 
 
     collideToBlacklord(player, npc) {
         p = player.body.touching.none;
         n = npc.body.touching.none;
-        console.log(p + " " + n);
     }
 
     collideToZombi(player, npc) {
         p = player.body.touching.none;
         n = npc.body.touching.none;
-        console.log(p + " " + n);
+        this.player.health -= 10;
+        healthText.setText('Santé : ' + this.player.health);
     }
 
 
@@ -394,14 +386,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         
         distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
         if(distanceBetween2PC <= 50) {
-            console.log("once : " + once);
             if (once == false) {
                 canTalkToBlacklord = true;
             }
         } else {
             canTalkToBlacklord = false;
             once = false;
-            console.log("invisible dialogue");
             if(blacklordDialogueDisplay == true) {
                 dialogueTextBlacklord.destroy();
                 dialogueBackground.destroy();
@@ -410,15 +400,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         }
 
         if(this.keyP.isDown) {
-
             if (!this.keyOnceP) {
                 if(canTalkToBlacklord == true && once == false) {
-                    console.log("visible dialogue");
                     dialogueBackground = this.add.rectangle(300, 500, 500, 100, 0xffffff, 1)
                             .setScrollFactor(0,0)
                             .setDepth(29);
                   
-                    dialogueTextBlacklord = this.add.text(50, 450, 'Moi : Oh Grand Black Lord !\nGrand Black Lord : Salut à toi !', {
+                    dialogueTextBlacklord = this.add.text(50, 450, 'Moi : Oh Grand Black Lord !\nGrand Black Lord : Salut à toi !\nTue tous les zombies!!!! \\o/', {
                           font: "12apx monospace",
                           fill: "#000000",
                           padding: { x: 20, y: 10 },
