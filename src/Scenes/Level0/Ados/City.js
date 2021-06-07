@@ -268,6 +268,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         keyM = this.input.keyboard.addKey("m");
         
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+
     }
 
 
@@ -360,6 +361,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             if(blacklordDialogue == true) {
                 console.log("invisible dialogue");
                 dialogueTextBlacklord.destroy();
+                dialogueBackground.destroy();
                 blacklordDialogue = false;
             }
         }
@@ -370,18 +372,23 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 console.log("P key pressed");
                 if(canTalkToBlacklord == true) {
                     console.log("visible dialogue");
-                    dialogueBackground = this.add.rectangle(16, 500, 600, 100, 0xffffff, 1);                    
-                    dialogueTextBlacklord = this.add.text(16, 500, 'Oh Grand Black Lord !', {
+                    dialogueBackground = this.add.rectangle(300, 500, 500, 100, 0xffffff, 1)
+                            .setScrollFactor(0,0)
+                            .setDepth(29);
+                    console.log("dialogue: ", dialogueBackground); 
+                                   
+                    dialogueTextBlacklord = this.add.text(50, 450, 'Moi : Oh Grand Black Lord !\nGrand Black Lord : Salut à toi !', {
                           font: "12apx monospace",
                           fill: "#000000",
                           padding: { x: 20, y: 10 },
                           backgroundColor: "#ffffff"
                         })
-                        .setScrollFactor(0)
+                        .setScrollFactor(0,0)
                         .setDepth(30);
                     blacklordDialogue = true;
+                
                 }
-
+                
                 this.keyOnceP = true;                
             }
         }
