@@ -6,7 +6,7 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 import 'phaser';
 
 var keyO, keyM, keyJ;
-var keyC, keyD;
+var keyC, keyD, keyP;
 var keyG;
 
 var keyP;
@@ -289,6 +289,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
+        keyP = this.input.keyboard.addKey("p");
+
         
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
@@ -345,11 +347,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         }
 
-
-        if(keyJ.isDown){
-            console.log( this.player.sprite.x + " " + this.player.sprite.y);
-        }
-    
                
         if(this.keyC.isDown) {
 
@@ -428,7 +425,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         }
  
 
-        /* Debug graphism */
+        /* Debug: player*/
+        if(keyP.isDown){
+            console.log( this.player.sprite.x + " " + this.player.sprite.y);
+        }
+    
+
+        /* Debug: graphism */
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.physics.world.createDebugGraphic();
             const graphics = this.add
