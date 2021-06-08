@@ -81,51 +81,51 @@ export default class Player {
 
 
 
-            sprite.body.setVelocity(0);
+        sprite.body.setVelocity(0);
 
-            if (keys.left.isDown) {
-                if(sprite.x > 0) {
-                    sprite.body.setVelocityX(-speed);
-                }
-            } else if (keys.right.isDown) {
-                if(sprite.x < 4096) {
-                    sprite.body.setVelocityX(speed);
-                }
+        if (keys.left.isDown) {
+            if(sprite.x > 0) {
+                sprite.body.setVelocityX(-speed);
             }
-
-            if (keys.up.isDown) {
-                if(sprite.y > 0) {
-                    sprite.body.setVelocityY(-speed);
-                }
-            } else if (keys.down.isDown) {
-                if(sprite.y < 4096) {
-                    sprite.body.setVelocityY(speed);
-                }
+        } else if (keys.right.isDown) {
+            if(sprite.x < 4096) {
+                sprite.body.setVelocityX(speed);
             }
+        }
 
-            sprite.body.velocity.normalize().scale(speed);
-
-            if (keys.left.isDown) {
-                sprite.anims.play("misa-left-walk", true);
-            } else if (keys.right.isDown) {
-                sprite.anims.play("misa-right-walk", true);
-            } else if (keys.up.isDown) {
-                sprite.anims.play("misa-back-walk", true);
-            } else if (keys.down.isDown) {
-                sprite.anims.play("misa-front-walk", true);
-            } else {
-                sprite.anims.stop();
-
-                if (prevVelocity.x < 0) {
-                    sprite.setTexture("atlas", "misa-left");
-                } else if (prevVelocity.x > 0) { 
-                    sprite.setTexture("atlas", "misa-right");
-                } else if (prevVelocity.y < 0) { 
-                    sprite.setTexture("atlas", "misa-back");
-                } else if (prevVelocity.y > 0) {
-                    sprite.setTexture("atlas", "misa-front");
-                }
+        if (keys.up.isDown) {
+            if(sprite.y > 0) {
+                sprite.body.setVelocityY(-speed);
             }
+        } else if (keys.down.isDown) {
+            if(sprite.y < 4096) {
+                sprite.body.setVelocityY(speed);
+            }
+        }
+
+        sprite.body.velocity.normalize().scale(speed);
+
+        if (keys.left.isDown) {
+            sprite.anims.play("misa-left-walk", true);
+        } else if (keys.right.isDown) {
+            sprite.anims.play("misa-right-walk", true);
+        } else if (keys.up.isDown) {
+            sprite.anims.play("misa-back-walk", true);
+        } else if (keys.down.isDown) {
+            sprite.anims.play("misa-front-walk", true);
+        } else {
+            sprite.anims.stop();
+
+            if (prevVelocity.x < 0) {
+                sprite.setTexture("atlas", "misa-left");
+            } else if (prevVelocity.x > 0) { 
+                sprite.setTexture("atlas", "misa-right");
+            } else if (prevVelocity.y < 0) { 
+                sprite.setTexture("atlas", "misa-back");
+            } else if (prevVelocity.y > 0) {
+                sprite.setTexture("atlas", "misa-front");
+            }
+        }
 
 
     }

@@ -31,7 +31,6 @@ var bombText;
 
 var healthText;
 
-
 var p, n, distanceBetween2PC;
 
 var camera;
@@ -118,17 +117,17 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.image("building_huts", "assets/stendhal/tiled/tileset/building/huts.png");
        this.load.image("logic_creature_fowl", "assets/stendhal/tiled/tileset/logic/creature/fowl.png");
 
-        this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
+       this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
-        this.load.atlas("atlas", "assets/atlas/soldier/player.png", "assets/atlas/soldier/player.json");
-        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
+       this.load.atlas("atlas", "assets/atlas/soldier/player.png", "assets/atlas/soldier/player.json");
+       this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
 
 
-        this.load.image('bomb', 'assets/bomb.png');
+       this.load.image('bomb', 'assets/bomb.png');
 
-        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
+       this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
-        this.load.image('zombi', 'assets/atlas/bloody-zombie/misa-front.png');
+       this.load.image('zombi', 'assets/atlas/bloody-zombie/misa-front.png');
 
     }
 
@@ -237,6 +236,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         this.physics.add.collider(this.knight.sprite, this.player.sprite)
         
+
         /* Camera */
         camera = this.cameras.main;
         camera.startFollow(this.player.sprite);
@@ -255,6 +255,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.player.sprite, bombs, this.collectBomb, null, this);
+
 
         /* HUD*/
          bombText = this.add
@@ -291,6 +292,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
 
+
         /* Command */
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         this.testKeyC = false;
@@ -318,7 +320,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyB = false;
         this.testKeyOnceB = true;
 
-
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
@@ -329,12 +330,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
     }
 
 
+    /* Collision */
     collectBomb(player, bomb) {
         bomb.disableBody(true, true);
         this.player.bomb += 10;
         bombText.setText('Bombe : ' + this.player.bomb);
     }
-
 
     collideToBlacklord(player, npc) {
         p = player.body.touching.none;
@@ -348,13 +349,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         healthText.setText('Santé : ' + this.player.health);
     }
 
-
     checkDoor(playerx, playery, doorx, doory) {
        if(playerx >= doorx-2 && playerx <= doorx+2 && playery >= doory-2 && playery <= doory+2)
             return true;
         return false;
     }
-
 
 
     update(time, delta) {
@@ -442,7 +441,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
  
 
         /* Kombat */
-
         if(this.keyK.isDown) {
 
             if (!this.keyOnceK) {
@@ -462,7 +460,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
  
 
         /* Dialogue */
-        
         distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
         if(distanceBetween2PC <= 50) {
             if (once == false) {
