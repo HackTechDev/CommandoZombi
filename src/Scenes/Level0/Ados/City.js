@@ -116,7 +116,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
-        this.load.atlas("atlas", "assets/atlas/player/player.png", "assets/atlas/player/player.json");
+        this.load.atlas("atlas", "assets/atlas/soldier/player.png", "assets/atlas/soldier/player.json");
 
         this.load.image('bomb', 'assets/bomb.png');
 
