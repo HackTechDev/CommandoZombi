@@ -279,18 +279,20 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setDepth(30);
 
 
-        /* NPC */
+        /* NPC and collision */
         npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
         npcBlacklord.body.immovable = true;
         npcBlacklord.body.moves = false;
 
         this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
+        this.physics.add.collider(this.knight.sprite, npcBlacklord, this.collideToBlacklord, null, this);
 
         npcZombi = this.physics.add.sprite(927,2641, 'zombi');
         npcZombi.body.immovable = true;
         npcZombi.body.moves = false;
 
         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
+        this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
 
         /* Command */
