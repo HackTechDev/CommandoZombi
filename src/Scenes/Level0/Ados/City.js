@@ -11,7 +11,7 @@ var keyO, keyM, keyJ;
 var keyC,keyP;
 var keyG, keyK;
 
-var keyP;
+var keyB, keyN;
 
 var dialogueBackground;
 
@@ -33,6 +33,8 @@ var healthText;
 
 
 var p, n, distanceBetween2PC;
+
+var camera;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -217,6 +219,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         roofLayer.setDepth(10);
 
+
+        /* Player position */
         const spawnPoint = level0AdosCity.findObject("Objects", obj => obj.name === "Spawn Point");
 
 
@@ -231,14 +235,20 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, this.collisionLayer);
         this.physics.add.collider(this.knight.sprite, this.collisionLayer);
 
-        const camera = this.cameras.main;
+        this.physics.add.collider(this.knight.sprite, this.player.sprite)
+        
+        /* Camera */
+        camera = this.cameras.main;
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, level0AdosCity.widthInPixels, level0AdosCity.heightInPixels);
 
+
+        /* Marker */
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
+
         /* Bomb */
-       bombs = this.physics.add.group({
+        bombs = this.physics.add.group({
             key: 'bomb',
             repeat: 9,
             setXY: { x: 490, y: 2723, stepX: 30 }
@@ -266,6 +276,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             })
             .setScrollFactor(0)
             .setDepth(30);
+
 
         /* NPC */
         npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
@@ -299,13 +310,19 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyK = false;
         this.testKeyOnceK = true;
 
-       
+        this.keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
+        this.testKeyN = false;
+        this.testKeyOnceN = true;
+
+        this.keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
+        this.testKeyB = false;
+        this.testKeyOnceB = true;
+
 
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
         keyP = this.input.keyboard.addKey("p");
-
         
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
@@ -397,7 +414,33 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceD = false;
         }
  */
-        
+    
+        /* Change camera focus*/
+         if(this.keyB.isDown) {
+            if (!this.keyOnceB) {
+                console.log("B key pressed");
+                camera.startFollow(this.knight.sprite);
+                this.keyOnceB = true;                
+            }
+        }
+
+        if(this.keyB.isUp) {
+          this.keyOnceB = false;
+        }
+   
+         if(this.keyN.isDown) {
+            if (!this.keyOnceN) {
+                console.log("N key pressed");
+                camera.startFollow(this.player.sprite);
+                this.keyOnceN = true;                
+            }
+        }
+
+        if(this.keyN.isUp) {
+          this.keyOnceN = false;
+        }
+ 
+
         /* Kombat */
 
         if(this.keyK.isDown) {
