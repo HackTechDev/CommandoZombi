@@ -19,7 +19,7 @@
 
       #game-container {
         min-width: 100vw;
-        min-height: 100vh;
+        min-height: 60vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -28,11 +28,20 @@
       #game-container > canvas {
         border-radius: 5px;
       }
+
+      #info {
+        color: blue;
+        text-align: center;
+      }
     </style>
   </head>
 
   <body>
     <div id="game-container"></div>
     <script src="build/project.bundle.js" charset="utf-8"></script>
+    <div id="info">
+        Développer par Le Sanglier des Ardennes<br/>
+        Code source : <a href="https://github.com/HackTechDev/phaserjs3-rpg">https://github.com/HackTechDev/phaserjs3-rpg</a>
+    </div>
   </body>
 </html>
