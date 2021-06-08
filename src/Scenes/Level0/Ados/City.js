@@ -27,9 +27,11 @@ var npcZombi;
 
 var bombs;
 
+var hud;
 var bombText;
-
 var healthText;
+
+
 
 var p, n, distanceBetween2PC;
 
@@ -258,6 +260,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* HUD*/
+        hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
+                            .setOrigin(0, 0)
+                            .setScrollFactor(0)
+                            .setDepth(29);
+
          bombText = this.add
             .text(16, 16, 'Bombe: ' + this.player.bomb, {
               font: "18px monospace",
