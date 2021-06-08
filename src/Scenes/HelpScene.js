@@ -17,7 +17,7 @@ export default class HelpScene extends Phaser.Scene {
   create () {
 
     this.text = this.add.text(300, 100, 'Aide', { fontSize: 40 });
-    this.mission1Text = this.add.text(150, 150, '- Se déplacer : Touches [Fléchés]\n- Ouvrir une porte : Touche [O]\n- Accéder la mission : Touche [M] dans une maison\n- Construire/Détruire : Touches [C]/[D]\n- Aide : Touche [A] dans une maison\n- Parler à qqu : [S]', { fontSize: 24 });
+    this.mission1Text = this.add.text(150, 150, '- Se déplacer : Touches [Fléchés]\n- Ouvrir une porte : Touche [O]\n- Accéder la mission : Touche [M] dans une maison\n- Construire/Détruire : Touches [C]/[D]\n- Aide : Touche [A] dans une maison\n- Parler à qqu : [S]\n- Combattre : [K]', { fontSize: 24 });
 
     if(this.previousScene === undefined) {
       this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');

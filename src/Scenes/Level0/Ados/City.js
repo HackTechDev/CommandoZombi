@@ -233,7 +233,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         /* Bomb */
        bombs = this.physics.add.group({
             key: 'bomb',
-            repeat: 11,
+            repeat: 9,
             setXY: { x: 490, y: 2723, stepX: 30 }
         });
 
@@ -395,7 +395,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcZombi.x, npcZombi.y);
                 if(distanceBetween2PC <= 50) {
                     console.log("Kombat");
-                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y});
+                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y, bomb: this.player.bomb});
                 } 
                 this.keyOnceK = true;                
             }

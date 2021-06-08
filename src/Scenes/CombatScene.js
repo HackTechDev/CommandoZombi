@@ -12,8 +12,8 @@ export default class CombatScene extends Phaser.Scene {
     this.previousScene = data.previousScene;
     this.px = data.px;
     this.py = data.py;
-
-    console.log("previousScene: " + this.previousScene);
+    this.bomb = data.bomb;
+    console.log("previousScene: " + this.previousScene + " / bomb: " + this.bomb);
 }
 
   create () {
@@ -22,12 +22,13 @@ export default class CombatScene extends Phaser.Scene {
 
     var value = Phaser.Math.Between(0, 100);
 
-    if(value % 2 == 0) {
+    if(value <= this.bomb) {
         this.resultText = this.add.text(150, 150, 'Gagné !!', { fontSize: 24 });
     } else {
         this.resultText = this.add.text(150, 150, 'Perdu !!', { fontSize: 24 });
     }
     
+   
 
     keyK = this.input.keyboard.addKey("K");
   }
