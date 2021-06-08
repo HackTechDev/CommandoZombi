@@ -9,7 +9,6 @@ import InteriorsAdosHouse68Scene from './Scenes/Interiors/Ados/House68';
 
 import Mission1Scene from './Scenes/Missions/Mission1Scene';
 
-
 import TileMapping from './TileMapping/TileMapping';
 
 import BootScene from './Scenes/BootScene';
@@ -18,7 +17,7 @@ import MenuScene from './Scenes/MenuScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import HelpScene from './Scenes/HelpScene';
-
+import CombatScene from './Scenes/CombatScene';
 
 import Music from './Music/Music';
 
@@ -35,6 +34,8 @@ class Game extends Phaser.Game {
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Help', HelpScene);
+    this.scene.add('Combat', CombatScene);
+
     
     this.scene.add('Game', GameScene);
     this.scene.add('Dungeon', DungeonScene);

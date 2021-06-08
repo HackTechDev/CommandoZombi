@@ -7,7 +7,7 @@ import 'phaser';
 
 var keyO, keyM, keyJ;
 var keyC, keyD, keyP;
-var keyG;
+var keyG, keyK;
 
 var keyP;
 
@@ -286,6 +286,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyP = false;
         this.testKeyOnceP = true;
 
+        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+        this.testKeyK = false;
+        this.testKeyOnceK = true;
+
+       
+
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
@@ -333,6 +339,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
 
+        /* Open door */
         if(keyO.isDown){
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
@@ -347,7 +354,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         }
 
-               
+        /* Construct */      
         if(this.keyC.isDown) {
 
             if (!this.keyOnceC) {
@@ -376,6 +383,26 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         if(this.keyD.isUp) {
           this.keyOnceD = false;
+        }
+ 
+        
+        /* Kombat */
+
+        if(this.keyK.isDown) {
+
+            if (!this.keyOnceK) {
+                console.log("K key pressed")
+                distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcZombi.x, npcZombi.y);
+                if(distanceBetween2PC <= 50) {
+                    console.log("Kombat");
+                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y});
+                } 
+                this.keyOnceK = true;                
+            }
+        }
+
+        if(this.keyK.isUp) {
+          this.keyOnceK = false;
         }
  
 
