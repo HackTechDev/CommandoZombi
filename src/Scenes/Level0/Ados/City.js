@@ -1,4 +1,6 @@
 import Player from "../../../Player/Player";
+import Knight from "../../../Player/Knight";
+
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
@@ -6,7 +8,7 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 import 'phaser';
 
 var keyO, keyM, keyJ;
-var keyC, keyD, keyP;
+var keyC,keyP;
 var keyG, keyK;
 
 var keyP;
@@ -117,6 +119,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
         this.load.atlas("atlas", "assets/atlas/soldier/player.png", "assets/atlas/soldier/player.json");
+        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
+
 
         this.load.image('bomb', 'assets/bomb.png');
 
@@ -222,7 +226,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             this.player = new Player(this, this.px, this.py);
         }
 
+        this.knight = new Knight(this, spawnPoint.x , spawnPoint.y + 100);
+
         this.physics.add.collider(this.player.sprite, this.collisionLayer);
+        this.physics.add.collider(this.knight.sprite, this.collisionLayer);
 
         const camera = this.cameras.main;
         camera.startFollow(this.player.sprite);
@@ -278,9 +285,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyC = false;
         this.testKeyOnceC = true;
 
+        /*
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.testKeyD = false;
         this.testKeyOnceD = true;
+        */
 
         this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.testKeyP = false;
@@ -333,6 +342,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
     update(time, delta) {
         this.player.update();
+        this.knight.update();
+
         this.marker.update();
 
         const pointer = this.input.activePointer;
@@ -370,6 +381,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceC = false;
         }
         
+/*
         if(this.keyD.isDown) {
 
             if (!this.keyOnceD) {
@@ -384,7 +396,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(this.keyD.isUp) {
           this.keyOnceD = false;
         }
- 
+ */
         
         /* Kombat */
 

@@ -21,11 +21,11 @@ for ($i = 0; $i < 4; $i++) {
         if($i == 2) $position = "front";
         if($i == 3) $position = "left";
 
-        imagepng($destination_image, "misa-$position-walk.00$j.png");
+        imagepng($destination_image, "$player-$position-walk.00$j.png");
 
         if($j == 1 ) {
-            imagepng($destination_image, "misa-$position-walk.003.png");
-            imagepng($destination_image, "misa-$position.png");
+            imagepng($destination_image, "$player-$position-walk.003.png");
+            imagepng($destination_image, "$player-$position.png");
         }
 
         imagedestroy($destination_image);

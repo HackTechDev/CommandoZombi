@@ -59,12 +59,8 @@ export default class Player {
         .setSize(30, 40)
         .setOffset(10, 24);
 
-    this.keyD = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
     this.keys = scene.input.keyboard.createCursorKeys();
 
-
-    this.keyDOnce = true;
 
     this.bomb = 0;
     this.health = 200;
@@ -78,24 +74,12 @@ export default class Player {
 
     update(time, delta) {
         const keys = this.keys;
-        const keyD = this.keyD;
 
         const sprite = this.sprite;
         const speed = 175;
         const prevVelocity = sprite.body.velocity.clone();
 
 
-
-            if(keyD.isDown) {
-                if (!this.keyDOnce) {
-                    console.log('D key pressed')
-                    this.keyDOnce = true;
-                }
-            }
-
-            if(keyD.isUp) {
-              this.keyDOnce = false;
-            }
 
             sprite.body.setVelocity(0);
 
