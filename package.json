@@ -1,7 +1,7 @@
 {
-  "name": "phaser3-project-template-3",
+  "name": "Phaser3: Commando Zombi",
   "version": "1.0.0",
-  "description": "A Phaser 3 Project Template",
+  "description": "Phaser3: Commando Zombi ",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://scottwestover@bitbucket.org/creativerendering/phaser3-template.git"
+    "url": "git+https://github.com/HackTechDev/phaserjs3-rpg.git"
   },
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "bugs": {
-    "url": "https://github.com/photonstorm/phaser3-project-template/issues"
+    "url": "https://github.com/HackTechDev/phaserjs3-rpg/issues"
   },
-  "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
+  "homepage": "http://commandozombi.hacktech.dev/",
   "devDependencies": {
     "phaser": "^3.3.0",
     "raw-loader": "^0.5.1",
