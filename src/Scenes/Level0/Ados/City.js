@@ -8,7 +8,8 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 import 'phaser';
 
 var keyO, keyM, keyJ;
-var keyC,keyP;
+var keyC, keyP;
+var keyP;
 var keyG, keyK;
 
 var keyB, keyN;
@@ -303,16 +304,16 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* Command */
+        // Construct/Destruct
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
         this.testKeyC = false;
         this.testKeyOnceC = true;
 
-        /*
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.testKeyD = false;
-        this.testKeyOnceD = true;
-        */
+        this.keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
+        this.testKeyV = false;
+        this.testKeyOnceV = true;
 
+        // Parler        
         this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.testKeyP = false;
         this.testKeyOnceP = true;
@@ -321,6 +322,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyK = false;
         this.testKeyOnceK = true;
 
+        // Change Camera view
         this.keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
         this.testKeyN = false;
         this.testKeyOnceN = true;
@@ -406,22 +408,21 @@ export default class Level0AdosCityScene extends Phaser.Scene {
           this.keyOnceC = false;
         }
         
-/*
-        if(this.keyD.isDown) {
+        if(this.keyV.isDown) {
 
-            if (!this.keyOnceD) {
+            if (!this.keyOnceV) {
                 this.worldTile = this.collisionLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y);                
                 this.worldTile.setCollision(false);
                 this.worldTile = this.terrainLayer.putTileAtWorldXY(0, worldPoint.x, worldPoint.y);  
-                console.log("D key pressed")
-                this.keyOnceD = true;                
+                console.log("V key pressed")
+                this.keyOnceV = true;                
             }
         }
 
-        if(this.keyD.isUp) {
-          this.keyOnceD = false;
+        if(this.keyV.isUp) {
+          this.keyOnceV = false;
         }
- */
+
     
         /* Change camera focus*/
          if(this.keyB.isDown) {
