@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd phaser3_commandozombi
+cd game
 npm start

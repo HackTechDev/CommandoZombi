@@ -1,7 +1,7 @@
 export default class Music {
   constructor() {
     this._soundOn = true;
-    this._musicOn = false; // Start the background music
+    this._musicOn = true; // Start the background music
     this._bgMusicPlaying = false;
   }
 
