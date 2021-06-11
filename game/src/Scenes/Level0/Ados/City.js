@@ -9,7 +9,7 @@ import 'phaser';
 
 var keyO, keyM, keyJ;
 var keyC, keyP;
-var keyP;
+var keyP, keyT;
 var keyG, keyK;
 
 var keyB, keyN;
@@ -32,11 +32,11 @@ var hud;
 var bombText;
 var healthText;
 
-
-
 var p, n, distanceBetween2PC;
 
 var camera;
+
+var mapWidth, mapHeight;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -130,7 +130,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
-       this.load.image('zombi', 'assets/atlas/bloody-zombie/misa-front.png');
+       this.load.image('zombi', 'assets/atlas/zombi/zombi-front.png');
 
     }
 
@@ -245,6 +245,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, level0AdosCity.widthInPixels, level0AdosCity.heightInPixels);
 
+        
+        /* World size */
+        mapWidth = level0AdosCity.widthInPixels;
+        mapHeight = level0AdosCity.heightInPixels;
+        
 
         /* Marker */
         this.marker = new MouseTileMarker(this, level0AdosCity);
@@ -302,6 +307,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
         this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
+        this.createEnemies(100);
+        this.physics.add.collider(this.player.sprite, this.spawns);
+        this.physics.add.collider(this.knight.sprite, this.spawns);
+
 
         /* Command */
         // Construct/Destruct
@@ -331,6 +340,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.testKeyB = false;
         this.testKeyOnceB = true;
 
+        // Debug Tile       
+        this.keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+        this.testKeyT = false;
+        this.testKeyOnceT = true;
+
+
+        /* */
         keyO = this.input.keyboard.addKey("o");
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
@@ -339,6 +355,84 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
     }
+
+    /* Enemy */
+
+    createEnemies(nbEnemy) {
+        // where the enemies will be
+        this.spawns = this.physics.add.group({
+          classType: Phaser.GameObjects.Sprite
+        });
+        
+        for (var i = 0; i < nbEnemy; i++) {
+          console.log("zombi: " + i);
+          const location = this.getValidLocation();
+          var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
+          //console.log("x: " + enemy.body.x + " / y: " + enemy.body.y);
+          enemy.body.setImmovable();
+        }
+
+    }
+
+
+    getEnemySprite() {
+        var sprites = ['zombi'];
+        return sprites[Math.floor(Math.random() * sprites.length)];
+    }
+
+    getValidLocation() {
+        var validLocation1 = false;
+        var validLocation2 = false;
+        var x, y;
+
+        while (!validLocation1 || !validLocation2) {
+            var occupied1 = false;
+            var occupied2 = false;
+
+            x = Phaser.Math.RND.between(0, mapWidth);
+            y = Phaser.Math.RND.between(0, mapHeight);
+
+
+            this.spawns.getChildren().forEach((child) => {
+                if (child.getBounds().contains(x, y)) {
+                    console.log("occupied: bound ");
+                    occupied1 = true;
+                }
+            });
+
+
+           this.spawns.getChildren().forEach((child) => {
+                var tile = this.collisionLayer.getTileAtWorldXY(x, y);
+                if(tile != null) {
+                    console.log("occupied tile", tile.properties.collides);
+                    // Debug
+                    /*
+                    this.worldTile = this.collisionLayer.putTileAtWorldXY(33, x, y);
+                    this.worldTile.setCollision(true);
+                    this.worldTile = this.terrainLayer.putTileAtWorldXY(33, x, y);
+                    */
+
+                    occupied2 = true;
+                }
+            });
+
+
+            if (!occupied1) {
+                validLocation1 = true;
+            }
+
+
+            if (!occupied2) {
+                validLocation2 = true;
+            }
+
+        }
+
+
+
+        return { x, y };
+    }
+
 
 
     /* Collision */
@@ -518,8 +612,26 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(keyP.isDown){
             console.log( this.player.sprite.x + " " + this.player.sprite.y);
         }
-    
+ 
 
+        /* Debug: Tile */   
+         if(this.keyT.isDown) {
+            if (!this.keyOnceT) {
+                console.log("T key pressed");
+                console.log("mousex: " + worldPoint.x + " / mousey: " +  worldPoint.y);
+                var tile = this.collisionLayer.getTileAtWorldXY(worldPoint.x, worldPoint.y);
+                if(tile != null) {
+                    console.log("tile: ", tile.properties.collides);
+                }
+                this.keyOnceT = true;                
+            }
+        }
+
+        if(this.keyT.isUp) {
+          this.keyOnceT = false;
+        }
+
+  
         /* Debug: graphism */
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.physics.world.createDebugGraphic();
