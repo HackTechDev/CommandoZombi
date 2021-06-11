@@ -307,7 +307,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
         this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
-        this.createEnemies(100);
+        this.createEnemies(1400, 3200, 600, 300, 10);
         this.physics.add.collider(this.player.sprite, this.spawns);
         this.physics.add.collider(this.knight.sprite, this.spawns);
 
@@ -358,7 +358,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
     /* Enemy */
 
-    createEnemies(nbEnemy) {
+    createEnemies(zonex, zoney, zoneWidth, zoneHeight, nbEnemy) {
         // where the enemies will be
         this.spawns = this.physics.add.group({
           classType: Phaser.GameObjects.Sprite
@@ -366,7 +366,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         
         for (var i = 0; i < nbEnemy; i++) {
           console.log("zombi: " + i);
-          const location = this.getValidLocation();
+          const location = this.getValidLocation(zonex, zoney, zoneWidth, zoneHeight);
           var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
           //console.log("x: " + enemy.body.x + " / y: " + enemy.body.y);
           enemy.body.setImmovable();
@@ -380,7 +380,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         return sprites[Math.floor(Math.random() * sprites.length)];
     }
 
-    getValidLocation() {
+    getValidLocation(zonex, zoney, zoneWidth, zoneHeight) {
         var validLocation1 = false;
         var validLocation2 = false;
         var x, y;
@@ -389,8 +389,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             var occupied1 = false;
             var occupied2 = false;
 
-            x = Phaser.Math.RND.between(0, mapWidth);
-            y = Phaser.Math.RND.between(0, mapHeight);
+            x = Phaser.Math.RND.between(zonex, zonex + zoneWidth);
+            y = Phaser.Math.RND.between(zoney, zoney + zoneHeight);
 
 
             this.spawns.getChildren().forEach((child) => {
