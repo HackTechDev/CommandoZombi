@@ -1,4 +1,4 @@
-import Player from "../Player/Player";
+import Player from "../Player/Soldier";
 import 'phaser';
 import Dungeon from "@mikewesthad/dungeon";
 import TILES from "../TileMapping/TileMapping.js";

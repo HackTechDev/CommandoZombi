@@ -10,9 +10,9 @@ export default class Player {
 
       const anims = scene.anims;
       anims.create({
-        key: "misa-left-walk",
-        frames: anims.generateFrameNames("atlas", {
-          prefix: "misa-left-walk.",
+        key: "soldier-left-walk",
+        frames: anims.generateFrameNames("atlas_soldier", {
+          prefix: "soldier-left-walk.",
           start: 0,
           end: 3,
           zeroPad: 3
@@ -21,9 +21,9 @@ export default class Player {
         repeat: -1
       });
       anims.create({
-        key: "misa-right-walk",
-        frames: anims.generateFrameNames("atlas", {
-          prefix: "misa-right-walk.",
+        key: "soldier-right-walk",
+        frames: anims.generateFrameNames("atlas_soldier", {
+          prefix: "soldier-right-walk.",
           start: 0,
           end: 3,
           zeroPad: 3
@@ -32,9 +32,9 @@ export default class Player {
         repeat: -1
       });
       anims.create({
-        key: "misa-front-walk",
-        frames: anims.generateFrameNames("atlas", {
-          prefix: "misa-front-walk.",
+        key: "soldier-front-walk",
+        frames: anims.generateFrameNames("atlas_soldier", {
+          prefix: "soldier-front-walk.",
           start: 0,
           end: 3,
           zeroPad: 3
@@ -43,9 +43,9 @@ export default class Player {
         repeat: -1
       });
       anims.create({
-        key: "misa-back-walk",
-        frames: anims.generateFrameNames("atlas", {
-          prefix: "misa-back-walk.",
+        key: "soldier-back-walk",
+        frames: anims.generateFrameNames("atlas_soldier", {
+          prefix: "soldier-back-walk.",
           start: 0,
           end: 3,
           zeroPad: 3
@@ -55,7 +55,7 @@ export default class Player {
       });
 
      this.sprite = scene.physics.add
-        .sprite(x, y, "atlas", "misa-front")
+        .sprite(x, y, "atlas_soldier", "soldier-front")
         .setSize(30, 40)
         .setOffset(10, 24);
 
@@ -106,24 +106,24 @@ export default class Player {
         sprite.body.velocity.normalize().scale(speed);
 
         if (keys.left.isDown) {
-            sprite.anims.play("misa-left-walk", true);
+            sprite.anims.play("soldier-left-walk", true);
         } else if (keys.right.isDown) {
-            sprite.anims.play("misa-right-walk", true);
+            sprite.anims.play("soldier-right-walk", true);
         } else if (keys.up.isDown) {
-            sprite.anims.play("misa-back-walk", true);
+            sprite.anims.play("soldier-back-walk", true);
         } else if (keys.down.isDown) {
-            sprite.anims.play("misa-front-walk", true);
+            sprite.anims.play("soldier-front-walk", true);
         } else {
             sprite.anims.stop();
 
             if (prevVelocity.x < 0) {
-                sprite.setTexture("atlas", "misa-left");
+                sprite.setTexture("atlas_soldier", "soldier-left");
             } else if (prevVelocity.x > 0) { 
-                sprite.setTexture("atlas", "misa-right");
+                sprite.setTexture("atlas_soldier", "soldier-right");
             } else if (prevVelocity.y < 0) { 
-                sprite.setTexture("atlas", "misa-back");
+                sprite.setTexture("atlas_soldier", "soldier-back");
             } else if (prevVelocity.y > 0) {
-                sprite.setTexture("atlas", "misa-front");
+                sprite.setTexture("atlas_soldier", "soldier-front");
             }
         }
 

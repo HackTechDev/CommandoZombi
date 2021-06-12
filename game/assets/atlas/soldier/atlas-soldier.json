@@ -1,6 +1,6 @@
 {"frames": {
 
-"misa-back-walk.000":
+"soldier-back-walk.000":
 {
 	"frame": {"x":1,"y":1,"w":48,"h":64},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-back-walk.001":
+"soldier-back-walk.001":
 {
 	"frame": {"x":1,"y":67,"w":48,"h":64},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-back-walk.002":
+"soldier-back-walk.002":
 {
 	"frame": {"x":1,"y":133,"w":48,"h":64},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-back-walk.003":
+"soldier-back-walk.003":
 {
 	"frame": {"x":1,"y":67,"w":48,"h":64},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-back":
+"soldier-back":
 {
 	"frame": {"x":1,"y":67,"w":48,"h":64},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-front-walk.000":
+"soldier-front-walk.000":
 {
 	"frame": {"x":1,"y":199,"w":48,"h":64},
 	"rotated": false,
@@ -48,7 +48,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-front-walk.001":
+"soldier-front-walk.001":
 {
 	"frame": {"x":1,"y":265,"w":48,"h":64},
 	"rotated": false,
@@ -56,7 +56,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-front-walk.002":
+"soldier-front-walk.002":
 {
 	"frame": {"x":1,"y":331,"w":48,"h":64},
 	"rotated": false,
@@ -64,7 +64,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-front-walk.003":
+"soldier-front-walk.003":
 {
 	"frame": {"x":1,"y":265,"w":48,"h":64},
 	"rotated": false,
@@ -72,7 +72,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-front":
+"soldier-front":
 {
 	"frame": {"x":1,"y":265,"w":48,"h":64},
 	"rotated": false,
@@ -80,7 +80,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-left-walk.000":
+"soldier-left-walk.000":
 {
 	"frame": {"x":1,"y":397,"w":48,"h":64},
 	"rotated": false,
@@ -88,7 +88,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-left-walk.001":
+"soldier-left-walk.001":
 {
 	"frame": {"x":1,"y":463,"w":48,"h":64},
 	"rotated": false,
@@ -96,7 +96,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-left-walk.002":
+"soldier-left-walk.002":
 {
 	"frame": {"x":1,"y":529,"w":48,"h":64},
 	"rotated": false,
@@ -104,7 +104,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-left-walk.003":
+"soldier-left-walk.003":
 {
 	"frame": {"x":1,"y":463,"w":48,"h":64},
 	"rotated": false,
@@ -112,7 +112,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-left":
+"soldier-left":
 {
 	"frame": {"x":1,"y":463,"w":48,"h":64},
 	"rotated": false,
@@ -120,7 +120,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-right-walk.000":
+"soldier-right-walk.000":
 {
 	"frame": {"x":1,"y":595,"w":48,"h":64},
 	"rotated": false,
@@ -128,7 +128,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-right-walk.001":
+"soldier-right-walk.001":
 {
 	"frame": {"x":1,"y":661,"w":48,"h":64},
 	"rotated": false,
@@ -136,7 +136,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-right-walk.002":
+"soldier-right-walk.002":
 {
 	"frame": {"x":1,"y":727,"w":48,"h":64},
 	"rotated": false,
@@ -144,7 +144,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-right-walk.003":
+"soldier-right-walk.003":
 {
 	"frame": {"x":1,"y":661,"w":48,"h":64},
 	"rotated": false,
@@ -152,7 +152,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
 	"sourceSize": {"w":48,"h":64}
 },
-"misa-right":
+"soldier-right":
 {
 	"frame": {"x":1,"y":661,"w":48,"h":64},
 	"rotated": false,

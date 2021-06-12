@@ -85,7 +85,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('insigneLogo', 'assets/logo/logo.png');
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
-    //this.load.audio('bgMusic', ['assets/theme/TownTheme.mp3']);
   }
 
   ready () {

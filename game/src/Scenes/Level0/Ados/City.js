@@ -1,4 +1,4 @@
-import Player from "../../../Player/Player";
+import Player from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
 
 
@@ -122,7 +122,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
        this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
-       this.load.atlas("atlas", "assets/atlas/soldier/player.png", "assets/atlas/soldier/player.json");
+       this.load.atlas("atlas_soldier", "assets/atlas/soldier/atlas-soldier.png", "assets/atlas/soldier/atlas-soldier.json");
        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
 
 

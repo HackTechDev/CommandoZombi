@@ -1,4 +1,4 @@
-import Player from "../Player/Player";
+import Player from "../Player/Soldier";
 import MouseTileMarker from "../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
