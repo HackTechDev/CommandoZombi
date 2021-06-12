@@ -311,6 +311,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, this.spawns);
         this.physics.add.collider(this.knight.sprite, this.spawns);
 
+        this.timedEvent = this.time.addEvent({
+            delay: 3000,
+            callback: this.moveEnemies,
+            callbackScope: this,
+            loop: true
+        });
 
         /* Command */
         // Construct/Destruct
@@ -400,7 +406,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 }
             });
 
-
            this.spawns.getChildren().forEach((child) => {
                 var tile = this.collisionLayer.getTileAtWorldXY(x, y);
                 if(tile != null) {
@@ -421,18 +426,43 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 validLocation1 = true;
             }
 
-
             if (!occupied2) {
                 validLocation2 = true;
             }
 
         }
 
-
-
         return { x, y };
     }
 
+
+    moveEnemies () {
+      this.spawns.getChildren().forEach((enemy) => {
+        const randNumber = Math.floor((Math.random() * 4) + 1);
+     
+        switch(randNumber) {
+          case 1:
+            enemy.body.setVelocityX(50);
+            break;
+          case 2:
+            enemy.body.setVelocityX(-50);
+            break;
+          case 3:
+            enemy.body.setVelocityY(50);
+            break;
+          case 4:
+            enemy.body.setVelocityY(50);
+            break;
+          default:
+            enemy.body.setVelocityX(50);
+        }
+      });
+     
+      setTimeout(() => {
+        this.spawns.setVelocityX(0);
+        this.spawns.setVelocityY(0);
+      }, 500);
+    }
 
 
     /* Collision */
