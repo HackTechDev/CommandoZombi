@@ -272,7 +272,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                             .setDepth(29);
 
          weapon1Text = this.add
-            .text(16, 16, 'Weapone: ' + this.player.weapon1, {
+            .text(16, 16, "Arme: " + this.player.weapon1, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -282,7 +282,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setDepth(30);
 
          healthText = this.add
-            .text(16, 50, 'Santé:  ' + this.player.health, {
+            .text(16, 50, "Santé: " + this.player.health, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -293,14 +293,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* NPC and collision */
-        npcBlacklord = this.physics.add.sprite(727,2641, 'blacklord');
+        npcBlacklord = this.physics.add.sprite(727,2641, "blacklord");
         npcBlacklord.body.immovable = true;
         npcBlacklord.body.moves = false;
 
         this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
         this.physics.add.collider(this.knight.sprite, npcBlacklord, this.collideToBlacklord, null, this);
 
-        npcZombi = this.physics.add.sprite(927,2641, 'zombi');
+        npcZombi = this.physics.add.sprite(927,2641, "zombi");
         npcZombi.body.immovable = true;
         npcZombi.body.moves = false;
 
@@ -469,7 +469,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
     collectWeapon(player, weapon1) {
         weapon1.disableBody(true, true);
         this.player.weapon1 += 10;
-        weapon1Text.setText('Weapon : ' + this.player.weapon1);
+        weapon1Text.setText('Arme: ' + this.player.weapon1);
     }
 
     collideToBlacklord(player, npc) {
