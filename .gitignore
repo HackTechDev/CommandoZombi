@@ -1,2 +1,3 @@
 node_modules/*
 syncGame2Prod.sh
+game/build/project.bundle.js

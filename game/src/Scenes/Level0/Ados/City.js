@@ -26,10 +26,10 @@ var once = false;
 var npcZombi;
 
 
-var bombs;
+var weapon1s;
 
 var hud;
-var bombText;
+var weapon1Text;
 var healthText;
 
 var p, n, distanceBetween2PC;
@@ -126,7 +126,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
 
 
-       this.load.image('bomb', 'assets/bomb.png');
+       this.load.image('weapon1', 'assets/bomb.png');
 
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
@@ -255,14 +255,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
 
-        /* Bomb */
-        bombs = this.physics.add.group({
-            key: 'bomb',
+        /* Weapon */
+        weapon1s = this.physics.add.group({
+            key: 'weapon1',
             repeat: 9,
             setXY: { x: 490, y: 2723, stepX: 30 }
         });
 
-        this.physics.add.overlap(this.player.sprite, bombs, this.collectBomb, null, this);
+        this.physics.add.overlap(this.player.sprite, weapon1s, this.collectWeapon, null, this);
 
 
         /* HUD*/
@@ -271,8 +271,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                             .setScrollFactor(0)
                             .setDepth(29);
 
-         bombText = this.add
-            .text(16, 16, 'Bombe: ' + this.player.bomb, {
+         weapon1Text = this.add
+            .text(16, 16, 'Weapone: ' + this.player.weapon1, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -466,10 +466,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
     /* Collision */
-    collectBomb(player, bomb) {
-        bomb.disableBody(true, true);
-        this.player.bomb += 10;
-        bombText.setText('Bombe : ' + this.player.bomb);
+    collectWeapon(player, weapon1) {
+        weapon1.disableBody(true, true);
+        this.player.weapon1 += 10;
+        weapon1Text.setText('Weapon : ' + this.player.weapon1);
     }
 
     collideToBlacklord(player, npc) {
@@ -582,7 +582,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcZombi.x, npcZombi.y);
                 if(distanceBetween2PC <= 50) {
                     console.log("Kombat");
-                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y, bomb: this.player.bomb});
+                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y, weapon1: this.player.weapon1});
                 } 
                 this.keyOnceK = true;                
             }
