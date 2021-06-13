@@ -3,7 +3,7 @@
  *
  */
 
-export default class Player {
+export default class Soldier {
     constructor(scene, x, y) {
       this.scene = scene;
         
@@ -62,7 +62,7 @@ export default class Player {
     this.keys = scene.input.keyboard.createCursorKeys();
 
     /* Character stats */
-    this.name = "";
+    this.name = "Capitaine Kronos";
     this.nickname ="";
     
     this.sex = 1; // Male

@@ -1,4 +1,4 @@
-import Player from "../../../Player/Soldier";
+import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
 
 
@@ -7,7 +7,7 @@ import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
 import 'phaser';
 
-var keyO, keyM, keyJ;
+var keyO, keyM, keyJ, keyE;
 var keyC, keyP;
 var keyP, keyT;
 var keyG, keyK;
@@ -227,9 +227,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         if ( this.px === undefined && this.py === undefined) {
-            this.player = new Player(this, spawnPoint.x, spawnPoint.y);
+            this.player = new Soldier(this, spawnPoint.x, spawnPoint.y);
         } else {
-            this.player = new Player(this, this.px, this.py);
+            this.player = new Soldier(this, this.px, this.py);
         }
 
         this.knight = new Knight(this, spawnPoint.x , spawnPoint.y + 100);
@@ -357,7 +357,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         keyJ = this.input.keyboard.addKey("j");
         keyM = this.input.keyboard.addKey("m");
         keyP = this.input.keyboard.addKey("p");
-        
+        keyE = this.input.keyboard.addKey("e");
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
     }
@@ -639,8 +639,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
  
 
         /* Debug: player*/
-        if(keyP.isDown){
+        if(keyE.isDown){
             console.log( this.player.sprite.x + " " + this.player.sprite.y);
+            console.log("Character");
+            this.scene.start("Character", {previousScene: "Level0AdosCity", player: this.player});
         }
  
 
