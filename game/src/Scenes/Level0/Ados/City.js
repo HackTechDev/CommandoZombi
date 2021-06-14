@@ -25,12 +25,18 @@ var once = false;
 
 var npcZombi;
 
+var soldierStat;
 
-var weapon1s;
+var weaponName1s;
 
 var hud;
-var weapon1Text;
+var weaponName1Text;
 var healthText;
+
+var weaponName1;
+var weaponQuantity1;
+var health;
+
 
 var p, n, distanceBetween2PC;
 
@@ -126,7 +132,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
 
 
-       this.load.image('weapon1', 'assets/bomb.png');
+       this.load.image('weaponName1', 'assets/bomb.png');
 
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
@@ -256,14 +262,22 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* Weapon */
-        weapon1s = this.physics.add.group({
-            key: 'weapon1',
+        weaponName1s = this.physics.add.group({
+            key: 'weaponName1',
             repeat: 9,
             setXY: { x: 490, y: 2723, stepX: 30 }
         });
 
-        this.physics.add.overlap(this.player.sprite, weapon1s, this.collectWeapon, null, this);
+        this.physics.add.overlap(this.player.sprite, weaponName1s, this.collectWeapon1, null, this);
 
+
+
+        /**/
+
+        soldierStat = JSON.parse(localStorage.getItem('soldierStat'));
+        weaponName1 = soldierStat.weaponName1;
+        weaponQuantity1 = soldierStat.weaponQuantity1;
+        health = soldierStat.health;
 
         /* HUD*/
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
@@ -271,8 +285,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                             .setScrollFactor(0)
                             .setDepth(29);
 
-         weapon1Text = this.add
-            .text(16, 16, "Arme: " + this.player.weapon1, {
+         weaponName1Text = this.add
+            .text(16, 16, weaponName1 + ": " + weaponQuantity1, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -282,7 +296,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             .setDepth(30);
 
          healthText = this.add
-            .text(16, 50, "Santé: " + this.player.health, {
+            .text(16, 50, "Santé: " + health, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -466,10 +480,10 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
     /* Collision */
-    collectWeapon(player, weapon1) {
-        weapon1.disableBody(true, true);
-        this.player.weapon1 += 10;
-        weapon1Text.setText('Arme: ' + this.player.weapon1);
+    collectWeapon1(player, weaponName) {
+        weaponName.disableBody(true, true);
+        weaponQuantity1 += 1;
+        weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
     }
 
     collideToBlacklord(player, npc) {
@@ -505,6 +519,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(keyO.isDown){
             console.log("o");
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
+                    /* Save stat */
+                    soldierStat.weaponQuantity1= weaponQuantity1;
+                    localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+                    console.log("file:", soldierStat);
+
+                    /* Go to the next scene */
                     console.log("house_70");
                     this.scene.start('InteriorsAdosHouse70', {px: 400, py: 704});
             }
@@ -582,7 +602,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
                 distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcZombi.x, npcZombi.y);
                 if(distanceBetween2PC <= 50) {
                     console.log("Kombat");
-                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y, weapon1: this.player.weapon1});
+                    this.scene.start('Combat', {previousScene: "Level0AdosCity", px: this.player.sprite.x, py: this.player.sprite.y, weaponQuantity1: this.player.weaponQuantity1});
                 } 
                 this.keyOnceK = true;                
             }

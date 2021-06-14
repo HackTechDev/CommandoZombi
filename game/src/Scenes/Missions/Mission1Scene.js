@@ -16,6 +16,8 @@ export default class Mission1Scene extends Phaser.Scene {
 
   create () {
 
+    
+
     this.text = this.add.text(300, 100, 'Mission 1', { fontSize: 40 });
     this.mission1Text = this.add.text(250, 190, '- Cartographier la ville d\'Ados\n- Visiter les maisons 68 et 70', { fontSize: 24 });
 

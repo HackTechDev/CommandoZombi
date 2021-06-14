@@ -61,29 +61,6 @@ export default class Soldier {
 
     this.keys = scene.input.keyboard.createCursorKeys();
 
-    /* Character stats */
-    this.name = "Capitaine Kronos";
-    this.nickname ="";
-    
-    this.sex = 1; // Male
-    this.age = 40;
-
-    this.job = "sniper";
-
-    this.body = 100;
-    this.health = 200;
-    this.agility = 100;
-    this.force = 100;
-    this.dexterity = 100;
-
-    this.intelligence = 100;
-    this.knowledge = 100;
-    this.charism = 100;
-
-    this.weapon1 = 0;
-
-    /* */
-        
 
   }
 

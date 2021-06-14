@@ -26,7 +26,9 @@ export default class MenuScene extends Phaser.Scene {
     // Game
     //this.l0AdosCityButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'L0AdosCity', 'Level0AdosCity');
 
-    this.missionButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'Mission', 'Mission1');
+    this.characterButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'Personnage', 'Character');
+
+    this.missionButton = new Button(this, Config.width/2 + 200, Config.height/2, 'blueButton1', 'blueButton2', 'Mission', 'Mission1');
 
     // Options
     this.optionsButton = new Button(this, Config.width/2, Config.height/2 + 100, 'blueButton1', 'blueButton2', 'Options', 'Options');
