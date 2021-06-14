@@ -272,7 +272,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
 
-        /**/
+        /* Get stat */
 
         soldierStat = JSON.parse(localStorage.getItem('soldierStat'));
         weaponName1 = soldierStat.weaponName1;
@@ -494,8 +494,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
     collideToZombi(player, npc) {
         p = player.body.touching.none;
         n = npc.body.touching.none;
-        this.player.health -= 10;
-        healthText.setText('Santé : ' + this.player.health);
+        health -= 10;
+        healthText.setText('Santé : ' + health);
     }
 
     checkDoor(playerx, playery, doorx, doory) {
@@ -521,6 +521,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 720, 3624)) {
                     /* Save stat */
                     soldierStat.weaponQuantity1= weaponQuantity1;
+                    soldierStat.health = health;
                     localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
                     console.log("file:", soldierStat);
 
