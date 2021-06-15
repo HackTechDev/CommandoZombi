@@ -23,10 +23,7 @@ export default class MenuScene extends Phaser.Scene {
   create () {
     this.add.image(0, 33, 'background').setOrigin(0).setScale(1);
 
-    // Game
-    //this.l0AdosCityButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'L0AdosCity', 'Level0AdosCity');
-
-    this.characterButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'Personnage', 'Character');
+    this.characterButton = new Button(this, Config.width/2, Config.height/2, 'blueButton1', 'blueButton2', 'Soldat', 'Character');
 
     this.missionButton = new Button(this, Config.width/2 + 200, Config.height/2, 'blueButton1', 'blueButton2', 'Mission', 'Mission1');
 
