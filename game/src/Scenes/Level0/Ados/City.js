@@ -132,7 +132,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
 
 
-       this.load.image('weaponName1', 'assets/bomb.png');
+       this.load.image('weaponName1', 'assets/images/knife.png');
 
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
