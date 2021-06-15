@@ -56,6 +56,9 @@ export default class CharacterScene extends Phaser.Scene {
     var file = JSON.parse(localStorage.getItem('soldierStat'));
     var name = file.name;
     var job = file.job;
+    var health = file.health;
+    var weaponName1 = file.weaponName1;
+    var weaponQuantity1 = file.weaponQuantity1;
     var currentScene = file.currentScene;
     var posxCurrentScene = file.posxCurrentScene;
     var posyCurrentScene = file.posyCurrentScene;
@@ -63,9 +66,11 @@ export default class CharacterScene extends Phaser.Scene {
 
     console.log("Character Scene: create");
     this.text = this.add.text(300, 100, "Stat", { fontSize: 40 });
-    this.stat1Text = this.add.text(200, 190, "Nom: " + name, { fontSize: 24 });
-    this.stat2Text = this.add.text(200, 220, "Job: " + job, { fontSize: 24 });
-    this.stat3Text = this.add.text(200, 250, "Scene: " + currentScene + " / x: " + posxCurrentScene + " / y: " + posyCurrentScene, { fontSize: 24 });
+    this.stat1Text = this.add.text(20, 190, "Nom: " + name, { fontSize: 24 });
+    this.stat2Text = this.add.text(20, 220, "Job: " + job, { fontSize: 24 });
+    this.stat3Text = this.add.text(20, 250, "Santé: " + health, { fontSize: 24 });
+    this.stat4Text = this.add.text(20, 280, weaponName1 + ": " + weaponQuantity1, { fontSize: 24 });
+    this.stat6Text = this.add.text(20, 310, "Scene: " + currentScene + " / x: " + posxCurrentScene + " / y: " + posyCurrentScene, { fontSize: 24 });
 
 
     this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');
