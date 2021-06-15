@@ -531,6 +531,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             }
 
             if(this.checkDoor(this.player.sprite.x, this.player.sprite.y, 592, 1960)) {
+                    /* Save stat */
+                    soldierStat.weaponQuantity1= weaponQuantity1;
+                    soldierStat.health = health;
+                    localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+                    console.log("file:", soldierStat);
+
+                    /* Go to the next scene */
                     console.log("house_68");
                     this.scene.start('InteriorsAdosHouse68' , {px: 432, py: 672});
             }
