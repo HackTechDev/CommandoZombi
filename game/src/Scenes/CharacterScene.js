@@ -1,5 +1,6 @@
 import 'phaser';
 import Button from '../Buttons/Button';
+import Button from '../Buttons/ButtonParam';
 
 var keyE;
 
@@ -8,51 +9,54 @@ export default class CharacterScene extends Phaser.Scene {
     super('Character');
   }
 
-  init(data){
-  }
+   init(data){
+          this.newCharacter = data.paramScene;
+   }
+
 
   create () {
 
     // Character stats
-    var soldierStat = {
-                        name: "Capitaine Kronos",
-                        nickname: "",
-                        sex: 1,
-                        age: 40,
-                        job: "sniper",
+    if(this.newCharacter === 1) {
+        var soldierStat = {
+                            name: "Capitaine Kronos",
+                            nickname: "",
+                            sex: 1,
+                            age: 40,
+                            job: "sniper",
 
-                        body: 100,
-                        health: 200,
-                        agility: 100,
-                        force: 100,
-                        dexterity: 100,
-                        intelligence: 100,
-                        knowledge: 100,
-                        charism: 100,
+                            body: 100,
+                            health: 200,
+                            agility: 100,
+                            force: 100,
+                            dexterity: 100,
+                            intelligence: 100,
+                            knowledge: 100,
+                            charism: 100,
 
-                        weaponName1: "Couteau",
-                        weaponQuantity1: 0,
-                        weaponName2: "",
-                        weaponQuantity2: 0,
-                        weaponName3: "",
-                        weaponQuantity3: 0,
+                            weaponName1: "Couteau",
+                            weaponQuantity1: 0,
+                            weaponName2: "",
+                            weaponQuantity2: 0,
+                            weaponName3: "",
+                            weaponQuantity3: 0,
 
-                        previousScene: "",
-                        posxPreviousScene: 513,
-                        posyPreviousScene: 2750,
+                            previousScene: "",
+                            posxPreviousScene: 513,
+                            posyPreviousScene: 2750,
 
-                        currentScene : "",
-                        posxCurrentScene: 513,
-                        posyCurrentScene: 2750,
+                            currentScene : "",
+                            posxCurrentScene: 513,
+                            posyCurrentScene: 2750,
 
-                        mission: "Mission1"
-    };
+                            mission: "Mission1"
+        };
 
-    // Save stats
-    localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+        // Save stats
+        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+    }
 
     // Load stat
-
     var file = JSON.parse(localStorage.getItem('soldierStat'));
     var name = file.name;
     var job = file.job;
@@ -62,7 +66,6 @@ export default class CharacterScene extends Phaser.Scene {
     var currentScene = file.currentScene;
     var posxCurrentScene = file.posxCurrentScene;
     var posyCurrentScene = file.posyCurrentScene;
-       
 
     console.log("Character Scene: create");
     this.text = this.add.text(300, 100, "Stat", { fontSize: 40 });
@@ -74,6 +77,7 @@ export default class CharacterScene extends Phaser.Scene {
 
 
     this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Menu');
+    this.newButtonParam = new Button(this, 600, 500, 'blueButton1', 'blueButton2', 'Nouveau', 'Character', 1);
 
   }
 
