@@ -483,6 +483,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
     collectWeapon1(player, weaponName) {
         weaponName.disableBody(true, true);
         weaponQuantity1 += 1;
+
+        /* Save stat */
+        soldierStat.weaponQuantity1 = weaponQuantity1;
+        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+
         weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
     }
 
@@ -495,6 +500,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         p = player.body.touching.none;
         n = npc.body.touching.none;
         health -= 10;
+
+        /* Save stat */
+        soldierStat.health = health;
+        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+
         healthText.setText('Santé : ' + health);
     }
 
