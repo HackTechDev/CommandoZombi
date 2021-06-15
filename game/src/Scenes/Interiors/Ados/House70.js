@@ -113,10 +113,7 @@ export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
        this.load.image("terrain_cave_edges_blue", "assets/stendhal/tiled/tileset/terrain/cave_edges_blue.png");
        this.load.image("ground_slate_tiles", "assets/stendhal/tiled/tileset/ground/slate_tiles.png");
 
-        this.load.tilemapTiledJSON("interiorsAdosHouse70", "assets/stendhal/tiled/interiors/ados/house_70.json");
-
-        this.load.atlas("atlas", "assets/atlas/atlas.png", "assets/atlas/atlas.json");
-
+       this.load.tilemapTiledJSON("interiorsAdosHouse70", "assets/stendhal/tiled/interiors/ados/house_70.json");
     }
 
     create() {
