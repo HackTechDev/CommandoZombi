@@ -128,9 +128,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
        this.load.tilemapTiledJSON("level0AdosCity", "assets/stendhal/tiled/Level 0/ados/city.json");
 
-       this.load.atlas("atlas_soldier", "assets/atlas/soldier/atlas-soldier.png", "assets/atlas/soldier/atlas-soldier.json");
-       this.load.atlas("atlas_knight", "assets/atlas/knight/atlas_knight.png", "assets/atlas/knight/atlas_knight.json");
-
+       this.load.atlas("atlas-soldier", "assets/atlas/soldier/atlas-soldier.png", "assets/atlas/soldier/atlas-soldier.json");
+       this.load.atlas("atlas-knight", "assets/atlas/knight/atlas-knight.png", "assets/atlas/knight/atlas-knight.json");
+       this.load.atlas("atlas-zombi", "assets/atlas/zombi/atlas-zombi.png", "assets/atlas/zombi/atlas-zombi.json");
 
        this.load.image('weaponName1', 'assets/images/knife.png');
 
@@ -321,7 +321,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
         this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
-        this.createEnemies(1400, 3200, 600, 300, 10);
+        this.createEnemies(0, 0, mapWidth, mapHeight, 10);
         this.physics.add.collider(this.player.sprite, this.spawns);
         this.physics.add.collider(this.knight.sprite, this.spawns);
 
@@ -385,7 +385,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         });
         
         for (var i = 0; i < nbEnemy; i++) {
-          console.log("zombi: " + i);
+          //console.log("zombi: " + i);
           const location = this.getValidLocation(zonex, zoney, zoneWidth, zoneHeight);
           var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
           //console.log("x: " + enemy.body.x + " / y: " + enemy.body.y);
@@ -415,7 +415,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
             this.spawns.getChildren().forEach((child) => {
                 if (child.getBounds().contains(x, y)) {
-                    console.log("occupied: bound ");
+                    //console.log("occupied: bound ");
                     occupied1 = true;
                 }
             });
@@ -423,7 +423,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
            this.spawns.getChildren().forEach((child) => {
                 var tile = this.collisionLayer.getTileAtWorldXY(x, y);
                 if(tile != null) {
-                    console.log("occupied tile", tile.properties.collides);
+                    //console.log("occupied tile", tile.properties.collides);
                     // Debug
                     /*
                     this.worldTile = this.collisionLayer.putTileAtWorldXY(33, x, y);
@@ -678,9 +678,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         /* Debug: player*/
         if(keyE.isDown){
-            console.log( this.player.sprite.x + " " + this.player.sprite.y);
-            console.log("Character");
-            this.scene.start("Character", {previousScene: "Level0AdosCity", player: this.player});
+            console.log(this.player.sprite.x + " " + this.player.sprite.y);
+            console.log(mapWidth + " " +  mapHeight);        
+
+            //console.log("Character");
+            //this.scene.start("Character", {previousScene: "Level0AdosCity", player: this.player});
         }
  
 

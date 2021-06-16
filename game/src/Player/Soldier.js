@@ -5,61 +5,61 @@
 
 export default class Soldier {
     constructor(scene, x, y) {
-      this.scene = scene;
-        
+          this.scene = scene;
+            
 
-      const anims = scene.anims;
-      anims.create({
-        key: "soldier-left-walk",
-        frames: anims.generateFrameNames("atlas_soldier", {
-          prefix: "soldier-left-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      anims.create({
-        key: "soldier-right-walk",
-        frames: anims.generateFrameNames("atlas_soldier", {
-          prefix: "soldier-right-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      anims.create({
-        key: "soldier-front-walk",
-        frames: anims.generateFrameNames("atlas_soldier", {
-          prefix: "soldier-front-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      anims.create({
-        key: "soldier-back-walk",
-        frames: anims.generateFrameNames("atlas_soldier", {
-          prefix: "soldier-back-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
+          const anims = scene.anims;
+          anims.create({
+            key: "soldier-left-walk",
+            frames: anims.generateFrameNames("atlas-soldier", {
+              prefix: "soldier-left-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          anims.create({
+            key: "soldier-right-walk",
+            frames: anims.generateFrameNames("atlas-soldier", {
+              prefix: "soldier-right-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          anims.create({
+            key: "soldier-front-walk",
+            frames: anims.generateFrameNames("atlas-soldier", {
+              prefix: "soldier-front-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          anims.create({
+            key: "soldier-back-walk",
+            frames: anims.generateFrameNames("atlas-soldier", {
+              prefix: "soldier-back-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
 
-     this.sprite = scene.physics.add
-        .sprite(x, y, "atlas_soldier", "soldier-front")
-        .setSize(30, 40)
-        .setOffset(10, 24);
+         this.sprite = scene.physics.add
+            .sprite(x, y, "atlas-soldier", "soldier-front")
+            .setSize(30, 40)
+            .setOffset(10, 24);
 
-    this.keys = scene.input.keyboard.createCursorKeys();
+        this.keys = scene.input.keyboard.createCursorKeys();
 
 
   }
@@ -115,13 +115,13 @@ export default class Soldier {
             sprite.anims.stop();
 
             if (prevVelocity.x < 0) {
-                sprite.setTexture("atlas_soldier", "soldier-left");
+                sprite.setTexture("atlas-soldier", "soldier-left");
             } else if (prevVelocity.x > 0) { 
-                sprite.setTexture("atlas_soldier", "soldier-right");
+                sprite.setTexture("atlas-soldier", "soldier-right");
             } else if (prevVelocity.y < 0) { 
-                sprite.setTexture("atlas_soldier", "soldier-back");
+                sprite.setTexture("atlas-soldier", "soldier-back");
             } else if (prevVelocity.y > 0) {
-                sprite.setTexture("atlas_soldier", "soldier-front");
+                sprite.setTexture("atlas-soldier", "soldier-front");
             }
         }
 

@@ -18,31 +18,30 @@ import HelpScene from './Scenes/HelpScene';
 import CombatScene from './Scenes/CombatScene';
 import CharacterScene from './Scenes/CharacterScene';
 
-
 import Music from './Music/Music';
 
 import MouseTileMarker from './MouseTileMarker/MouseTileMarker'
 
 class Game extends Phaser.Game {
-  constructor () {
-    super(Config);
-    const music = new Music();
-    this.globals = { music, bgMusic: null };
-    this.scene.add('Boot', BootScene);
-    this.scene.add('Preloader', PreloaderScene);
-    this.scene.add('Menu', MenuScene);
-    this.scene.add('Options', OptionsScene);
-    this.scene.add('Credits', CreditsScene);
-    this.scene.add('Help', HelpScene);
-    this.scene.add('Combat', CombatScene);
-    this.scene.add('Character', CharacterScene);
+    constructor () {
+        super(Config);
+        const music = new Music();
+        this.globals = { music, bgMusic: null };
+        this.scene.add('Boot', BootScene);
+        this.scene.add('Preloader', PreloaderScene);
+        this.scene.add('Menu', MenuScene);
+        this.scene.add('Options', OptionsScene);
+        this.scene.add('Credits', CreditsScene);
+        this.scene.add('Help', HelpScene);
+        this.scene.add('Combat', CombatScene);
+        this.scene.add('Character', CharacterScene);
 
-    this.scene.add('Level0AdosCity', Level0AdosCityScene);
-    this.scene.add('InteriorsAdosHouse70', InteriorsAdosHouse70Scene);
-    this.scene.add('InteriorsAdosHouse68', InteriorsAdosHouse68Scene);
-    this.scene.add('Mission1', Mission1Scene);
+        this.scene.add('Level0AdosCity', Level0AdosCityScene);
+        this.scene.add('InteriorsAdosHouse70', InteriorsAdosHouse70Scene);
+        this.scene.add('InteriorsAdosHouse68', InteriorsAdosHouse68Scene);
+        this.scene.add('Mission1', Mission1Scene);
         this.scene.start('Boot');
-  }
+    }
 }
 
 window.game = new Game();
