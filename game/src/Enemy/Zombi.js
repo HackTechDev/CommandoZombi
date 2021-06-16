@@ -54,13 +54,15 @@ export default class Zombi {
         repeat: -1
       });
 
+    
      this.sprite = scene.physics.add
         .sprite(x, y, "atlas-zombi", "zombi-front")
         .setSize(30, 40)
         .setOffset(10, 24);
 
+    /*
     this.keys = scene.input.keyboard.createCursorKeys();
-
+    */
 
   }
 
@@ -71,6 +73,7 @@ export default class Zombi {
 
 
     update(time, delta) {
+    /*
         const keys = this.keys;
 
         const sprite = this.sprite;
@@ -124,7 +127,7 @@ export default class Zombi {
                 sprite.setTexture("atlas-zombi", "zombi-front");
             }
         }
-
+    */
 
     }
 

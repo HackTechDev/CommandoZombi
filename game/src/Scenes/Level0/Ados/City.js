@@ -1,6 +1,6 @@
 import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
-
+import Zombi from "../../../Enemy/Zombi";
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
@@ -43,6 +43,13 @@ var p, n, distanceBetween2PC;
 var camera;
 
 var mapWidth, mapHeight;
+
+/* Path following */
+var path;
+var graphics1;
+var graphics2;
+var follower;
+var zombia;
 
 export default class Level0AdosCityScene extends Phaser.Scene {
   constructor () {
@@ -137,7 +144,11 @@ export default class Level0AdosCityScene extends Phaser.Scene {
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
        this.load.image('zombi', 'assets/atlas/zombi/zombi-front.png');
-
+        
+        this.load.spritesheet('zombia', 'assets/atlas/zombi/zombi-front.png', {
+                frameWidth: 48,
+                frameHeight: 64,
+            });
     }
 
     create() {
@@ -229,16 +240,16 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* Player position */
-        const spawnPoint = level0AdosCity.findObject("Objects", obj => obj.name === "Spawn Point");
+        const playerSpawn = level0AdosCity.findObject("Objects", obj => obj.name === "Spawn Point");
 
 
         if ( this.px === undefined && this.py === undefined) {
-            this.player = new Soldier(this, spawnPoint.x, spawnPoint.y);
+            this.player = new Soldier(this, playerSpawn.x, playerSpawn.y);
         } else {
             this.player = new Soldier(this, this.px, this.py);
         }
 
-        this.knight = new Knight(this, spawnPoint.x , spawnPoint.y + 100);
+        this.knight = new Knight(this, playerSpawn.x , playerSpawn.y + 100);
 
         this.physics.add.collider(this.player.sprite, this.collisionLayer);
         this.physics.add.collider(this.knight.sprite, this.collisionLayer);
@@ -322,8 +333,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
         this.createEnemies(0, 0, mapWidth, mapHeight, 10);
-        this.physics.add.collider(this.player.sprite, this.spawns);
-        this.physics.add.collider(this.knight.sprite, this.spawns);
+        this.physics.add.collider(this.player.sprite, this.zombis);
+        this.physics.add.collider(this.knight.sprite, this.zombis);
 
         this.timedEvent = this.time.addEvent({
             delay: 3000,
@@ -331,6 +342,29 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+
+        /* Path following */
+        graphics1 = this.add.graphics({ lineStyle: { color: 0x666666 } });
+        graphics2 = this.add.graphics({ lineStyle: { color: 0xffff00 } });
+
+        path = new Phaser.Curves.Path();
+        path.moveTo(436, 3190);
+        path.lineTo(1351, 3190);
+        path.lineTo(1351, 3700);
+        path.lineTo(430, 3700);
+        path.lineTo(436, 3190);
+
+        path.draw(graphics1);
+ 
+        follower = this.add.follower(path, 0, 0, "zombia").startFollow({
+                        duration: 80000,
+                        loop: -1,
+                    });
+ 
+        this.physics.world.enable(follower);
+        follower.body.setImmovable();
+        this.physics.add.collider(this.player.sprite, follower);      
 
         /* Command */
         // Construct/Destruct
@@ -380,14 +414,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
     createEnemies(zonex, zoney, zoneWidth, zoneHeight, nbEnemy) {
         // where the enemies will be
-        this.spawns = this.physics.add.group({
+        this.zombis = this.physics.add.group({
           classType: Phaser.GameObjects.Sprite
         });
         
         for (var i = 0; i < nbEnemy; i++) {
           //console.log("zombi: " + i);
           const location = this.getValidLocation(zonex, zoney, zoneWidth, zoneHeight);
-          var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
+          var enemy = this.zombis.create(location.x, location.y, this.getEnemySprite());
           //console.log("x: " + enemy.body.x + " / y: " + enemy.body.y);
           enemy.body.setImmovable();
         }
@@ -413,14 +447,14 @@ export default class Level0AdosCityScene extends Phaser.Scene {
             y = Phaser.Math.RND.between(zoney, zoney + zoneHeight);
 
 
-            this.spawns.getChildren().forEach((child) => {
+            this.zombis.getChildren().forEach((child) => {
                 if (child.getBounds().contains(x, y)) {
                     //console.log("occupied: bound ");
                     occupied1 = true;
                 }
             });
 
-           this.spawns.getChildren().forEach((child) => {
+           this.zombis.getChildren().forEach((child) => {
                 var tile = this.collisionLayer.getTileAtWorldXY(x, y);
                 if(tile != null) {
                     //console.log("occupied tile", tile.properties.collides);
@@ -451,7 +485,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
     moveEnemies () {
-      this.spawns.getChildren().forEach((enemy) => {
+      this.zombis.getChildren().forEach((enemy) => {
         const randNumber = Math.floor((Math.random() * 4) + 1);
      
         switch(randNumber) {
@@ -473,8 +507,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
       });
      
       setTimeout(() => {
-        this.spawns.setVelocityX(0);
-        this.spawns.setVelocityY(0);
+        this.zombis.setVelocityX(0);
+        this.zombis.setVelocityY(0);
       }, 500);
     }
 
@@ -523,6 +557,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
+
+
+        /**/
+
+         if (!follower.isFollowing()) return;
+
 
 
         /* Open door */
@@ -679,7 +719,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         /* Debug: player*/
         if(keyE.isDown){
             console.log(this.player.sprite.x + " " + this.player.sprite.y);
-            console.log(mapWidth + " " +  mapHeight);        
+            //console.log(mapWidth + " " +  mapHeight);        
 
             //console.log("Character");
             //this.scene.start("Character", {previousScene: "Level0AdosCity", player: this.player});
