@@ -357,14 +357,15 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         path.draw(graphics1);
  
-        follower = this.add.follower(path, 0, 0, "zombia").startFollow({
-                        duration: 80000,
-                        loop: -1,
-                    });
- 
+        follower = this.add.follower(path, 0, 0, "zombia")
+                            .startFollow({ duration: 80000, loop: -1 });
+
+
+        
         this.physics.world.enable(follower);
         follower.body.setImmovable();
-        this.physics.add.collider(this.player.sprite, follower);      
+        this.physics.add.collider(this.player.sprite, follower, null, null, this);      
+
 
         /* Command */
         // Construct/Destruct
@@ -525,10 +526,12 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
     }
 
+
     collideToBlacklord(player, npc) {
         p = player.body.touching.none;
         n = npc.body.touching.none;
     }
+
 
     collideToZombi(player, npc) {
         p = player.body.touching.none;
@@ -541,6 +544,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         healthText.setText('Santé : ' + health);
     }
+
 
     checkDoor(playerx, playery, doorx, doory) {
        if(playerx >= doorx-2 && playerx <= doorx+2 && playery >= doory-2 && playery <= doory+2)
@@ -559,10 +563,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
 
-        /**/
-
-         if (!follower.isFollowing()) return;
-
+        /* Follower collide */
+        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, follower.x, follower.y);
+        if(distanceBetween2PC <= 50) {
+            follower.pauseFollow();
+        } else {
+            follower.resumeFollow();
+        }
 
 
         /* Open door */
