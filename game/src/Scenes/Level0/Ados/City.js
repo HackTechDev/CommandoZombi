@@ -1,6 +1,5 @@
 import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
-import Zombi from "../../../Enemy/Zombi";
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
@@ -238,6 +237,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         roofLayer.setDepth(10);
 
+        /**/
+
+       
 
         /* Player position */
         const playerSpawn = level0AdosCity.findObject("Objects", obj => obj.name === "Spawn Point");
@@ -345,27 +347,72 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* Path following */
-        graphics1 = this.add.graphics({ lineStyle: { color: 0x666666 } });
-        graphics2 = this.add.graphics({ lineStyle: { color: 0xffff00 } });
+
+    const zombiAnims = this.anims;
+
+      zombiAnims.create({
+        key: "zombi-left-walk",
+        frames: zombiAnims.generateFrameNames("atlas-zombi", {
+          prefix: "zombi-left-walk.",
+          start: 0,
+          end: 3,
+          zeroPad: 3
+        }),
+        frameRate: 10,
+        repeat: -1
+      });
+      
+      zombiAnims.create({
+        key: "zombi-right-walk",
+        frames: zombiAnims.generateFrameNames("atlas-zombi", {
+          prefix: "zombi-right-walk.",
+          start: 0,
+          end: 3,
+          zeroPad: 3
+        }),
+        frameRate: 10,
+        repeat: -1
+      });
+      
+      zombiAnims.create({
+        key: "zombi-front-walk",
+        frames: zombiAnims.generateFrameNames("atlas-zombi", {
+          prefix: "zombi-front-walk.",
+          start: 0,
+          end: 3,
+          zeroPad: 3
+        }),
+        frameRate: 10,
+        repeat: -1
+      });
+      
+      zombiAnims.create({
+        key: "zombi-back-walk",
+        frames: zombiAnims.generateFrameNames("atlas-zombi", {
+          prefix: "zombi-back-walk.",
+          start: 0,
+          end: 3,
+          zeroPad: 3
+        }),
+        frameRate: 10,
+        repeat: -1
+      });
+
 
         path = new Phaser.Curves.Path();
         path.moveTo(436, 3190);
         path.lineTo(1351, 3190);
         path.lineTo(1351, 3700);
-        path.lineTo(430, 3700);
+        path.lineTo(436, 3700);
         path.lineTo(436, 3190);
 
-        path.draw(graphics1);
- 
         follower = this.add.follower(path, 0, 0, "zombia")
                             .startFollow({ duration: 80000, loop: -1 });
 
-
-        
         this.physics.world.enable(follower);
         follower.body.setImmovable();
         this.physics.add.collider(this.player.sprite, follower, null, null, this);      
-
+    
 
         /* Command */
         // Construct/Destruct
@@ -429,6 +476,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
     }
 
+    
 
     getEnemySprite() {
         var sprites = ['zombi'];
@@ -562,6 +610,24 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
+        /* */
+     
+        var t = follower.pathTween.getValue(); 
+        var p1 = path.getPoint(Phaser.Math.Clamp(t - 1e-6, 0, 1)); 
+        var p2 = path.getPoint(Phaser.Math.Clamp(t + 1e-6, 0, 1)); 
+        var dir = p2.clone().subtract(p1); 
+
+        if (dir.x > 0) {
+            follower.anims.play('zombi-right-walk', true);
+        } else if (dir.x < 0) {
+            follower.anims.play('zombi-left-walk', true);
+        } else if (dir.y > 0) {
+            follower.anims.play('zombi-front-walk', true);
+        } else if (dir.y < 0) {
+            follower.anims.play('zombi-back-walk', true);
+        }else {
+            dir.anims.stop();
+        }
 
         /* Follower collide */
         distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, follower.x, follower.y);
