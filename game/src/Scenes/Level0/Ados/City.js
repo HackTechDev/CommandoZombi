@@ -1,5 +1,6 @@
 import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
+import Blacklord from "../../../Enemy/Blacklord";
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
@@ -320,12 +321,13 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
 
         /* NPC and collision */
-        npcBlacklord = this.physics.add.sprite(727,2641, "blacklord");
-        npcBlacklord.body.immovable = true;
-        npcBlacklord.body.moves = false;
+        this.npcBlacklord = new Blacklord(this, 727, 2641, "blacklord");
 
-        this.physics.add.collider(this.player.sprite, npcBlacklord, this.collideToBlacklord, null, this);
-        this.physics.add.collider(this.knight.sprite, npcBlacklord, this.collideToBlacklord, null, this);
+
+        this.physics.add.collider(this.player.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
+        this.physics.add.collider(this.knight.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
+        
+
 
         npcZombi = this.physics.add.sprite(927,2641, "zombi");
         npcZombi.body.immovable = true;
@@ -745,7 +747,8 @@ export default class Level0AdosCityScene extends Phaser.Scene {
  
 
         /* Dialogue */
-        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, npcBlacklord.x, npcBlacklord.y);
+        
+        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, this.npcBlacklord.x, this.npcBlacklord.y);
         if(distanceBetween2PC <= 50) {
             if (once == false) {
                 canTalkToBlacklord = true;
@@ -787,7 +790,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         if(this.keyP.isUp) {
           this.keyOnceP = false;
         }
- 
+        
 
         /* Debug: player*/
         if(keyE.isDown){
