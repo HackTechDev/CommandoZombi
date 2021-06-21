@@ -16,6 +16,11 @@ export default class Blacklord extends Phaser.Physics.Arcade.Sprite {
 
     }
 
+    collideToBlacklord(player, npc) {
+        console.log("collideToBlacklord");
+        let p = player.body.touching.none;
+        let n = npc.body.touching.none;
+    }
 
 }
 

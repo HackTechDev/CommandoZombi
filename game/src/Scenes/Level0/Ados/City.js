@@ -324,7 +324,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.npcBlacklord = new Blacklord(this, 727, 2641, "blacklord");
 
 
-        this.physics.add.collider(this.player.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
+        this.physics.add.collider(this.player.sprite, this.npcBlacklord, this.npcBlacklord.collideToBlacklord, null, this);
         this.physics.add.collider(this.knight.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
         
 
@@ -574,12 +574,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
         weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
-    }
-
-
-    collideToBlacklord(player, npc) {
-        p = player.body.touching.none;
-        n = npc.body.touching.none;
     }
 
 
