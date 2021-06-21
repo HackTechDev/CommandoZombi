@@ -1,6 +1,8 @@
 import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
 import Blacklord from "../../../Enemy/Blacklord";
+import StaticZombi from "../../../Enemy/StaticZombi";
+
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
 
@@ -23,7 +25,7 @@ var blacklordDialogueDisplay = false;
 var dialogueTextBlacklord = false;
 var once = false;
 
-var npcZombi;
+var npcStaticZombi;
 
 var soldierStat;
 
@@ -238,13 +240,9 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         roofLayer.setDepth(10);
 
-        /**/
 
-       
-
-        /* Player position */
+        /* Players position */
         const playerSpawn = level0AdosCity.findObject("Objects", obj => obj.name === "Spawn Point");
-
 
         if ( this.px === undefined && this.py === undefined) {
             this.player = new Soldier(this, playerSpawn.x, playerSpawn.y);
@@ -285,7 +283,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         this.physics.add.overlap(this.player.sprite, weaponName1s, this.collectWeapon1, null, this);
 
 
-
         /* Get stat */
 
         soldierStat = JSON.parse(localStorage.getItem('soldierStat'));
@@ -293,7 +290,7 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         weaponQuantity1 = soldierStat.weaponQuantity1;
         health = soldierStat.health;
 
-        /* HUD*/
+        /* HUD */
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
                             .setOrigin(0, 0)
                             .setScrollFactor(0)
@@ -323,19 +320,17 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         /* NPC and collision */
         this.npcBlacklord = new Blacklord(this, 727, 2641, "blacklord");
 
-
-        this.physics.add.collider(this.player.sprite, this.npcBlacklord, this.npcBlacklord.collideToBlacklord, null, this);
+        this.physics.add.collider(this.player.sprite, this.npcBlacklord, this.npcBlacklord.collision, null, this);
         this.physics.add.collider(this.knight.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
         
 
+        this.npcStaticZombi = new StaticZombi(this, 927,2641, "zombi");
 
-        npcZombi = this.physics.add.sprite(927,2641, "zombi");
-        npcZombi.body.immovable = true;
-        npcZombi.body.moves = false;
+        this.physics.add.collider(this.player.sprite, this.npcStaticZombi, this.npcStaticZombi.collision, null, this);
+        this.physics.add.collider(this.knight.sprite, this.npcStaticZombi, null, null, this);
 
-        this.physics.add.collider(this.player.sprite, npcZombi, this.collideToZombi, null, this);
-        this.physics.add.collider(this.knight.sprite, npcZombi, null, null, this);
 
+        /* Enemies zone */
         this.createEnemies(0, 0, mapWidth, mapHeight, 10);
         this.physics.add.collider(this.player.sprite, this.zombis);
         this.physics.add.collider(this.knight.sprite, this.zombis);
@@ -350,55 +345,55 @@ export default class Level0AdosCityScene extends Phaser.Scene {
 
         /* Path following */
 
-    const zombiAnims = this.anims;
+        const zombiAnims = this.anims;
 
-      zombiAnims.create({
-        key: "zombi-left-walk",
-        frames: zombiAnims.generateFrameNames("atlas-zombi", {
-          prefix: "zombi-left-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      
-      zombiAnims.create({
-        key: "zombi-right-walk",
-        frames: zombiAnims.generateFrameNames("atlas-zombi", {
-          prefix: "zombi-right-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      
-      zombiAnims.create({
-        key: "zombi-front-walk",
-        frames: zombiAnims.generateFrameNames("atlas-zombi", {
-          prefix: "zombi-front-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      
-      zombiAnims.create({
-        key: "zombi-back-walk",
-        frames: zombiAnims.generateFrameNames("atlas-zombi", {
-          prefix: "zombi-back-walk.",
-          start: 0,
-          end: 3,
-          zeroPad: 3
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
+          zombiAnims.create({
+            key: "zombi-left-walk",
+            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+              prefix: "zombi-left-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          
+          zombiAnims.create({
+            key: "zombi-right-walk",
+            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+              prefix: "zombi-right-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          
+          zombiAnims.create({
+            key: "zombi-front-walk",
+            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+              prefix: "zombi-front-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          
+          zombiAnims.create({
+            key: "zombi-back-walk",
+            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+              prefix: "zombi-back-walk.",
+              start: 0,
+              end: 3,
+              zeroPad: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
 
 
         path = new Phaser.Curves.Path();
@@ -576,18 +571,6 @@ export default class Level0AdosCityScene extends Phaser.Scene {
         weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
     }
 
-
-    collideToZombi(player, npc) {
-        p = player.body.touching.none;
-        n = npc.body.touching.none;
-        health -= 10;
-
-        /* Save stat */
-        soldierStat.health = health;
-        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
-
-        healthText.setText('Santé : ' + health);
-    }
 
 
     checkDoor(playerx, playery, doorx, doory) {
