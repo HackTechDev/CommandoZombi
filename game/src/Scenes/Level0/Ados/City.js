@@ -2,6 +2,7 @@ import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
 import Blacklord from "../../../Enemy/Blacklord";
 import ZombiStatic from "../../../Enemy/ZombiStatic";
+import ZombiFollower from "../../../Enemy/ZombiFollower";
 
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
@@ -26,6 +27,7 @@ var dialogueTextBlacklord = false;
 var once = false;
 
 var npcZombiStatic;
+var npcZombiFollower;
 
 var soldierStat;
 
@@ -147,10 +149,6 @@ export default class Level0AdosCity extends Phaser.Scene {
 
        this.load.image('zombiStaticSprite', 'assets/atlas/zombi/zombi-front.png');
         
-        this.load.spritesheet('zombiFollowerSprite', 'assets/atlas/zombi/zombi-front.png', {
-                frameWidth: 48,
-                frameHeight: 64,
-            });
     }
 
     create() {
@@ -344,72 +342,13 @@ export default class Level0AdosCity extends Phaser.Scene {
 
 
         /* Path following */
+        this.npcZombiFollower = new ZombiFollower(this, 436, 3190, "zombiStaticSprite");
 
-        const zombiFollowerAnims = this.anims;
-
-          zombiFollowerAnims.create({
-            key: "zombi-left-walk",
-            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
-              prefix: "zombi-left-walk.",
-              start: 0,
-              end: 3,
-              zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
-          });
-          
-          zombiFollowerAnims.create({
-            key: "zombi-right-walk",
-            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
-              prefix: "zombi-right-walk.",
-              start: 0,
-              end: 3,
-              zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
-          });
-          
-          zombiFollowerAnims.create({
-            key: "zombi-front-walk",
-            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
-              prefix: "zombi-front-walk.",
-              start: 0,
-              end: 3,
-              zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
-          });
-          
-          zombiFollowerAnims.create({
-            key: "zombi-back-walk",
-            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
-              prefix: "zombi-back-walk.",
-              start: 0,
-              end: 3,
-              zeroPad: 3
-            }),
-            frameRate: 10,
-            repeat: -1
-          });
-
-
-        path = new Phaser.Curves.Path();
-        path.moveTo(436, 3190);
-        path.lineTo(1351, 3190);
-        path.lineTo(1351, 3700);
-        path.lineTo(436, 3700);
-        path.lineTo(436, 3190);
-
-        zombiFollower = this.add.follower(path, 0, 0, "zombiFollowerSprite")
-                            .startFollow({ duration: 80000, loop: -1 });
-
+        /*
         this.physics.world.enable(zombiFollower);
         zombiFollower.body.setImmovable();
         this.physics.add.collider(this.player.sprite, zombiFollower, null, null, this);      
-    
+        */
 
         /* Command */
         // Construct/Destruct
@@ -582,39 +521,24 @@ export default class Level0AdosCity extends Phaser.Scene {
     update(time, delta) {
         this.player.update();
         this.knight.update();
+        this.npcZombiFollower.update();   
+        
 
         this.marker.update();
 
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
-        /* */
      
-        var t = zombiFollower.pathTween.getValue(); 
-        var p1 = path.getPoint(Phaser.Math.Clamp(t - 1e-6, 0, 1)); 
-        var p2 = path.getPoint(Phaser.Math.Clamp(t + 1e-6, 0, 1)); 
-        var dir = p2.clone().subtract(p1); 
-
-        if (dir.x > 0) {
-            zombiFollower.anims.play('zombi-right-walk', true);
-        } else if (dir.x < 0) {
-            zombiFollower.anims.play('zombi-left-walk', true);
-        } else if (dir.y > 0) {
-            zombiFollower.anims.play('zombi-front-walk', true);
-        } else if (dir.y < 0) {
-            zombiFollower.anims.play('zombi-back-walk', true);
-        }else {
-            dir.anims.stop();
-        }
-
         /* Follower collide */
+        /*
         distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, zombiFollower.x, zombiFollower.y);
         if(distanceBetween2PC <= 50) {
             zombiFollower.pauseFollow();
         } else {
             zombiFollower.resumeFollow();
         }
-
+        */
 
         /* Open door */
         if(keyO.isDown){

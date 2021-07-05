@@ -3,10 +3,15 @@
  *
  */
 
+
 export default class ZombiFollower {
-    constructor(scene) {
+    constructor(scene, x, y, texture) {
       this.scene = scene;
+      this.texture = texture;
         
+      console.log("npcZombiFollower constructor");
+
+
       const anims = scene.anims;
       
       anims.create({
@@ -54,8 +59,25 @@ export default class ZombiFollower {
         repeat: -1
       });
 
-    
-  }
+        this.createPath();
+    }
+
+    createPath() {
+        console.log("npcZombiFollower create");
+
+        this.path = new Phaser.Curves.Path();
+        this.path.moveTo(436, 3190);
+        this.path.lineTo(1351, 3190);
+        this.path.lineTo(1351, 3700);
+        this.path.lineTo(436, 3700);
+        this.path.lineTo(436, 3190);
+
+        this.zombiFollower = this.scene.add
+                                .follower(this.path, 0, 0, this.texture)
+                                .startFollow({ duration: 80000, loop: -1 });
+
+    }
+
 
 
     freeze() {
@@ -64,6 +86,24 @@ export default class ZombiFollower {
 
 
     update(time, delta) {
+        var t = this.zombiFollower.pathTween.getValue();
+
+        var p1 = this.path.getPoint(Phaser.Math.Clamp(t - 1e-6, 0, 1));
+        var p2 = this.path.getPoint(Phaser.Math.Clamp(t + 1e-6, 0, 1));
+        var dir = p2.clone().subtract(p1);
+
+        if (dir.x > 0) {
+            this.zombiFollower.anims.play('zombi-right-walk', true);
+        } else if (dir.x < 0) {
+            this.zombiFollower.anims.play('zombi-left-walk', true);
+        } else if (dir.y > 0) {
+            this.zombiFollower.anims.play('zombi-front-walk', true);
+        } else if (dir.y < 0) {
+            this.zombiFollower.anims.play('zombi-back-walk', true);
+        } else {
+            dir.anims.stop();
+        }
+
     }
 
     destroy() {
