@@ -1,7 +1,7 @@
 import Soldier from "../../../Player/Soldier";
 import Knight from "../../../Player/Knight";
 import Blacklord from "../../../Enemy/Blacklord";
-import StaticZombi from "../../../Enemy/StaticZombi";
+import ZombiStatic from "../../../Enemy/ZombiStatic";
 
 
 import MouseTileMarker from "../../../MouseTileMarker/MouseTileMarker"
@@ -25,7 +25,7 @@ var blacklordDialogueDisplay = false;
 var dialogueTextBlacklord = false;
 var once = false;
 
-var npcStaticZombi;
+var npcZombiStatic;
 
 var soldierStat;
 
@@ -51,7 +51,7 @@ var path;
 var graphics1;
 var graphics2;
 var follower;
-var zombia;
+var zombiFollowerSprite;
 
 export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
@@ -145,9 +145,9 @@ export default class Level0AdosCity extends Phaser.Scene {
 
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
-       this.load.image('zombi', 'assets/atlas/zombi/zombi-front.png');
+       this.load.image('zombiStaticSprite', 'assets/atlas/zombi/zombi-front.png');
         
-        this.load.spritesheet('zombia', 'assets/atlas/zombi/zombi-front.png', {
+        this.load.spritesheet('zombiFollowerSprite', 'assets/atlas/zombi/zombi-front.png', {
                 frameWidth: 48,
                 frameHeight: 64,
             });
@@ -324,10 +324,10 @@ export default class Level0AdosCity extends Phaser.Scene {
         this.physics.add.collider(this.knight.sprite, this.npcBlacklord, this.collideToBlacklord, null, this);
         
 
-        this.npcStaticZombi = new StaticZombi(this, 927,2641, "zombi");
+        this.npcZombiStatic = new ZombiStatic(this, 927,2641, "zombiStaticSprite");
 
-        this.physics.add.collider(this.player.sprite, this.npcStaticZombi, this.npcStaticZombi.collision, null, this);
-        this.physics.add.collider(this.knight.sprite, this.npcStaticZombi, null, null, this);
+        this.physics.add.collider(this.player.sprite, this.npcZombiStatic, this.npcZombiStatic.collision, null, this);
+        this.physics.add.collider(this.knight.sprite, this.npcZombiStatic, null, null, this);
 
 
         /* Enemies zone */
@@ -403,7 +403,7 @@ export default class Level0AdosCity extends Phaser.Scene {
         path.lineTo(436, 3700);
         path.lineTo(436, 3190);
 
-        follower = this.add.follower(path, 0, 0, "zombia")
+        follower = this.add.follower(path, 0, 0, "zombiFollowerSprite")
                             .startFollow({ duration: 80000, loop: -1 });
 
         this.physics.world.enable(follower);
@@ -473,10 +473,9 @@ export default class Level0AdosCity extends Phaser.Scene {
 
     }
 
-    
 
     getEnemySprite() {
-        var sprites = ['zombi'];
+        var sprites = ['zombiStaticSprite'];
         return sprites[Math.floor(Math.random() * sprites.length)];
     }
 

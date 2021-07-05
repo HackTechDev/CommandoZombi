@@ -3,7 +3,7 @@
  *
  */
 
-export default class Zombi {
+export default class ZombiFollower {
     constructor(scene) {
       this.scene = scene;
         

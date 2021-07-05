@@ -3,7 +3,7 @@
  *
  */
 
-export default class StaticZombi extends Phaser.Physics.Arcade.Sprite {
+export default class ZombiStatic extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
             
@@ -17,7 +17,7 @@ export default class StaticZombi extends Phaser.Physics.Arcade.Sprite {
     }
 
     collision(player, npc) {
-        console.log("collideToStaticZombi");
+        console.log("collideToZombiStatic");
         let p = player.body.touching.none;
         let n = npc.body.touching.none;
     }
