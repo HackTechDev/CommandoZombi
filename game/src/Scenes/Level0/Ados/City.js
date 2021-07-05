@@ -345,11 +345,11 @@ export default class Level0AdosCity extends Phaser.Scene {
 
         /* Path following */
 
-        const zombiAnims = this.anims;
+        const zombiFollowerAnims = this.anims;
 
-          zombiAnims.create({
+          zombiFollowerAnims.create({
             key: "zombi-left-walk",
-            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
               prefix: "zombi-left-walk.",
               start: 0,
               end: 3,
@@ -359,9 +359,9 @@ export default class Level0AdosCity extends Phaser.Scene {
             repeat: -1
           });
           
-          zombiAnims.create({
+          zombiFollowerAnims.create({
             key: "zombi-right-walk",
-            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
               prefix: "zombi-right-walk.",
               start: 0,
               end: 3,
@@ -371,9 +371,9 @@ export default class Level0AdosCity extends Phaser.Scene {
             repeat: -1
           });
           
-          zombiAnims.create({
+          zombiFollowerAnims.create({
             key: "zombi-front-walk",
-            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
               prefix: "zombi-front-walk.",
               start: 0,
               end: 3,
@@ -383,9 +383,9 @@ export default class Level0AdosCity extends Phaser.Scene {
             repeat: -1
           });
           
-          zombiAnims.create({
+          zombiFollowerAnims.create({
             key: "zombi-back-walk",
-            frames: zombiAnims.generateFrameNames("atlas-zombi", {
+            frames: zombiFollowerAnims.generateFrameNames("atlas-zombi", {
               prefix: "zombi-back-walk.",
               start: 0,
               end: 3,
