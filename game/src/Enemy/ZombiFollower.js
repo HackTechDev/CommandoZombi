@@ -4,8 +4,10 @@
  */
 
 
-export default class ZombiFollower {
+export default class ZombiFollower  extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
+      super(scene, x, y, texture);
+
       this.scene = scene;
       this.texture = texture;
         
@@ -102,6 +104,18 @@ export default class ZombiFollower {
             this.zombiFollower.anims.play('zombi-back-walk', true);
         } else {
             dir.anims.stop();
+        }
+
+
+    }
+
+    collision(p) {
+        var distanceBetween2PC = Phaser.Math.Distance.Between(p.sprite.x, p.sprite.y, this.zombiFollower.x,  this.zombiFollower.y);
+        if(distanceBetween2PC <= 50) {
+            console.log("Touch");
+            this.zombiFollower.pauseFollow();
+        } else {
+            this.zombiFollower.resumeFollow();
         }
 
     }

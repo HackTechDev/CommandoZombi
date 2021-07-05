@@ -344,11 +344,6 @@ export default class Level0AdosCity extends Phaser.Scene {
         /* Path following */
         this.npcZombiFollower = new ZombiFollower(this, 436, 3190, "zombiStaticSprite");
 
-        /*
-        this.physics.world.enable(zombiFollower);
-        zombiFollower.body.setImmovable();
-        this.physics.add.collider(this.player.sprite, zombiFollower, null, null, this);      
-        */
 
         /* Command */
         // Construct/Destruct
@@ -529,16 +524,9 @@ export default class Level0AdosCity extends Phaser.Scene {
         const pointer = this.input.activePointer;
         const worldPoint = pointer.positionToCamera(this.cameras.main);
 
-     
-        /* Follower collide */
-        /*
-        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, zombiFollower.x, zombiFollower.y);
-        if(distanceBetween2PC <= 50) {
-            zombiFollower.pauseFollow();
-        } else {
-            zombiFollower.resumeFollow();
-        }
-        */
+    
+        this.npcZombiFollower.collision(this.player); 
+    
 
         /* Open door */
         if(keyO.isDown){
