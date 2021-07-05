@@ -4,7 +4,7 @@ import Button from '../Buttons/Button';
 
 var keyM;
 
-export default class MenuScene extends Phaser.Scene {
+export default class Menu extends Phaser.Scene {
   constructor () {
     super('Menu');
   }

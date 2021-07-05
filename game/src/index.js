@@ -1,22 +1,22 @@
 import 'phaser';
 
 import Config from './Config/Config';
-import Level0AdosCityScene from './Scenes/Level0/Ados/City';
-import InteriorsAdosHouse70Scene from './Scenes/Interiors/Ados/House70';
-import InteriorsAdosHouse68Scene from './Scenes/Interiors/Ados/House68';
+import Level0AdosCity from './Scenes/Level0/Ados/City';
+import InteriorsAdosHouse70 from './Scenes/Interiors/Ados/House70';
+import InteriorsAdosHouse68 from './Scenes/Interiors/Ados/House68';
 
-import Mission1Scene from './Scenes/Missions/Mission1Scene';
+import Mission01 from './Scenes/Missions/Mission01';
 
 import TileMapping from './TileMapping/TileMapping';
 
-import BootScene from './Scenes/BootScene';
-import PreloaderScene from './Scenes/PreloaderScene';
-import MenuScene from './Scenes/MenuScene';
-import OptionsScene from './Scenes/OptionsScene';
-import CreditsScene from './Scenes/CreditsScene';
-import HelpScene from './Scenes/HelpScene';
-import CombatScene from './Scenes/CombatScene';
-import CharacterScene from './Scenes/CharacterScene';
+import Boot from './Scenes/Boot';
+import Preloader from './Scenes/Preloader';
+import Menu from './Scenes/Menu';
+import Options from './Scenes/Options';
+import Credits from './Scenes/Credits';
+import Help from './Scenes/Help';
+import Combat from './Scenes/Combat';
+import Character from './Scenes/Character';
 
 import Music from './Music/Music';
 
@@ -27,19 +27,19 @@ class Game extends Phaser.Game {
         super(Config);
         const music = new Music();
         this.globals = { music, bgMusic: null };
-        this.scene.add('Boot', BootScene);
-        this.scene.add('Preloader', PreloaderScene);
-        this.scene.add('Menu', MenuScene);
-        this.scene.add('Options', OptionsScene);
-        this.scene.add('Credits', CreditsScene);
-        this.scene.add('Help', HelpScene);
-        this.scene.add('Combat', CombatScene);
-        this.scene.add('Character', CharacterScene);
+        this.scene.add('Boot', Boot);
+        this.scene.add('Preloader', Preloader);
+        this.scene.add('Menu', Menu);
+        this.scene.add('Options', Options);
+        this.scene.add('Credits', Credits);
+        this.scene.add('Help', Help);
+        this.scene.add('Combat', Combat);
+        this.scene.add('Character', Character);
 
-        this.scene.add('Level0AdosCity', Level0AdosCityScene);
-        this.scene.add('InteriorsAdosHouse70', InteriorsAdosHouse70Scene);
-        this.scene.add('InteriorsAdosHouse68', InteriorsAdosHouse68Scene);
-        this.scene.add('Mission1', Mission1Scene);
+        this.scene.add('Level0AdosCity', Level0AdosCity);
+        this.scene.add('InteriorsAdosHouse70', InteriorsAdosHouse70);
+        this.scene.add('InteriorsAdosHouse68', InteriorsAdosHouse68);
+        this.scene.add('Mission01', Mission01);
         this.scene.start('Boot');
     }
 }

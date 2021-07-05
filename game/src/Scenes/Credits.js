@@ -1,7 +1,7 @@
 import 'phaser';
 import Config from '../Config/Config';
 
-export default class CreditsScene extends Phaser.Scene {
+export default class Credits extends Phaser.Scene {
   constructor () {
     super('Credits');
   }

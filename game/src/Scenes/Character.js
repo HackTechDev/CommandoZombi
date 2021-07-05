@@ -4,7 +4,7 @@ import Button from '../Buttons/ButtonParam';
 
 var keyE;
 
-export default class CharacterScene extends Phaser.Scene {
+export default class Character extends Phaser.Scene {
   constructor () {
     super('Character');
   }

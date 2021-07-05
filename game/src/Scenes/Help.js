@@ -3,7 +3,7 @@ import Button from '../Buttons/Button';
 
 var keyA;
 
-export default class HelpScene extends Phaser.Scene {
+export default class Help extends Phaser.Scene {
   constructor () {
     super('Help');
   }

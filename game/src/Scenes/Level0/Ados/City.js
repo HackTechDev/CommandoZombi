@@ -53,7 +53,7 @@ var graphics2;
 var follower;
 var zombia;
 
-export default class Level0AdosCityScene extends Phaser.Scene {
+export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
     super('Level0AdosCity');
   }

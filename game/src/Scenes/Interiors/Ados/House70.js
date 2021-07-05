@@ -4,7 +4,7 @@ import 'phaser';
 
 var keyO, keyD, keyM, keyA, keyS;
 
-export default class InteriorsAdosHouse70Scene extends Phaser.Scene {
+export default class InteriorsAdosHouse70 extends Phaser.Scene {
   constructor () {
     super('InteriorsAdosHouse70');
   }
