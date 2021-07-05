@@ -50,7 +50,7 @@ var mapWidth, mapHeight;
 var path;
 var graphics1;
 var graphics2;
-var follower;
+var zombiFollower;
 var zombiFollowerSprite;
 
 export default class Level0AdosCity extends Phaser.Scene {
@@ -403,12 +403,12 @@ export default class Level0AdosCity extends Phaser.Scene {
         path.lineTo(436, 3700);
         path.lineTo(436, 3190);
 
-        follower = this.add.follower(path, 0, 0, "zombiFollowerSprite")
+        zombiFollower = this.add.follower(path, 0, 0, "zombiFollowerSprite")
                             .startFollow({ duration: 80000, loop: -1 });
 
-        this.physics.world.enable(follower);
-        follower.body.setImmovable();
-        this.physics.add.collider(this.player.sprite, follower, null, null, this);      
+        this.physics.world.enable(zombiFollower);
+        zombiFollower.body.setImmovable();
+        this.physics.add.collider(this.player.sprite, zombiFollower, null, null, this);      
     
 
         /* Command */
@@ -590,29 +590,29 @@ export default class Level0AdosCity extends Phaser.Scene {
 
         /* */
      
-        var t = follower.pathTween.getValue(); 
+        var t = zombiFollower.pathTween.getValue(); 
         var p1 = path.getPoint(Phaser.Math.Clamp(t - 1e-6, 0, 1)); 
         var p2 = path.getPoint(Phaser.Math.Clamp(t + 1e-6, 0, 1)); 
         var dir = p2.clone().subtract(p1); 
 
         if (dir.x > 0) {
-            follower.anims.play('zombi-right-walk', true);
+            zombiFollower.anims.play('zombi-right-walk', true);
         } else if (dir.x < 0) {
-            follower.anims.play('zombi-left-walk', true);
+            zombiFollower.anims.play('zombi-left-walk', true);
         } else if (dir.y > 0) {
-            follower.anims.play('zombi-front-walk', true);
+            zombiFollower.anims.play('zombi-front-walk', true);
         } else if (dir.y < 0) {
-            follower.anims.play('zombi-back-walk', true);
+            zombiFollower.anims.play('zombi-back-walk', true);
         }else {
             dir.anims.stop();
         }
 
         /* Follower collide */
-        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, follower.x, follower.y);
+        distanceBetween2PC = Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, zombiFollower.x, zombiFollower.y);
         if(distanceBetween2PC <= 50) {
-            follower.pauseFollow();
+            zombiFollower.pauseFollow();
         } else {
-            follower.resumeFollow();
+            zombiFollower.resumeFollow();
         }
 
 
