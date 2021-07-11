@@ -41,19 +41,11 @@ var weaponName1;
 var weaponQuantity1;
 var health;
 
-
 var p, n, distanceBetween2PC;
 
 var camera;
 
 var mapWidth, mapHeight;
-
-/* Path following */
-var path;
-var graphics1;
-var graphics2;
-var zombiFollower;
-var zombiFollowerSprite;
 
 export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
