@@ -33,7 +33,7 @@ var soldierStat;
 
 var weaponName1s;
 
-var hud;
+var hud, buttons;
 var weaponName1Text;
 var healthText;
 
@@ -46,6 +46,13 @@ var p, n, distanceBetween2PC;
 var camera;
 
 var mapWidth, mapHeight;
+
+const Random = Phaser.Math.Between;
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 
 export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
@@ -140,7 +147,13 @@ export default class Level0AdosCity extends Phaser.Scene {
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
        this.load.image('zombiStaticSprite', 'assets/atlas/zombi/zombi-front.png');
-        
+
+       this.load.scenePlugin({
+          key: 'rexuiplugin',
+          url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+          sceneKey: 'rexUI'
+      });          
+
     }
 
     create() {
@@ -306,6 +319,57 @@ export default class Level0AdosCity extends Phaser.Scene {
             .setScrollFactor(0)
             .setDepth(30);
 
+        /* rexUI */
+         buttons = this.rexUI.add.buttons({
+            x: 10, y: 500,
+
+            orientation: 'x',
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK),
+            buttons: [
+                createButton(this, 'A').setOrigin(0.5, 1),
+                createButton(this, 'B').setOrigin(0.5, 1),
+                createButton(this, 'C').setOrigin(0.5, 1),
+                createButton(this, 'D').setOrigin(0.5, 1),
+                createButton(this, 'E').setOrigin(0.5, 1),
+            ],
+
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                item: 6
+            }
+
+        })
+            .setOrigin(0, 0)
+            .setScrollFactor(0)
+            .layout();
+
+        buttons.getElement('buttons').forEach(function (button) {
+            button.popUp(1000, undefined, 'Back');
+        });
+
+        buttons
+            .on('button.click', function (button, index, pointer, event) {
+                console.log("button index: " + index);
+                  if(index == 0){
+                      console.log("A");
+                  }
+                  if(index == 1){
+                      console.log("B");
+                  }
+                  if(index == 2){
+                      console.log("C");
+                  }
+                  if(index == 3){
+                      console.log("D");
+                  }
+                  if(index == 4){
+                      console.log("E");
+                  }
+
+                button.scaleYoyo(500, 1.2);
+            });
+
+        buttons.setDepth(50);
 
         /* NPC and collision */
         this.npcBlacklord = new Blacklord(this, 727, 2641, "blacklord");
@@ -716,4 +780,21 @@ export default class Level0AdosCity extends Phaser.Scene {
         }
 
     }
+}
+
+var createButton = function (scene, text) {
+    console.log("CreateButton");
+    return scene.rexUI.add.label({
+        width: 60,
+        height: 60,
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+        text: scene.add.text(0, 0, text, {
+            fontSize: 18
+        }),
+        align: 'center',
+        space: {
+            left: 10,
+            right: 10,
+        }
+    });
 }
