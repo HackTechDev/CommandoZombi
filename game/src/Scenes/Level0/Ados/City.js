@@ -33,7 +33,7 @@ var soldierStat;
 
 var weaponName1s;
 
-var hud, buttons;
+var hud, buttons, tabPages;
 var weaponName1Text;
 var healthText;
 
@@ -319,7 +319,7 @@ export default class Level0AdosCity extends Phaser.Scene {
             .setScrollFactor(0)
             .setDepth(30);
 
-        /* rexUI */
+        /* rexUI: Buttons */
          buttons = this.rexUI.add.buttons({
             x: 10, y: 500,
 
@@ -352,9 +352,11 @@ export default class Level0AdosCity extends Phaser.Scene {
                 console.log("button index: " + index);
                   if(index == 0){
                       console.log("A");
+                      hideTabPage();
                   }
                   if(index == 1){
                       console.log("B");
+                      displayTabPage();
                   }
                   if(index == 2){
                       console.log("C");
@@ -370,6 +372,59 @@ export default class Level0AdosCity extends Phaser.Scene {
             });
 
         buttons.setDepth(50);
+
+        /* RewUI: TabPages */
+        tabPages = this.rexUI.add.tabPages({
+            x: 10, y: 10,
+            width: 700, height: 450,
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK),
+
+            tabs: {
+                space: { item: 3 }
+            },
+            pages: {
+                fadeIn: 300
+            },
+
+            align: {
+                tabs: 'left'
+            },
+
+            space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 }
+
+        })
+            .on('tab.focus', function (tab, key) {
+                tab.getElement('background').setStrokeStyle(2, COLOR_LIGHT);
+            })
+            .on('tab.blur', function (tab, key) {
+                tab.getElement('background').setStrokeStyle();
+            })
+            .setOrigin(0, 0)
+            .setScrollFactor(0);
+
+
+
+        tabPages
+            .addPage({
+                key: 'page0',
+                tab: CreateLabel(this, 'Page0'),
+                page: CreatePage(this, 'Page0')
+            })
+            .addPage({
+                key: 'page1',
+                tab: CreateLabel(this, 'Page1'),
+                page: CreatePage(this, 'Page1')
+            })
+            .addPage({
+                key: 'page2',
+                tab: CreateLabel(this, 'Page2'),
+                page: CreatePage(this, 'Page2')
+            })
+            .layout()
+            .swapFirstPage();
+
+        tabPages.setDepth(50);
+
 
         /* NPC and collision */
         this.npcBlacklord = new Blacklord(this, 727, 2641, "blacklord");
@@ -797,4 +852,48 @@ var createButton = function (scene, text) {
             right: 10,
         }
     });
+}
+
+
+var CreateLabel = function (scene, text) {
+    return scene.rexUI.add.label({
+        width: 40, height: 40,
+
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_PRIMARY),
+        text: scene.add.text(0, 0, text, { fontSize: 24 }),
+
+        space: { left: 10, right: 10, top: 10, bottom: 10 }
+    })
+}
+
+const content = `Commando Zombi`;
+
+
+var CreatePage = function (scene, text) {
+    return scene.rexUI.add.textArea({
+        text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
+
+        content: `\
+This is ${text}
+....
+${content}
+....
+[color=green]${content}[/color]
+....
+[color=cadetblue]${content}[/color]
+....
+[color=yellow]${content}[/color]\
+`
+    })
+}
+
+
+var hideTabPage = function (scene, text) {
+  console.log("hideTabPage");
+tabPages.setDepth(-50);
+}
+
+var displayTabPage = function (scene, text) {
+  console.log("displayTabPage");
+tabPages.setDepth(50);
 }
