@@ -278,11 +278,11 @@ export default class Level0AdosCity extends Phaser.Scene {
         this.marker = new MouseTileMarker(this, level0AdosCity);
 
 
-        /* Weapon */
+        /* Add weapon: Knife */
         weaponName1s = this.physics.add.group({
             key: 'weaponName1',
             repeat: 9,
-            setXY: { x: 490, y: 2723, stepX: 30 }
+            setXY: { x: 700, y: 2723, stepX: 30 }
         });
 
         this.physics.add.overlap(this.player.sprite, weaponName1s, this.collectWeapon1, null, this);
@@ -355,7 +355,7 @@ export default class Level0AdosCity extends Phaser.Scene {
                   if(index == 0){
                       console.log("A");
                       if (switchTabPage == 0) {
-                        displayTabPage();
+                        displayTabPage(this, weaponQuantity1);
                         switchTabPage = 1;
                       } else {
                         hideTabPage();
@@ -415,7 +415,7 @@ export default class Level0AdosCity extends Phaser.Scene {
             .addPage({
                 key: 'inv',
                 tab: CreateLabel(this, 'Inv'),
-                page: CreateInvPage(this, 'Inv')
+                page: CreateInvPage(this, weaponQuantity1)
             })
             .addPage({
                 key: 'com',
@@ -890,14 +890,16 @@ ${content}
 }
 
 
+var invPage;
+
 var CreateInvPage = function (scene, text) {
-    return scene.rexUI.add.textArea({
+    invPage = scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
 
-        content: `\
-${weaponName1} : ${weaponQuantity1}
-`
-    })
+        content: `${weaponName1} : ` + text
+    });
+
+    return invPage;
 }
 
 
@@ -909,6 +911,7 @@ tabPages.setDepth(-50);
 }
 
 var displayTabPage = function (scene, text) {
-  console.log("displayTabPage");
+  console.log("displayTabPage : " + text);
+  invPage.setText("Couteau : " + text );
 tabPages.setDepth(50);
 }
