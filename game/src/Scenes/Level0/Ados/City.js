@@ -47,6 +47,8 @@ var camera;
 
 var mapWidth, mapHeight;
 
+var switchTabPage = 0;
+
 const Random = Phaser.Math.Between;
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -352,11 +354,16 @@ export default class Level0AdosCity extends Phaser.Scene {
                 console.log("button index: " + index);
                   if(index == 0){
                       console.log("A");
-                      hideTabPage();
+                      if (switchTabPage == 0) {
+                        displayTabPage();
+                        switchTabPage = 1;
+                      } else {
+                        hideTabPage();
+                        switchTabPage = 0;
+                      }
                   }
                   if(index == 1){
                       console.log("B");
-                      displayTabPage();
                   }
                   if(index == 2){
                       console.log("C");
@@ -406,24 +413,19 @@ export default class Level0AdosCity extends Phaser.Scene {
 
         tabPages
             .addPage({
-                key: 'page0',
-                tab: CreateLabel(this, 'Page0'),
-                page: CreatePage(this, 'Page0')
+                key: 'inv',
+                tab: CreateLabel(this, 'Inv'),
+                page: CreateInvPage(this, 'Inv')
             })
             .addPage({
-                key: 'page1',
-                tab: CreateLabel(this, 'Page1'),
-                page: CreatePage(this, 'Page1')
-            })
-            .addPage({
-                key: 'page2',
-                tab: CreateLabel(this, 'Page2'),
-                page: CreatePage(this, 'Page2')
+                key: 'com',
+                tab: CreateLabel(this, 'Com'),
+                page: CreatePage(this, 'Com')
             })
             .layout()
             .swapFirstPage();
 
-        tabPages.setDepth(50);
+        tabPages.setDepth(-50);
 
 
         /* NPC and collision */
@@ -866,7 +868,7 @@ var CreateLabel = function (scene, text) {
     })
 }
 
-const content = `Commando Zombi`;
+const content = ``;
 
 
 var CreatePage = function (scene, text) {
@@ -886,6 +888,19 @@ ${content}
 `
     })
 }
+
+
+var CreateInvPage = function (scene, text) {
+    return scene.rexUI.add.textArea({
+        text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
+
+        content: `\
+${weaponName1} : ${weaponQuantity1}
+`
+    })
+}
+
+
 
 
 var hideTabPage = function (scene, text) {
