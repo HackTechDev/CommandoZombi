@@ -874,7 +874,8 @@ const content = ``;
 var CreatePage = function (scene, text) {
     return scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
-
+        mouseWheelScroller: false,
+        scroller: false,
         content: `\
 This is ${text}
 ....
@@ -895,7 +896,8 @@ var invPage;
 var CreateInvPage = function (scene, text) {
     invPage = scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
-
+        mouseWheelScroller: false,
+        scroller: false,
         content: `${weaponName1} : ` + text
     });
 
