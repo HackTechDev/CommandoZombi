@@ -17,7 +17,7 @@ export default class Menu extends Phaser.Scene {
 
   preload() {
         this.load.image('background', 'assets/images/team.jpg');
-        this.load.audio('bgMusic', 'assets/theme/TownTheme.mp3');
+        this.load.audio('bgMusic', 'assets/theme/Surrounded-by-the-Enemy.mp3');
     }
 
   create () {
