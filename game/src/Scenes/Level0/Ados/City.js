@@ -29,7 +29,7 @@ var once = false;
 var npcZombiStatic;
 var npcZombiFollower;
 
-var soldierStat;
+var soldierStat = new Object();
 
 var weaponName1s;
 
@@ -288,8 +288,13 @@ export default class Level0AdosCity extends Phaser.Scene {
         this.physics.add.overlap(this.player.sprite, weaponName1s, this.collectWeapon1, null, this);
 
 
-        /* Get stat */
+        /* Set stat */
+        soldierStat.weaponName1 = "Knife";
+        soldierStat.weaponQuantity1 = 0;
+        soldierStat.health = 0;
+        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
+        /* Get stat */
         soldierStat = JSON.parse(localStorage.getItem('soldierStat'));
         weaponName1 = soldierStat.weaponName1;
         weaponQuantity1 = soldierStat.weaponQuantity1;
