@@ -1,6 +1,6 @@
 import 'phaser';
 import Button from '../Buttons/Button';
-import Button from '../Buttons/ButtonParam';
+import ButtonParam from '../Buttons/ButtonParam';
 
 var keyE;
 
