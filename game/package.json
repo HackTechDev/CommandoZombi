@@ -1,11 +1,11 @@
 {
-  "name": "Phaser3: Commando Zombi",
+  "name": "Phaser: Commando Zombi",
   "version": "1.0.0",
-  "description": "Phaser3: Commando Zombi ",
+  "description": "Phaser: Commando Zombi ",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && webpack-dev-server --port=8000"
+    "start": "npm run build && webpack server --port=8000"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,9 @@
   "devDependencies": {
     "phaser": "^3.3.0",
     "raw-loader": "^0.5.1",
-    "webpack": "^3.12.0",
+    "webpack": "^4.46.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^2.11.0"
+    "webpack-dev-server": "^3.11.3"
   },
   "dependencies": {
     "@mikewesthad/dungeon": "^2.0.1",
