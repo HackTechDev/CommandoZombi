@@ -294,12 +294,7 @@ export default class Level0AdosCity extends Phaser.Scene {
         soldierStat.health = 0;
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
-        /* Get stat */
-        soldierStat = JSON.parse(localStorage.getItem('soldierStat'));
-        weaponName1 = soldierStat.weaponName1;
-        weaponQuantity1 = soldierStat.weaponQuantity1;
-        health = soldierStat.health;
-
+    
         /* HUD */
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
                             .setOrigin(0, 0)
@@ -307,7 +302,7 @@ export default class Level0AdosCity extends Phaser.Scene {
                             .setDepth(29);
 
          weaponName1Text = this.add
-            .text(16, 16, weaponName1 + ": " + weaponQuantity1, {
+            .text(16, 16, soldierStat.weaponName1 + ": " + soldierStat.weaponQuantity1, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -317,7 +312,7 @@ export default class Level0AdosCity extends Phaser.Scene {
             .setDepth(30);
 
          healthText = this.add
-            .text(16, 50, "Santé: " + health, {
+            .text(16, 50, "Santé: " + soldierStat.health, {
               font: "18px monospace",
               fill: "#000000",
               padding: { x: 20, y: 10 },
@@ -360,7 +355,7 @@ export default class Level0AdosCity extends Phaser.Scene {
                   if(index == 0){
                       console.log("A");
                       if (switchTabPage == 0) {
-                        displayTabPage(this, weaponQuantity1);
+                        displayTabPage(this, soldierStat.weaponQuantity1);
                         switchTabPage = 1;
                       } else {
                         hideTabPage();
@@ -613,13 +608,13 @@ export default class Level0AdosCity extends Phaser.Scene {
     /* Collision */
     collectWeapon1(player, weaponName) {
         weaponName.disableBody(true, true);
-        weaponQuantity1 += 1;
+        soldierStat.weaponQuantity1 += 1;
 
         /* Save stat */
-        soldierStat.weaponQuantity1 = weaponQuantity1;
+        soldierStat.weaponQuantity1 = soldierStat.weaponQuantity1;
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
-        weaponName1Text.setText(weaponName1 + ": " + weaponQuantity1);
+        weaponName1Text.setText(soldierStat.weaponName1 + ": " + soldierStat.weaponQuantity1);
     }
 
 
