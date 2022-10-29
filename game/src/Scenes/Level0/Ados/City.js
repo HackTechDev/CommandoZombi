@@ -294,7 +294,9 @@ export default class Level0AdosCity extends Phaser.Scene {
         soldierStat.health = 0;
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
-    
+        /* HUD */
+    this.events.emit('displayHUD');
+
         /* HUD */
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
                             .setOrigin(0, 0)
@@ -500,6 +502,7 @@ export default class Level0AdosCity extends Phaser.Scene {
         keyE = this.input.keyboard.addKey("e");
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
+        this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     }
 
     /* Enemy */
@@ -639,7 +642,21 @@ export default class Level0AdosCity extends Phaser.Scene {
 
     
         this.npcZombiFollower.collision(this.player); 
-    
+
+        
+        if(this.keyI.isDown) {
+            if (!this.keyOnceI) { 
+              console.log("Invocation");
+              camera.shake(500);
+              this.keyOnceI = true;
+            }
+          }
+  
+          if(this.keyI.isUp) {
+            this.keyOnceI = false;
+          }
+
+          
 
         /* Open door */
         if(keyO.isDown){

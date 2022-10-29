@@ -2,6 +2,7 @@ import 'phaser';
 
 import Config from './Config/Config';
 import Level0AdosCity from './Scenes/Level0/Ados/City';
+import HUD from './Scenes/HUD';
 import InteriorsAdosHouse70 from './Scenes/Interiors/Ados/House70';
 import InteriorsAdosHouse68 from './Scenes/Interiors/Ados/House68';
 
@@ -41,6 +42,8 @@ class Game extends Phaser.Game {
         this.scene.add('InteriorsAdosHouse68', InteriorsAdosHouse68);
         this.scene.add('Mission01', Mission01);
         this.scene.start('Boot');
+
+        this.scene.add('HUD', HUD);
     }
 }
 
