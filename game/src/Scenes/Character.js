@@ -18,7 +18,7 @@ export default class Character extends Phaser.Scene {
 
     // Character stats
     if(this.newCharacter === 1) {
-        var soldierStat = {
+        const soldierStatObj = {
                             name: "Capitaine Kronos",
                             nickname: "",
                             sex: 1,
@@ -53,11 +53,11 @@ export default class Character extends Phaser.Scene {
         };
 
         // Save stats
-        localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
+        localStorage.setItem('soldierStat', JSON.stringify(soldierStatObj));
     }
 
     // Load stat
-    var file = JSON.parse(localStorage.getItem('soldierStat'));
+    let file = JSON.parse(localStorage.getItem('soldierStat'));
     var name = file.name;
     var job = file.job;
     var health = file.health;
