@@ -17,7 +17,7 @@ export default class Character extends Phaser.Scene {
   create () {
 
     // Character stats
-    if(this.newCharacter === 1) {
+    if(this.newCharacter === undefined) {
         const soldierStatObj = {
                             name: "Capitaine Kronos",
                             nickname: "",
