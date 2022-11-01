@@ -55,6 +55,8 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+// Night and day
+var theNight, theDay;
 
 export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
@@ -149,6 +151,8 @@ export default class Level0AdosCity extends Phaser.Scene {
        this.load.image('blacklord', 'assets/stendhal/data/sprites/npc/blacklord.png');
 
        this.load.image('zombiStaticSprite', 'assets/atlas/zombi/zombi-front.png');
+
+       this.load.image('night', 'assets/images/night.png');
 
        this.load.scenePlugin({
           key: 'rexuiplugin',
@@ -268,7 +272,16 @@ export default class Level0AdosCity extends Phaser.Scene {
         camera.startFollow(this.player.sprite);
         camera.setBounds(0, 0, level0AdosCity.widthInPixels, level0AdosCity.heightInPixels);
 
-        
+        /* Add night */
+        var night = this.add.image(-100, -100, 'night')
+        this.theNight = this.add.image(-100, -100, 'night')
+                    .setOrigin(0, 0)
+                    .setScrollFactor(0)
+                    .setDepth(29);
+
+        night.alpha = 0.5;
+        this.theNight.alpha = 0.5;
+
         /* World size */
         mapWidth = level0AdosCity.widthInPixels;
         mapHeight = level0AdosCity.heightInPixels;
@@ -295,7 +308,7 @@ export default class Level0AdosCity extends Phaser.Scene {
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
         /* HUD */
-    this.events.emit('displayHUD');
+        this.events.emit('displayHUD');
 
         /* HUD */
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
@@ -503,6 +516,11 @@ export default class Level0AdosCity extends Phaser.Scene {
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
         this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
+        /* Night and day */
+        this.theHour = 40;
+        this.theAlpha = 0;
+        this.time.addEvent({ delay: 1000, callback: cycleNightAndDay, callbackScope: this, loop: true });
     }
 
     /* Enemy */
@@ -650,13 +668,15 @@ export default class Level0AdosCity extends Phaser.Scene {
               camera.shake(500);
               this.keyOnceI = true;
             }
-          }
+        }
   
-          if(this.keyI.isUp) {
-            this.keyOnceI = false;
-          }
+        if(this.keyI.isUp) {
+        this.keyOnceI = false;
+        }
 
-          
+        
+        /* Night and day */
+        this.theNight.alpha = this.theAlpha;
 
         /* Open door */
         if(keyO.isDown){
@@ -934,3 +954,65 @@ var displayTabPage = function (scene, text) {
   invPage.setText("Couteau : " + text );
 tabPages.setDepth(50);
 }
+
+
+
+function cycleNightAndDay() {
+    if(this.theHour >= 40) {
+      this.theAlpha = 0.1;
+    }
+    if(this.theHour >= 41) {
+      this.theAlpha = 0.2;
+    }
+    if(this.theHour >= 42) {
+      this.theAlpha = 0.3;
+    }
+    if(this.theHour >= 43) {
+      this.theAlpha = 0.4;
+    }
+    if(this.theHour >= 44) {
+      this.theAlpha = 0.5;
+    }
+    if(this.theHour >= 45) {
+      this.theAlpha = 0.6;
+    }
+    if(this.theHour >= 46) {
+      this.theAlpha = 0.7;
+    }
+    if(this.theHour >= 47) {
+      this.theAlpha = 0.8;
+    }
+  
+    if(this.theHour >= 70) {
+      this.theAlpha = 0.7;
+    }
+    if(this.theHour >= 71) {
+      this.theAlpha = 0.6;
+    }
+    if(this.theHour >= 72) {
+      this.theAlpha = 0.5;
+    }
+    if(this.theHour >= 73) {
+      this.theAlpha = 0.4;
+    }
+    if(this.theHour >= 74) {
+      this.theAlpha = 0.3;
+    }
+    if(this.theHour >= 75) {
+      this.theAlpha = 0.2;
+    }
+    if(this.theHour >= 76) {
+      this.theAlpha = 0.1;
+    }
+    if(this.theHour >= 77) {
+      this.theAlpha = 0.0;
+    }
+  
+     if(this.theHour >= 100) {
+      this.theHour = 40;
+    }
+
+
+  console.log("The Hour: " + this.theHour);
+  this.theHour += 1;
+} 
