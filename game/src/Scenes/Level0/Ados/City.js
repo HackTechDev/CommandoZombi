@@ -58,6 +58,9 @@ const COLOR_DARK = 0x260e04;
 // Night and day
 var theNight, theDay;
 
+// HUD
+var displayHideHUD = true;
+
 export default class Level0AdosCity extends Phaser.Scene {
   constructor () {
     super('Level0AdosCity');
@@ -308,7 +311,7 @@ export default class Level0AdosCity extends Phaser.Scene {
         localStorage.setItem('soldierStat',JSON.stringify(soldierStat));
 
         /* HUD */
-        this.events.emit('displayHUD');
+        this.events.emit('hideHUD');
 
         /* HUD */
         hud = this.add.rectangle( 10, 10, 200, 90, 0xffffff, 1)
@@ -515,7 +518,8 @@ export default class Level0AdosCity extends Phaser.Scene {
         keyE = this.input.keyboard.addKey("e");
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
-        this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I); // Invocation
+        this.keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H); // HUD
 
         /* Night and day */
         this.theHour = 40;
@@ -661,7 +665,7 @@ export default class Level0AdosCity extends Phaser.Scene {
     
         this.npcZombiFollower.collision(this.player); 
 
-        
+        /* Invocation */
         if(this.keyI.isDown) {
             if (!this.keyOnceI) { 
               console.log("Invocation");
@@ -674,7 +678,28 @@ export default class Level0AdosCity extends Phaser.Scene {
         this.keyOnceI = false;
         }
 
-        
+        /* HUD */
+        if(this.keyH.isDown) {
+          if (!this.keyOnceH) { 
+            console.log("HUD display/hidden");
+            
+
+            if(displayHideHUD) {
+              this.events.emit('displayHUD');
+            } else {
+              this.events.emit('hideHUD');
+            }
+            displayHideHUD = !displayHideHUD;
+
+            this.keyOnceH = true;
+          }
+      }
+
+      if(this.keyH.isUp) {
+        this.keyOnceH = false;
+      }
+
+
         /* Night and day */
         this.theNight.alpha = this.theAlpha;
 

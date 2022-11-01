@@ -10,7 +10,7 @@ export default class HUD extends Phaser.Scene {
   create () {
 
 
-        hud = this.add.rectangle( 700, 500, 50, 50, 0xffffff, 1)
+        hud = this.add.rectangle( 0, 0, 800, 600, 0xffffff, 1)
                             .setOrigin(0, 0)
                             .setScrollFactor(0)
                             .setDepth(-29);
